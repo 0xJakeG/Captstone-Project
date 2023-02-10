@@ -25,3 +25,15 @@
     background-color: #89CFF0;
     color: white;
   }
+
+  .container{
+    margin-top: 200px;
+    background-color: aquamarine;
+    display: grid;
+    grid-template-columns: auto;
+
+  }
+
+  .recipebox{
+
+  }
