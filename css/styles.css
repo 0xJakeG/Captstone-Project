@@ -1,12 +1,10 @@
 /*CSS Variables */
 
 :root{
-    --primary-color: #FF3D4A;
+    --primary-color: #31572C;
     --secondary-color: #8F8F8F;
     --white-color: #ede7e3;
     --black-color: #171717;
-    --primary75: hsla(24, 49%, 22%, 0.75);
-    --secondary75: hsl(24, 49%, 22%, 0.75);
     --fs-h1: 2.488rem;
     --fs-h2: 2.074rem;
     --fs-h3: 1.728rem;
@@ -24,6 +22,15 @@
     font-family: 'Varela Round';
 }
 
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--black-color);
+}
+
 .flex-row{
   display: flex;
   flex-wrap: wrap;
@@ -36,6 +43,29 @@
   gap: 1rem;
 }
 /*Header*/
+
+#header img{
+  height: 44px;
+  width: auto;
+}
+
+header{
+  justify-content: space-between;
+  align-items: center;
+  padding: .1rem;
+  background-color: var(--primary-color);
+}
+
+nav a{
+  font-size: var(--fs-h5);
+  color: var(--white-color);
+  font-weight: 600;
+  padding: .5em;
+}
+
+nav a:hover{
+  color: var(--white-color);
+}
 
 /*Hero Section*/
 
