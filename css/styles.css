@@ -1,8 +1,8 @@
 /*CSS Variables */
 
 :root{
-    --primary-color: #9c5526;
-    --secondary-color: #54331d;
+    --primary-color: #FF3D4A;
+    --secondary-color: #8F8F8F;
     --white-color: #ede7e3;
     --black-color: #171717;
     --primary75: hsla(24, 49%, 22%, 0.75);
@@ -21,6 +21,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Varela Round';
 }
 
 .flex-row{
@@ -46,13 +47,39 @@
     background-size: cover;
     background-position: center;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .hero-container h1{
-
   font-size: var(--fs-h1);
-  align-self: flex-start;
+  padding-bottom: 0;
+  color: var(--white-color);
+  font-family: 'Varela Round';
+  margin-bottom: -2.1rem;
+}
 
+.hero-container h1:nth-child(2){
+  font-size: var(--fs-h1);
+  color: var(--primary-color);
+  font-family: 'Varela Round';
+}
+
+.hero-container p{
+  color: var(--secondary-color);
+}
+
+.cfa{
+  width: 170px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  color: var(--white-color);
+  font-size: var(--fs-h5);
+  font-weight: 600;
+  align-items: center;
 }
 
 .hero{
