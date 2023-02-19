@@ -42,6 +42,11 @@ a {
   flex-direction: column;
   gap: 1rem;
 }
+
+button {
+  all: unset;
+  cursor: pointer;
+}
 /*Header*/
 
 #header img{
@@ -147,3 +152,26 @@ nav a:hover{
     color: white;
   }
 
+  main{
+    background-color: var(--black-color);
+  }
+
+
+/*Register Page*/
+  .register-page{
+    min-height: 1324px;
+    align-items: center;
+    color: var(--white-color);
+
+
+  }
+  .register-page h1{
+    font-size: var(--fs-h1);
+
+  }
+
+  .register-page button{
+
+    background-color: var(--primary-color);
+
+  }

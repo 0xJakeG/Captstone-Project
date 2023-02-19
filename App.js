@@ -13,8 +13,15 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'))
 
 app.get('/', (req, res)=> {
-    res.render('index');
+    res.render('index.ejs');
 });
 
+app.get('/signin', (req, res)=> {
+    res.render('signin.ejs');
+});
+
+app.get('/register', (req, res)=> {
+    res.render('register.ejs');
+});
 
 app.listen(3000)
