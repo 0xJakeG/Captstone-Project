@@ -9,7 +9,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon App.js"
+    "devStart": "nodemon app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
