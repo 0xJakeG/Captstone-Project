@@ -4,8 +4,6 @@ const methodOverride = require('method-override');
 
 app = express();
 
-let port = 3000;
-let host = 'localhost';
 app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
@@ -24,4 +22,3 @@ app.get('/register', (req, res)=> {
     res.render('register.ejs');
 });
 
-app.listen(3000)
