@@ -18,31 +18,32 @@
 <body>
 
     <main>
-        <section class="register-page flex-column">
+        <section class="register-section flex-column">
             <h1>Create an Account</h1>
             <form class="register-form" action="/register" method="POST">
                 <div>
                     <label for="name">Name</label>
                     <br>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" class="form-label" name="name" required>
                 </div>
         
                 <div>
                     <label for="email">Email</label>
                     <br>
-                    <input type="email" id="name" name="email" required>
+                    <input type="email" id="email" class="form-label" name="email" required>
                 </div>
         
                 <div>
                     <label for="password">Password</label>
                     <br>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" class="form-label" name="password" required>
                 </div>
-        
-                <button type="submit">Create an Account</button>
+                
+                <div>
+                    <button type="submit">Create an Account</button>
+                </div>
             </form>
-            <p>Already Have an Account? </p>
-            <a href="/signin">Sign In</a>
+            <p>Already Have an Account?<a href="/signin"> Sign In</a> </p>
         </section>
     </main>
   <footer>
