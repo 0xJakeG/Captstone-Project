@@ -7,6 +7,7 @@ app = express();
 app.set('view engine', 'ejs');
 
 app.use('/public', express.static('public'));
+app.use('/images', express.static('/images'));
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'))
 
@@ -23,5 +24,6 @@ app.get('/signin', (req, res)=> {
 app.get('/register', (req, res)=> {
     res.render('register.ejs');
 });
+
 
 app.listen(port)
