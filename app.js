@@ -14,15 +14,15 @@ app.use(morgan('tiny'))
 var port = process.env.PORT || 8080; // set the port
 
 app.get('/', (req, res)=> {
-    res.render('index.ejs');
+    res.render('index');
 });
 
 app.get('/signin', (req, res)=> {
-    res.render('signin.ejs');
+    res.render('signin');
 });
 
 app.get('/register', (req, res)=> {
-    res.render('register.ejs');
+    res.render('register');
 });
 
 app.get('/recipes', (req, res)=> {
@@ -34,4 +34,6 @@ app.get('/recipeMeta', (req, res)=> {
 });
 
 
-app.listen(port)
+app.listen(port, ()=> {
+    console.log('Server is running on port', port);
+});
