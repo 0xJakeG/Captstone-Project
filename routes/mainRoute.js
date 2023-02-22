@@ -11,6 +11,8 @@ router.get('/register', controller.register);
 
 router.get('/recipes', controller.recipes);
 
-router,get('/recipeMeta', controller.recipeMeta);
+router.get('/recipeMeta', controller.recipeMeta);
 
 router.get('/about', controller.about);
+
+module.exports = router;
