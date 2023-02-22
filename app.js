@@ -25,5 +25,13 @@ app.get('/register', (req, res)=> {
     res.render('register.ejs');
 });
 
+app.get('/recipes', (req, res)=> {
+    res.render('recipes.ejs');
+});
+
+app.get('/recipeMeta', (req, res)=> {
+    res.render('recipeMeta.ejs');
+});
+
 
 app.listen(port)
