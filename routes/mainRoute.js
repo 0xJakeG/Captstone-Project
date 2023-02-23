@@ -16,4 +16,10 @@ router.get('/recipeMeta', controller.recipeMeta);
 
 router.get('/about', controller.about);
 
+router.get('/head', controller.head);
+
+router.get('/header', controller.header);
+
+router.get('/footer', controller.footer);
+
 module.exports = router;
