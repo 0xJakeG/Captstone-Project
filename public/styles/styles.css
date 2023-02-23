@@ -14,7 +14,14 @@
     --fs-h6: 1rem;
     --fs-small: 0.83rem;
 }
-
+.logo
+{
+  position: relative;
+  margin-top: 5%;
+  margin-left: 5%;
+  padding: 1px 1px 1px 1px;
+  border-radius: 50%;
+}
 /*Global Styles*/
 * {
     margin: 0;
