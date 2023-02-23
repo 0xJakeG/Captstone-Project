@@ -304,21 +304,20 @@ nav a:hover{
 
 /* Recipe Page */
 
-#expand {
-  display:none;  
-}
-
-#expand + .smalldesc {
-  max-height:50px;
-  overflow:hidden;
-  transition:all .3s ease;
-}
-
-#expand:checked + .smalldesc {
-  max-height:250px;  
-}
-
-label {
-  color:blue;
-  cursor:pointer;
-}
+  #expend {
+    display:none;  
+  }
+  
+  #expend + .smalldesc {
+    max-height:50px;
+    overflow:hidden;
+    transition:all .3s ease;
+  }
+  
+  #expend:checked + .smalldesc {
+    max-height:250px;  
+  }
+  
+  label {
+    cursor:pointer;
+  }
