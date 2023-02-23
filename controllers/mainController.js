@@ -22,3 +22,15 @@ exports.recipes = (req, res, next)=> {
 exports.recipeMeta = (req, res, next)=> {
     res.render('../views/recipeMeta');
 }
+
+exports.head = (req, res, next)=> {
+    res.render('../views/partials/head');
+}
+
+exports.header = (req, res, next)=> {
+    res.render('../views/partials/header');
+}
+
+exports.footer = (req, res, next)=> {
+    res.render('../views/partials/footer');
+}
