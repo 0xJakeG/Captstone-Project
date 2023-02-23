@@ -302,6 +302,7 @@ nav a:hover{
 
 }
 
+
 /* Recipe Page */
 
   #expend {
@@ -319,5 +320,6 @@ nav a:hover{
   }
   
   label {
+    color:blue;
     cursor:pointer;
   }
