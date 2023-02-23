@@ -300,3 +300,23 @@ nav a:hover{
 }
 
 
+/* Recipe Page */
+
+  #expend {
+    display:none;  
+  }
+  
+  #expend + .smalldesc {
+    max-height:50px;
+    overflow:hidden;
+    transition:all .3s ease;
+  }
+  
+  #expend:checked + .smalldesc {
+    max-height:250px;  
+  }
+  
+  label {
+    color:blue;
+    cursor:pointer;
+  }
