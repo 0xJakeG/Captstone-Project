@@ -9,18 +9,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="stylesheet" href="/public/styles.css">
+    <link rel="stylesheet" href="/public/styles/styles.css">
     <title>This is the future recipeMeta Page</title>
 </head>
 <body>
-    <header id="'header" class="flex-row">
-        <img src="images/logo.png" alt="logo" width="60" height="60">  
-        <nav>
-          <ul class="flex-row">
-            <li><a href="/recipeMeta">Recipes</a></li>
-        </ul>
-          </nav>
-      </header>
+  <header>
+  <%- include('./partials/header'); %>
+  </header>
   
       <main>
         <div class="hero-container flex-row">
@@ -158,5 +153,8 @@
           <a href="/"><div class="cfa flex-column">Back to main page</div></a>
         </div>
       </main>
+      <footer>
+        <%- include('./partials/footer'); %>
+      </footer>
 </body>
 </html>

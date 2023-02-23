@@ -2,10 +2,10 @@
 
 :root{
     --primary-color: #31572C;
-    --secondary-color: #8F8F8F;
+    --secondary-color: #F5F5F5;
     --white-color: #ede7e3;
     --black-color: #171717;
-    --blue-color: #0582CA;
+    --blue-color: #08a6e4;
     --fs-h1: 2.488rem;
     --fs-h2: 2.074rem;
     --fs-h3: 1.728rem;
@@ -13,6 +13,7 @@
     --fs-h5: 1.2rem;
     --fs-h6: 1rem;
     --fs-small: 0.83rem;
+    --anti-flash-white: #EBEBEB;
 }
 
 /*Global Styles*/
@@ -21,6 +22,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Varela Round';
+    color: var(--anti-flash-white);
 }
 
 ul {
@@ -31,7 +33,14 @@ a {
   text-decoration: none;
   color: var(--black-color);
 }
-
+.logo
+{
+  position: relative;
+  margin-top: 5%;
+  margin-left: 5%;
+  padding: 1px 1px 1px 1px;
+  border-radius: 50%;
+}
 .flex-row{
   display: flex;
   flex-wrap: wrap;
@@ -72,7 +81,24 @@ nav a{
 nav a:hover{
   color: var(--white-color);
 }
-
+h1
+{
+ color: var(--anti-flash-white);
+ text-align: center;
+ padding-top: 5px;
+ background-color: transparent;
+ font-family: 'Bebas Neue', cursive;
+ font-size:var(--fs-h1);
+ border-radius: 50%;
+ margin-left: 35%;
+ margin-right: 35%;
+ margin-top: 10%;
+}
+h2
+{
+  color: var(--blue-color);
+  text-align: center;
+}
 
 /*Hero Section*/
 
@@ -155,9 +181,14 @@ nav a:hover{
   }
 
   main{
+    background-color: var(--black-olive);
+    padding: 10%;
+  }
+  body
+  {
     background-color: var(--black-color);
+    
   }
-
 
 /*Register Page*/
 
@@ -300,23 +331,3 @@ nav a:hover{
 }
 
 
-/* Recipe Page */
-
-  #expend {
-    display:none;  
-  }
-  
-  #expend + .smalldesc {
-    max-height:50px;
-    overflow:hidden;
-    transition:all .3s ease;
-  }
-  
-  #expend:checked + .smalldesc {
-    max-height:250px;  
-  }
-  
-  label {
-    color:blue;
-    cursor:pointer;
-  }
