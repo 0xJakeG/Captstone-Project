@@ -16,17 +16,8 @@
 </head>
 
 <body>
-    <header id="'header" class="flex-row">
-        <img class ="logo" src="../public/images/logo.jpg" alt="logo" width="60" height="60">  
-        <nav>
-            <ul class="flex-row">
-                <li><a class="active" href="/">Home</a></li>
-                <li><a class="active" href="/recipeMeta">My Recipes</a></li>
-                <li><a class="active" href="/recipes">Add Recipe</a></li>
-                <li><a class="active" href="/signin">Sign Up/Sign In</a></li>
-                <li><a class="active" href="/about">About</a></li>
-            </ul>
-          </nav>
+    <header>
+        <%- include('./partials/header'); %>
       </header>
     <main>
         <section class="register-section flex-column">

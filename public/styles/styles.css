@@ -35,7 +35,12 @@ a {
   flex-wrap: wrap;
   gap: 1rem;
 }
-
+.logo
+{
+  position: relative;
+  padding: 1px 1px 1px 1px;
+  border-radius: 50%;
+}
 .flex-column{
   display: flex;
   flex-direction: column;
