@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
-  <!--Default head with basic info-->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <link rel="stylesheet" href="/public/styles/styles.css">
-  <title>Books For Cooks</title>
+<head>
+    <%- include('./partials/head'); %>
+        <title>Books For Cooks</title>
 </head>
 
 <body>
     <header>
         <%- include('./partials/header'); %>
-      </header>
+    </header>
     <main>
         <section class="register-section flex-column">
             <img src="../public/images/logo.jpg" width="300" height="300">
@@ -29,19 +20,19 @@
                     <br>
                     <input type="text" id="name" class="form-label" name="name" required>
                 </div>
-        
+
                 <div>
                     <label for="email">Email</label>
                     <br>
                     <input type="email" id="email" class="form-label" name="email" required>
                 </div>
-        
+
                 <div>
                     <label for="password">Password</label>
                     <br>
                     <input type="password" id="password" class="form-label" name="password" required>
                 </div>
-                
+
                 <div>
                     <button type="submit">Create an Account</button>
                 </div>
@@ -49,8 +40,9 @@
             <p>Already Have an Account?<a href="/signin"> Sign In</a> </p>
         </section>
     </main>
-  <footer>
-      
-  </footer>  
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
 </body>
+
 </html>
