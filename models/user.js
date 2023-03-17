@@ -4,8 +4,9 @@ module.exports = (sequelize,DataTypes) => {
     const user = sequelize.define("user", {
     
         id: {
-            primaryKey: true,
             type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
             allowNull: false,
             valiidate: {
                 notEmpty: true
@@ -20,7 +21,16 @@ module.exports = (sequelize,DataTypes) => {
             }
         },
 
-        test: {
+        lastName: {
+            type: DataTypes.STRING,
+            //change later
+            allowNull: true,
+            valiidate: {
+                notEmpty: true
+            }
+        },
+
+        email: {
             type: DataTypes.STRING,
             allowNull: false,
             valiidate: {

@@ -3,6 +3,11 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const db = require('./models');
+const { request } = require('express');
+const bodyParser = require('body-parser');
+const userModel = require('./models/user');
+
+const {user} = require ("./models");
 require('dotenv').config();
 
 app = express();
@@ -23,6 +28,9 @@ app.get('/', (req, res)=> {
 
 app.use('/', Route);
 
+app.post('/create', (req, res) => {
+    user.create({firstName: req.body.name, email: req.body.email, password: req.body.password}) //.then(user => res.json(user))
+})
 
 db.sequelize.sync().then((req)=> {
     app.listen(port, ()=> {
