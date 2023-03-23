@@ -37,6 +37,10 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+//=========== Associations =========
+
+//
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
