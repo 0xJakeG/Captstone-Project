@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const userModel = require('./sequelize/models/user');
 
 const {user} = require ("./sequelize/models");
-require('dotenv').config();
+require('dotenv').config({ path: './.env'});
 
 app = express();
 
