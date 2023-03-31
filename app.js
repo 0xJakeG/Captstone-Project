@@ -35,14 +35,14 @@ var config = mysql.createConnection({
     'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
     database: 'booksforcooks'
 });
-app.get('/', function(req, res) {
+app.get('/allRecipes', function(req, res) {
     config.connect(function(err) {
         var data = {};
         if(err) console.log(err);
         config.query('SELECT * FROM Testrecipes', function(err, result) {
             if(err) console.log(err);
             data = {print: result};
-            res.render('index', {data: result});
+            res.render('allRecipes', {data: result});
         });
     });
 });
