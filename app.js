@@ -43,7 +43,6 @@ app.get('/', function(req, res) {
             if(err) console.log(err);
             data = {print: result};
             res.render('index', {data: result});
-            console.log(data);
         });
     });
 });
