@@ -29,7 +29,7 @@ var port = process.env.PORT || 8080; // set the port
 
 //Connect to database
 var config = mysql.createConnection({
-    user: 'root',
+    user: 'JakeAdmin',
     password: '69LgU84Bta8RZJr',
     host: 
     'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
@@ -42,7 +42,8 @@ app.get('/', function(req, res) {
         config.query('SELECT * FROM Testrecipes', function(err, result) {
             if(err) console.log(err);
             data = {print: result};
-            res.render('index', {data: data});
+            res.render('index', {data: result});
+            console.log(data);
         });
     });
 });
