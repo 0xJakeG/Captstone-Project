@@ -2,6 +2,16 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
+const db = require('./sequelize/models');
+const { request } = require('express');
+const bodyParser = require('body-parser');
+const userModel = require('./sequelize/models/user');
+
+const {user} = require ("./sequelize/models");
+require('dotenv').config();
+
+const {recipe} = require("./sequelize/models");
+require('dotenv').config()
 
 app = express();
 
@@ -21,7 +31,12 @@ app.get('/', (req, res)=> {
 
 app.use('/', Route);
 
+app.post('/create', (req, res) => {
+    user.create({firstName: req.body.name, email: req.body.email, password: req.body.password}) //.then(user => res.json(user))
+})
 
-app.listen(port, ()=> {
-    console.log('Server is running on port', port);
+db.sequelize.sync().then((req)=> {
+    app.listen(port, ()=> {
+        console.log('Server is running on port', port);
+    });
 });
