@@ -32,8 +32,7 @@ app.post('/create', (req, res) => {
     user.create({firstName: req.body.name, email: req.body.email, password: req.body.password}) //.then(user => res.json(user))
 })
 
-db.sequelize.sync().then((req)=> {
+
     app.listen(port, ()=> {
         console.log('Server is running on port', port);
     });
-});
