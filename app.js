@@ -35,6 +35,17 @@ app.post('/create', (req, res) => {
     user.create({firstName: req.body.name, email: req.body.email, password: req.body.password}) //.then(user => res.json(user))
 })
 
+app.post('/create-recipe', (req, res) => {
+    recipe.create({recipes_id: 1, 
+                   recipes_name: req.body.recipe_name, 
+                   recipes_description: req.body.description, 
+                   postedBy: "your mom", 
+                   mealType: "Standard", 
+                   timeToCompletion: 20, 
+                   image: "Image"})
+    console.log(request.body.title);
+})
+
 db.sequelize.sync().then((req)=> {
     app.listen(port, ()=> {
         console.log('Server is running on port', port);
