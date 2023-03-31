@@ -10,9 +10,6 @@ const userModel = require('./sequelize/models/user');
 const {user} = require ("./sequelize/models");
 require('dotenv').config();
 
-const {recipe} = require("./sequelize/models");
-require('dotenv').config()
-
 app = express();
 
 app.set('view engine', 'ejs');
