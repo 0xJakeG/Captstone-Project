@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
+const db = require('./sequelize/models');
 
 app = express();
 
