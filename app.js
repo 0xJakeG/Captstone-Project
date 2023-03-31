@@ -2,7 +2,13 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
+const db = require('./sequelize/models');
+const { request } = require('express');
+const bodyParser = require('body-parser');
+const userModel = require('./sequelize/models/user');
 
+const {user} = require ("./sequelize/models");
+require('dotenv').config();
 app = express();
 
 app.set('view engine', 'ejs');
