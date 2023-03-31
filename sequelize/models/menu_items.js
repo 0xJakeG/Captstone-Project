@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      menu_items.associate = models => {
+        menu_items.belongsTo(models.users, {
+            as: 'menu_items',
+            foreignKey: 'user_id'
+        });
+      };
     }
   }
   menu_items.init({

@@ -12,6 +12,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       menu_item_picture: {
         type: Sequelize.STRING
       },
@@ -21,18 +25,6 @@ module.exports = {
       menu_item_description: {
         type: Sequelize.STRING
       },
-      /*user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName:'user',
-            schema: 'booksforcooks',
-          },
-          key: 'id'
-        },
-        allowNull: false
-        },
-        */
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -41,10 +33,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
-    menu_items.belongsTo(booksforcooks.users, {
-      foreignKey: "user_id",
-      targetKey: "id",
     });
   },
   async down(queryInterface, Sequelize) {
