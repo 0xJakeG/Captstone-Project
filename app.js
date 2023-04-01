@@ -3,10 +3,8 @@ const morgan = require('morgan');
 const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
-//const sequelize = require('./sequelize');
-//const db = require('./sequelize/models');
 const bodyParser = require('body-parser');
-//const userModel = require('./sequelize/models/user');
+
 
 app = express();
 
@@ -49,7 +47,6 @@ app.get('/', (req, res)=> {
 
 app.use('/', Route);
 
-//const db = require('./sequelize/models');
 
 app.listen(port, ()=> {
     console.log('Server is running on port', port);
