@@ -1,7 +1,4 @@
 'use strict';
-
-const menu_items = require('../models/menu_items');
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -12,10 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
       menu_item_picture: {
         type: Sequelize.STRING
       },
@@ -24,6 +17,9 @@ module.exports = {
       },
       menu_item_description: {
         type: Sequelize.STRING
+      },
+      user_id: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
