@@ -17,6 +17,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 
+const {recipe} = require("./sequelize/models");
+require('dotenv').config()
 
 
 var port = process.env.PORT || 8080; // set the port
