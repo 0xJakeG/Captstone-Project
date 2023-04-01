@@ -2,8 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
-const sequelize = require('./sequelize');
-//const db = require('./sequelize/models');
+//const sequelize = require('./sequelize');
+const db = require('./sequelize/models');
 const bodyParser = require('body-parser');
 //const userModel = require('./sequelize/models/user');
 
