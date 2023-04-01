@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
-const db = require('./sequelize/models');
+//const db = require('./sequelize/models');
 const bodyParser = require('body-parser');
 //const userModel = require('./sequelize/models/user');
 
@@ -15,6 +15,8 @@ app.use('/images', express.static('/images'));
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
+
+const db = require('./sequelize/models');
 
 var port = process.env.PORT || 8080; // set the port
 
