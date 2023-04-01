@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); %>
+      <title>This is the future recipeMeta Page</title>
+  </head>
+
+  <body>
+    <header>
+        <%- include('./partials/header'); %>
+      </header>
+
+      <main>
+        <div class="hero-container flex-row">
+            <section class="hero flex-column">
+                <h1>All Recipes</h1>
+                <br>
+                <div class="seriousEats">
+                    <nav>
+                    <% data.forEach(entry => { %>
+                        <a class="recipe_list_item" href="/allRecipes/<%= entry.recipes_id%>"><%= entry.recipes_name%></a>
+                      <%})%>
+                    </nav>
+                </div>
+            </section>
+        </div>
+      </main>
+  </body>
