@@ -17,6 +17,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 
+
+const { Sequelize } = require('sequelize');
 //const {recipe} = require("./sequelize/models");
 //require('dotenv').config()
 
