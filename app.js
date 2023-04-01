@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 
-const db = require('./sequelize/models');
+
 
 var port = process.env.PORT || 8080; // set the port
 
@@ -26,6 +26,7 @@ app.get('/', (req, res)=> {
 
 app.use('/', Route);
 
+const db = require('./sequelize/models');
 
 app.listen(port, ()=> {
     console.log('Server is running on port', port);
