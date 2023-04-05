@@ -3,25 +3,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    queryInterface.addConstraint('menu_items',{
+    queryInterface.addConstraint('recipes',{
       fields: ['user_id'],
       type: 'foreign key',
-      name: 'menu_item_user-association',
+      name: 'recipe_user-association',
       references: {
         table: 'users',
-        field: 'id'
+        field: 'user_id'
       }
     });
   },
 
   async down (queryInterface, Sequelize) {
-    queryInterface.removeConstraint('menu_items',{
+    queryInterface.removeConstraint('recipes',{
       fields: ['user_id'],
       type: 'foreign key',
-      name: 'menu_item_user-association',
+      name: 'recipe_user-association',
       references: {
         table: 'users',
-        field: 'id'
+        field: 'user_id'
       }
     });
   }

@@ -2,23 +2,22 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('menu_items', {
-      id: {
+    await queryInterface.createTable('recipe_ingredients', {
+      recipe_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      menu_item_picture: {
-        type: Sequelize.STRING
+      ingredient_id: {
+        allowNull: false,
+        //primaryKey: true,
+        type: Sequelize.INTEGER
       },
-      menu_item_name: {
-        type: Sequelize.STRING
+      measurement_qty_id: {
+        type: Sequelize.INTEGER
       },
-      menu_item_description: {
-        type: Sequelize.STRING
-      },
-      user_id: {
+      measurement_id: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -32,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('menu_items');
+    await queryInterface.dropTable('recipe_ingredients');
   }
 };
