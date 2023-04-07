@@ -19,10 +19,20 @@ app.use(methodOverride('_method'));
 app.use('/sequelize', express.static('sequelize')); 
 app.use('/models', express.static('/images'));
 
-const { Sequelize } = require('sequelize');
-const { sequelize } = require('./sequelize/models');
+//const { Sequelize } = require('sequelize');
+//const { sequelize } = require('./sequelize/models');
 //const models = require ("./sequelize/models/index.js");
 
+const { sequelize } = require('./sequelize/models');
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+})();
 
 
 var port = process.env.PORT || 8080; // set the port
