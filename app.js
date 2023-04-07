@@ -16,6 +16,8 @@ app.use(express.static(__dirname + '/views'));
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
+app.use('/sequelize', express.static('sequelize')); 
+app.use('/models', express.static('/images'));
 
 const { Sequelize } = require('sequelize');
 const models = require ("./sequelize/models/index.js");
