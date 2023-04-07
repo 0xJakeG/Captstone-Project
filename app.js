@@ -20,7 +20,7 @@ app.use('/sequelize', express.static('sequelize'));
 app.use('/models', express.static('/images'));
 
 const { Sequelize } = require('sequelize');
-const models = require ("./sequelize/models/index.js");
+//const models = require ("./sequelize/models/index.js");
 
 
 var port = process.env.PORT || 8080; // set the port
