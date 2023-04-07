@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
+const mysql2 = require('mySQL2');
+const { sequelize } = require('./sequelize/models');
 
 
 app = express();
@@ -17,22 +19,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 app.use('/sequelize', express.static('sequelize')); 
-app.use('/models', express.static('/images'));
+app.use('/models', express.static('/models'));
 
-//const { Sequelize } = require('sequelize');
-//const { sequelize } = require('./sequelize/models');
-//const models = require ("./sequelize/models/index.js");
 
-const { sequelize } = require('./sequelize/models');
-
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-})();
+sequelize.user
 
 
 var port = process.env.PORT || 8080; // set the port
