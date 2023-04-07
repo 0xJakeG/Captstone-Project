@@ -4,7 +4,6 @@ const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
-const mysql2 = require('mySQL2');
 //const { sequelize } = require('./sequelize/models');
 
 
