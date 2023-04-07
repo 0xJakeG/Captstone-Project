@@ -18,7 +18,7 @@ app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 
 const { Sequelize } = require('sequelize');
-const models = require ("./sequelize/models/index.js");
+//const models = require ("./sequelize/models/index.js");
 
 
 var port = process.env.PORT || 8080; // set the port
