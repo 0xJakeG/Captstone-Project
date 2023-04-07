@@ -5,7 +5,7 @@ const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
 const mysql2 = require('mySQL2');
-const { sequelize } = require('./sequelize/models');
+//const { sequelize } = require('./sequelize/models');
 
 
 app = express();
@@ -22,7 +22,7 @@ app.use('/sequelize', express.static('sequelize'));
 app.use('/models', express.static('/models'));
 
 
-sequelize.user
+const db = require('.sequelize')
 
 
 var port = process.env.PORT || 8080; // set the port
