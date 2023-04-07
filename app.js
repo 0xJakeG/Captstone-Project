@@ -22,7 +22,7 @@ app.use('/sequelize', express.static('sequelize'));
 app.use('/models', express.static('/models'));
 
 
-const db = require('.sequelize')
+//const db = require('.sequelize')
 
 
 var port = process.env.PORT || 8080; // set the port
