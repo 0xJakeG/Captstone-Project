@@ -8,10 +8,8 @@ const Route = require('./routes/mainRoute');
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const cognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
 const AWS = require('aws-sdk');
-
 const jwkToPem = require('jwk-to-pem');
 const jwt = require('jsonwebtoken');
-
 global.fetch = require('node-fetch');
 
 
@@ -43,29 +41,23 @@ const poolData = {
     UserPoolId: "us-east-1_ODmxRRkbw",
     ClientId: "6stcckuprodns354nqp1r1ig43"
 };
-
-const pool_region = 'us-east-1';
-
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+AWS.config.update({
+    region: 'us-east-1'
+})
 app.post('/create', (req, res) => {
     let user = req.body.username;
     let email = req.body.email;
     let password = req.body.password;
     console.log('Creating user with email ', email);
-    RegisterUser({user, email, password}) 
+    registerUser({user, email, password}) 
 })
-async function RegisterUser(username, email, pass){
-    let attributeList = [];
-    //attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"username", Value:"rocksolid"}));
-    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({Name:"email", value:""}));
-    let cognitoUser;
 
-    userPool.signUp("gjrangiujEnfgoWNEfgoSWOEIFno4204uu23452@gmail.com", "9969jDb40gh!*", null, null, function(err, result){
-        if(err) {
-            console.log(err);
-            return;
-        }
-        cognitoUser = result.user;
-        console.log('username is', cognitoUser.getUsername());
+exports.handler = async function(event, context, callback) {
+    const json = JSON.parse(event.body)
+    const result = await registerUser(json)
+
+    callback(null, {
+        statusCode: result.statusCode,
+        body: JSON.stringify(result)
     })
 }
