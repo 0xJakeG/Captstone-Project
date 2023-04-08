@@ -11,9 +11,6 @@ const bodyParser = require('body-parser');
 //amazon_cognito dependencies. 
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
 const cognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
-const AWS = require('aws-sdk');
-const jwkToPem = require('jwk-to-pem');
-const jwt = require('jsonwebtoken');
 global.fetch = require('node-fetch');
 
 
@@ -72,9 +69,6 @@ const poolData = {
     UserPoolId: "us-east-1_ODmxRRkbw",
     ClientId: "6stcckuprodns354nqp1r1ig43"
 };
-AWS.config.update({
-    region: 'us-east-1'
-})
 app.post('/create', (req, res) => {
     let user = req.body.username;
     let email = req.body.email;
