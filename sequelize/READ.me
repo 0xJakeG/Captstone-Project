@@ -1,0 +1,6 @@
+sequelize model:create --name --attributes
+sequelize model:create --name lee_test --attributes test_val:string
+sequelize model:create --name pheonix_test --attributes test_val:string
+sequelize db:migrate
+
+npx sequelize-cli db:migrate:undo
