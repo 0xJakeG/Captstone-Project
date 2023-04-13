@@ -1,4 +1,3 @@
-
 exports.index = (req, res, next)=> {
     res.render('../views/index');
 }
@@ -15,8 +14,8 @@ exports.about = (req, res, next)=> {
     res.render('../views/about');
 }
 
-exports.recipes = (req, res, next)=> {
-    res.render('../views/recipes');
+exports.add_recipe = (req, res, next)=> {
+    res.render('../views/add_recipe');
 }
 
 exports.recipeMeta = (req, res, next)=> {
@@ -25,6 +24,23 @@ exports.recipeMeta = (req, res, next)=> {
 
 exports.map = (req, res, next)=> {
     res.render('../views/map');
+}
+
+exports.allRecipes = (req, res, next)=> {
+    res.render('../views/allRecipes');
+}
+
+exports.showRecipe = (req, res, next)=> {
+    let id = req.params.id;
+    recipes => {
+        if(recipes) {
+        return res.render('../views/allRecipes', {recipes});
+        } else {
+            let err = new Error('Cannot find a recipe with id ' + id);
+            err.status = 404;
+            next(err);
+        }
+    };
 }
 
 exports.head = (req, res, next)=> {
