@@ -10,7 +10,7 @@ router.get('/signin', controller.signin);
 
 router.get('/register', controller.register);
 
-router.get('/recipes', controller.recipes);
+router.get('/add_recipe', controller.add_recipe);
 
 router.get('/recipeMeta', controller.recipeMeta);
 

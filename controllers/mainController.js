@@ -14,8 +14,8 @@ exports.about = (req, res, next)=> {
     res.render('../views/about');
 }
 
-exports.recipes = (req, res, next)=> {
-    res.render('../views/recipes');
+exports.add_recipe = (req, res, next)=> {
+    res.render('../views/add_recipe');
 }
 
 exports.recipeMeta = (req, res, next)=> {
