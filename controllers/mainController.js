@@ -23,6 +23,10 @@ exports.recipeMeta = (req, res, next)=> {
     res.render('../views/recipeMeta');
 }
 
+exports.map = (req, res, next)=> {
+    res.render('../views/map');
+}
+
 exports.head = (req, res, next)=> {
     res.render('../views/partials/head');
 }

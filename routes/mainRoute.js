@@ -14,6 +14,8 @@ router.get('/recipes', controller.recipes);
 
 router.get('/recipeMeta', controller.recipeMeta);
 
+router.get('/map', controller.map);
+
 router.get('/about', controller.about);
 
 router.get('/head', controller.head);

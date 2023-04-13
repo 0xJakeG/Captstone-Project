@@ -1,26 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="mapMain">
 <head>
     <%- include('./partials/head'); %>
+    <script src="../public/javascript/map.js"></script>
     <title>Map Test</title>
 </head>
 
-<body>
+<body id="mapMain">
     <header>
       <%- include('./partials/header'); %>
     </header>
-    <main>
 
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/geocode/json?address=8908 University City Blvd, Charlotte, NC 28223&key=AIzaSyCzKNqUGAC9dtaqgyKmPvabVhJVkjXnuRo"></script>
         <div id="floating-panel">
             <div>
                 <div>
-                    <input type="text" id="from", placeholder="Origin", value="8908 University City Blvd, Charlotte, NC 28223">
+                    <input type="text" id="from", placeholder="Origin", style="color:black;", value="8908 University City Blvd, Charlotte, NC 28223">
                 </div>
             </div>
             <div>
                 <div>
-                    <input type="text" id="to", placeholder="Destination", value="8120 University City Blvd, Charlotte, NC 28213">
+                    <input type="text" id="to", placeholder="Destination", style="color:black;", value="8120 University City Blvd, Charlotte, NC 28213">
                 </div>
+            </div>
+            <div>
+                <select id="optimize">
+                    <option value="TIME">Time</option>
+                    <option value="COST">Cost</option>
+                </select>
             </div>
         </div>
         <select id="mode">
@@ -36,8 +43,6 @@
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzKNqUGAC9dtaqgyKmPvabVhJVkjXnuRo&callback=initMap&v=weekly"
                 defer
         ></script>
-
-    </main>
     <footer>
       <%- include('./partials/footer'); %>
     </footer>
