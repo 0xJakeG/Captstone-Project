@@ -394,3 +394,29 @@ h4
     padding:10%;
     background-color: var(--black-olive);
   }
+
+
+  /* Map Page */
+  #map{
+    height: 100%;
+}
+
+#mapMain{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#floating-panel{
+    top: 10px;
+    left: 25%;
+    z-index: 5;
+    border: 1px solid #999;
+    text-align: center;
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+#mode, #optimize{
+  color: #000;
+}

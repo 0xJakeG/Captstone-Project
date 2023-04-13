@@ -18,6 +18,8 @@ router.get('/allRecipes', controller.allRecipes);
 
 router.get('/allRecipes:id', controller.showRecipe);
 
+router.get('/map', controller.map);
+
 router.get('/about', controller.about);
 
 router.get('/head', controller.head);
