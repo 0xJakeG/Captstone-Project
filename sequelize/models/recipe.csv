@@ -1,11 +1,11 @@
 recipe_id,user_id,recipe_picture,recipe_name,recipe_description,time_to_complete,createdAt,updatedAt
-admin1,123456789,null,"Simple Waffles",Breakfast,"30 minutes",null,null
-admin2,123456789,null,"Classic Hash Browns",Breakfast,"30 minutes",null,null
-admin3,123456789,null,"Microwave Scrambled Eggs",Breakfast,"10 minutes",null,null
-admin4,123456789,null,"Homemade Breakfast Sausage",Breakfast,"20 minutes",null,null
-admin5,123456789,null,"Hot Apple Cereal",Breakfast,"30 minutes",null,null
-admin6,123456789,null,"Whole-Wheat Apple Pancakes",Breakfast,"15 minutes",null,null
-admin7,123456789,null,"Oatmeal Smoothie",Breakfast,"10 minutes",null,null
-admin8,123456789,null,"Banana Waffles",Breakfast,"30 minutes",null,null
-admin9,123456789,null,"Green Apple Sour-Dough Pancakes",Breakfast,"40 minutes",null,null
-admin10,123456789,null,"Huevos Rancheros",Breakfast,"40 minutes",null,null
+admin1,123456789,null,"Simple Waffles",Breakfast,"30 minutes",1/1/23,1/1/23
+admin2,123456789,null,"Classic Hash Browns",Breakfast,"30 minutes",1/1/23,1/1/23
+admin3,123456789,null,"Microwave Scrambled Eggs",Breakfast,"10 minutes",1/1/23,1/1/23
+admin4,123456789,null,"Homemade Breakfast Sausage",Breakfast,"20 minutes",1/1/23,1/1/23
+admin5,123456789,null,"Hot Apple Cereal",Breakfast,"30 minutes",1/1/23,1/1/23
+admin6,123456789,null,"Whole-Wheat Apple Pancakes",Breakfast,"15 minutes",1/1/23,1/1/23
+admin7,123456789,null,"Oatmeal Smoothie",Breakfast,"10 minutes",1/1/23,1/1/23
+admin8,123456789,null,"Banana Waffles",Breakfast,"30 minutes",1/1/23,1/1/23
+admin9,123456789,null,"Green Apple Sour-Dough Pancakes",Breakfast,"40 minutes",1/1/23,1/1/23
+admin10,123456789,null,"Huevos Rancheros",Breakfast,"40 minutes",1/1/23,1/1/23
