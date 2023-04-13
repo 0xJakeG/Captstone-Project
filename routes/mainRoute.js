@@ -10,9 +10,13 @@ router.get('/signin', controller.signin);
 
 router.get('/register', controller.register);
 
-router.get('/recipes', controller.recipes);
+router.get('/add_recipe', controller.add_recipe);
 
 router.get('/recipeMeta', controller.recipeMeta);
+
+router.get('/allRecipes', controller.allRecipes);
+
+router.get('/allRecipes:id', controller.showRecipe);
 
 router.get('/about', controller.about);
 
