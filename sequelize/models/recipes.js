@@ -2,37 +2,39 @@ const { sequelize } = require(".");
 
 module.exports = (sequelize,DataTypes) => {
     const recipes = sequelize.define("recipes", {
-        recipes_id: {
+        recipe_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        recipes_name: {
+        user_id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        recipe_picture: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        recipes_time_to_completion: {
+        recipe_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        recipes_meal_type: {
+        recipe_description: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        recipes_reviews: {
+        time_to_complete: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        recipes_nutrition: {
+        createdAt: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        recipes_ingredients: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        recipes_directions: {
+        updatedAt: {
             type: DataTypes.STRING,
             allowNull: false,
         },

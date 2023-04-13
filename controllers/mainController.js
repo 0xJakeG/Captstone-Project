@@ -1,3 +1,5 @@
+const model = require('../sequelize/models/recipes');
+
 exports.index = (req, res, next)=> {
     res.render('../views/index');
 }
@@ -28,15 +30,17 @@ exports.allRecipes = (req, res, next)=> {
 
 exports.showRecipe = (req, res, next)=> {
     let id = req.params.id;
-    recipes => {
+    model.findById(id)
+    .then(recipes=>{
         if(recipes) {
-        return res.render('../views/allRecipes', {recipes});
+            return res.render('../views/allRecipesS', {recipes});
         } else {
-            let err = new Error('Cannot find a recipe with id ' + id);
+            let err = new Error('Cannot find a recipe with id '+ id);
             err.status = 404;
             next(err);
         }
-    };
+    })
+    .catch(err=>next(err));
 }
 
 exports.head = (req, res, next)=> {

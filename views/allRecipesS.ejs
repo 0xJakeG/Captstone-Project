@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include('./partials/head'); %>
-      <title>This is the future recipes Page</title>
+      <title>This is the future recipeMeta Page</title>
   </head>
 
   <body>
@@ -17,9 +17,9 @@
                 <br>
                 <div class="seriousEats">
                     <nav>
-                    <% data.forEach(entry => { %>
-                        <a class="recipe_list_item" href="/allRecipes/<%= entry.recipe_id%>"><%= entry.recipe_name%></a>
-                      <%})%>
+                        <p><%=  entry.picture %></p>
+                        <p><%=  entry.recipe_description %></p>
+                        <p><%=  entry.time_to_complete %></p>
                     </nav>
                 </div>
             </section>
