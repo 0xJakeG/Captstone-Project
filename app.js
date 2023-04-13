@@ -3,10 +3,8 @@ const morgan = require('morgan');
 const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
-const db = require('./sequelize/models');
 const { request } = require('express');
 const bodyParser = require('body-parser');
-const userModel = require('./sequelize/models/user');
 
 const {user} = require ("./sequelize/models");
 require('dotenv').config();
