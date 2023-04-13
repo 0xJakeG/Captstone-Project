@@ -67,7 +67,8 @@ app.listen(port, ()=> {
 //aws cognito functions
 const poolData = {
     UserPoolId: "us-east-1_ODmxRRkbw",
-    ClientId: "6stcckuprodns354nqp1r1ig43"
+    ClientId: "6stcckuprodns354nqp1r1ig43",
+    Storage: new AmazonCognitoIdentity.CookieStorage({domain: 'localhost'})
 };
 app.post('/create', (req, res) => {
     let user = req.body.username;
