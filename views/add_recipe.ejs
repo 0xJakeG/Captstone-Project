@@ -5,76 +5,53 @@
 	<title>Add Recipe</title>
 </head>
 <body>
-	<h2>Add Recipe</h2>
-	<%- include('./partials/header'); %>
-	<form>
-		<label for="recipe_name">Recipe Name:</label>
-		<input type="text" id="recipe_name" name="recipe_name"><br>
-
-		<label for="time">Estimated Time to Completion:</label>
-		<input type="radio" id="time_15" name="time" value="15">
-		<label for="time_15">15 minutes</label>
-		<input type="radio" id="time_30" name="time" value="30">
-		<label for="time_30">30 minutes</label>
-		<input type="radio" id="time_60" name="time" value="60">
-		<label for="time_60">60 minutes</label><br>
-
-		<label for="recipe_type">Recipe Type:</label>
-		<select id="recipe_type" name="recipe_type">
-			<option value="breakfast">Breakfast</option>
-			<option value="lunch">Lunch</option>
-			<option value="dinner">Dinner</option>
-			<option value="dessert">Dessert</option>
-		</select><br>
-
-		<label for="recipe_desc">Recipe Description:</label><br>
-		<textarea id="recipe_desc" name="recipe_desc" rows="4" cols="50"></textarea><br>
-
-		<h3>Ingredients:</h3>
-		<table>
-			<tr>
-				<th>Ingredient</th>
-				<th>Qty</th>
-				<th>Units</th>
-			</tr>
-			<tr>
-				<td>
-					<select id="ingredient" name="ingredient">
-						<option value="flour">Flour</option>
-						<option value="sugar">Sugar</option>
-						<option value="salt">Salt</option>
-						<option value="butter">Butter</option>
-						<option value="eggs">Eggs</option>
-						<option value="milk">Milk</option>
-					</select>
-				</td>
-				<td><input type="number" id="qty" name="qty" min="0" max="100"></td>
-				<td>
-					<input type="radio" id="cups" name="units" value="cups">
-					<label for="cups">Cups</label><br>
-					<input type="radio" id="teaspoons" name="units" value="teaspoons">
-					<label for="teaspoons">Teaspoons</label><br>
-					<input type="radio" id="tablespoons" name="units" value="tablespoons">
-					<label for="tablespoons">Tablespoons</label><br>
-					<input type="radio" id="lbs" name="units" value="lbs">
-					<label for="lbs">Lbs</label><br>
-					<input type="radio" id="quarts" name="units" value="quarts">
-					<label for="quarts">Quarts</label>
-				</td>
-			</tr>
-		</table>
-
-		<h3>Instructions:</h3>
-		<div id="instructions">
-			<div>
-				<label for="instruction1">Instruction 1:</label>
-				<input type="text" id="instruction1" name="instruction1">
-				<button onclick=""></button>
-			</div>
+	<header>
+		<%- include('./partials/header'); %>
+	</header>
+	<h1>Add a new recipe</h1>
+	<form action="/addRecipe" method="post">
+	  <label for="recipeName">Recipe Name:</label>
+	  <input type="text" id="recipeName" name="recipeName" required><br><br>
+	  
+	  <label for="instruction">Instructions:</label><br>
+	  <textarea id="instruction" name="instruction" required></textarea><br><br>
+	  
+	  <fieldset>
+		<legend>Ingredients:</legend>
+		<div id="ingredients">
+		  <div>
+			<label for="ingredient1">Name:</label>
+			<input type="text" id="ingredient1" name="ingredients[0][name]" required>
+			<label for="ingredientQty1">Quantity:</label>
+			<input type="text" id="ingredientQty1" name="ingredients[0][quantity]" required>
+		  </div>
 		</div>
-		</form>
-
-</body>
+		<button type="button" onclick="addIngredient()">Add Ingredient</button>
+	  </fieldset>
+	  
+	  <br>
+	  <button type="submit">Add Recipe</button>
+	</form>
+  
+	<script>
+	  let ingredientCounter = 1;
+  
+	  function addIngredient() {
+		ingredientCounter++;
+  
+		const ingredientDiv = document.createElement('div');
+		ingredientDiv.innerHTML = `
+		  <label for="ingredient-name-${ingredientCounter}">Name:</label>
+		  <input type="text" id="ingredient-name-${ingredientCounter}" name="ingredients[${ingredientCounter - 1}][name]" required>
+		  <label for="ingredient-quantity-${ingredientCounter}">Quantity:</label>
+		  <input type="text" id="ingredient-quantity-${ingredientCounter}" name="ingredients[${ingredientCounter - 1}][quantity]" required>
+		`;
+  
+		document.getElementById('ingredients').appendChild(ingredientDiv);
+	  }
+	</script>
+  </body>
+  
 <footer>
 	<%- include('./partials/footer'); %>
 </footer>

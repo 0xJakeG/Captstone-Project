@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       models.user.hasMany(recipe);
     }
   }
-  menu_item.init({
-    menu_item_picture: DataTypes.STRING,
-    menu_item_name: DataTypes.STRING,
-    menu_item_description: DataTypes.STRING,
+  recipe.init({
+    recipe_picture: DataTypes.STRING,
+    recipe_name: DataTypes.STRING,
+    recipe_description: DataTypes.STRING,
     user_id: DataTypes.INTEGER
   }, {
     sequelize,

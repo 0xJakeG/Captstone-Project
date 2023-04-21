@@ -4,12 +4,14 @@ const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
-//const { sequelize } = require('./sequelize/models');
+const {sequelize} = require('./sequelize/models');
+const {recipe} = require("./sequelize/models");
 
 
 
 //amazon_cognito dependencies. 
 const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const recipeIngredient = require('./sequelize/migrations/recipe-ingredient');
 const cognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
 global.fetch = require('node-fetch');
 
@@ -70,6 +72,7 @@ const poolData = {
     ClientId: "6stcckuprodns354nqp1r1ig43",
     Storage: new AmazonCognitoIdentity.CookieStorage({domain: 'localhost'})
 };
+
 app.post('/create', (req, res) => {
     let user = req.body.username;
     let email = req.body.email;
@@ -77,7 +80,33 @@ app.post('/create', (req, res) => {
     console.log('Creating user with email ', email);
     registerUser({user, email, password}) 
 })
+//app.post('/addRecipe', (req, res) => {
+    //let recipe_name = req.body.recipe_name;
+    //let time_to_complete = req.body.time_to_complete;
+    //let recipe_description = req.body.recipe_description;
+   // add_recipe({recipe_name, time_to_complete, recipe_description})
+//})
 
+app.post('/addRecipe', async (req, res) => {
+    const { recipeName, instruction, ingredients } = req.body;
+  
+    try {
+      // Create a new recipe instance and save it to the database
+      const Recipe = await recipe.create({ recipeName, instruction });
+  
+      // Create new ingredient instances and associate them with the recipe
+      const ingredientPromises = ingredients.map(ingredient =>
+        Ingredient.create({ name: ingredient.name, quantity: ingredient.quantity, recipeId: recipe.recipe_id })
+      );
+      await Promise.all(ingredientPromises);
+  
+      res.json({ message: 'Recipe and ingredients created successfully!' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error creating recipe and ingredients.' });
+    }
+
+  });
 exports.handler = async function(event, context, callback) {
     const json = JSON.parse(event.body)
     const result = await registerUser(json)
