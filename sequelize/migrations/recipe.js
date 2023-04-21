@@ -21,6 +21,9 @@ module.exports = {
       recipe_description: {
         type: Sequelize.STRING
       },
+      recipe_type: {
+        type: Sequelize.STRING
+      },
       time_to_complete: {
         type: Sequelize.INTEGER
       },

@@ -15,10 +15,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   recipe.init({
-    recipe_picture: DataTypes.STRING,
-    recipe_name: DataTypes.STRING,
-    recipe_description: DataTypes.STRING,
-    user_id: DataTypes.INTEGER
+      recipe_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      recipe_picture: DataTypes.STRING,
+      recipe_name: DataTypes.STRING,
+      recipe_description: DataTypes.STRING,
+      user_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'recipe',

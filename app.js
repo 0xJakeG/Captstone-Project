@@ -5,7 +5,9 @@ const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
 const {sequelize} = require('./sequelize/models');
-const {recipe} = require("./sequelize/models");
+const {recipe, recipe_ingredient} = require("./sequelize/models");
+const { Op } = require('sequelize');
+
 
 
 
@@ -87,26 +89,41 @@ app.post('/create', (req, res) => {
    // add_recipe({recipe_name, time_to_complete, recipe_description})
 //})
 
+// POST /recipes - create a new recipe and its ingredients
 app.post('/addRecipe', async (req, res) => {
-    const { recipeName, instruction, ingredients } = req.body;
-  
-    try {
-      // Create a new recipe instance and save it to the database
-      const Recipe = await recipe.create({ recipeName, instruction });
-  
-      // Create new ingredient instances and associate them with the recipe
-      const ingredientPromises = ingredients.map(ingredient =>
-        Ingredient.create({ name: ingredient.name, quantity: ingredient.quantity, recipeId: recipe.recipe_id })
-      );
-      await Promise.all(ingredientPromises);
-  
-      res.json({ message: 'Recipe and ingredients created successfully!' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error creating recipe and ingredients.' });
-    }
+  const { recipe_name, recipe_description, ingredients } = req.body;
 
-  });
+  try {
+    // create the recipe
+    const newRecipe = await recipe.create({
+      recipe_name,
+      recipe_description
+    });
+
+    // create the recipe's ingredients
+    const newIngredients = await recipe_ingredient.bulkCreate(
+      ingredients.map(({ ingredient_name, measurement_qty, measurement_id }) => ({
+        ingredient_id: null, // replace with actual ingredient ID if using a separate table for ingredients
+        recipe_id: newRecipe.recipe_id,
+        measurement_qty_id: null, // replace with actual measurement qty ID if using a separate table for measurement qtys
+        measurement_id
+      }))
+    );
+
+    res.status(201).json({
+      recipe: {
+        id: newRecipe.recipe_id,
+        recipe_name: newRecipe.recipe_name,
+        recipe_description: newRecipe.recipe_description,
+
+        ingredients: newIngredients
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error creating recipe');
+  }
+});
 exports.handler = async function(event, context, callback) {
     const json = JSON.parse(event.body)
     const result = await registerUser(json)
