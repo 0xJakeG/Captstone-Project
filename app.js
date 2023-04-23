@@ -1,3 +1,4 @@
+
 const express = require('express');
 const morgan = require('morgan');
 const mysql = require('mysql');
@@ -9,9 +10,10 @@ const bodyParser = require('body-parser');
 
 
 //amazon_cognito dependencies. 
-const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-const cognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
-global.fetch = require('node-fetch');
+//const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+//const cognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
+//global.fetch = require('node-fetch');
+
 
 
 app = express();
@@ -27,11 +29,11 @@ app.use(methodOverride('_method'));
 app.use('/sequelize', express.static('sequelize')); 
 app.use('/models', express.static('/models'));
 
-
+app.use('/api/'), require('./routes/')
 //const db = require('/sequelizes')
 
 
-var port = process.env.PORT || 8080; // set the port
+var port = process.env.PORT || 3001; // set the port
 
 //Connect to database
 var config = mysql.createConnection({
@@ -45,11 +47,16 @@ app.get('/allRecipes', function(req, res) {
     config.connect(function(err) {
         var data = {};
         if(err) console.log(err);
+        console.log("database connected successfully");
         config.query('SELECT * FROM recipes', function(err, result) {
             if(err) console.log(err);
             data = {print: result};
+            console.log(data);
             res.render('allRecipes', {data: result});
         });
+        
+
+        
     });
 });
 
@@ -64,10 +71,17 @@ app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
 
+//amazon_cognito dependencies. 
+const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
+const { pool } = require('mssql');
+const cognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
+global.fetch = require('node-fetch');
+const AWS = require('aws-sdk/global');
+
 //aws cognito functions
 const poolData = {
     UserPoolId: "us-east-1_ODmxRRkbw",
-    ClientId: "6stcckuprodns354nqp1r1ig43",
+    ClientId: "4mq5ne89f13lfp2d5pv8cvvc8p",
     Storage: new AmazonCognitoIdentity.CookieStorage({domain: 'localhost'})
 };
 app.post('/create', (req, res) => {
@@ -77,6 +91,48 @@ app.post('/create', (req, res) => {
     console.log('Creating user with email ', email);
     registerUser({user, email, password}) 
 })
+let userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+let userData = {
+    email: 'email',
+    Pool: userPool,
+    Storage: new AmazonCognitoIdentity.CookieStorage({domain: "localhost"})
+};
+/*let authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationDetails);
+let cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+cognitoUser.authenticateUser(authenticationDetails, {
+	onSuccess: function(result) {
+		var accessToken = result.getAccessToken().getJwtToken();
+
+		//POTENTIAL: Region needs to be set if not already set previously elsewhere.
+		AWS.config.region = 'us-east-1';
+
+		AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+			IdentityPoolId: '...', // your identity pool id here
+			Logins: {
+				// Change the key below according to the specific region your user pool is in.
+				'cognito-idp.us-east-1.amazonaws.com/us-east-1_ODmxRRkbw': result
+					.getIdToken()
+					.getJwtToken(),
+			},
+		});
+
+		//refreshes credentials using AWS.CognitoIdentity.getCredentialsForIdentity()
+		AWS.config.credentials.refresh(error => {
+			if (error) {
+				console.error(error);
+			} else {
+				// Instantiate aws sdk service objects now that the credentials have been updated.
+				// example: var s3 = new AWS.S3();
+				console.log('Successfully logged!');
+			}
+		});
+	},
+
+	onFailure: function(err) {
+		alert(err.message || JSON.stringify(err));
+	},
+});*/
+
 
 exports.handler = async function(event, context, callback) {
     const json = JSON.parse(event.body)

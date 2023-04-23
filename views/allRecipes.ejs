@@ -15,11 +15,16 @@
             <section class="hero flex-column">
                 <h1>All Recipes</h1>
                 <br>
-                <div class="seriousEats">
+                <div class="seriousEats" id="recipe_list">
                     <nav>
                     <% data.forEach(entry => { %>
+                      <div id="<%= entry.recipe_id%>">
                         <a class="recipe_list_item" href="/allRecipes/<%= entry.recipe_id%>"><%= entry.recipe_name%></a>
+                        <p><%= entry.recipe_description%></p>
+                        <button action="/favorite_recipe">Favorite</button>
+                        <button action="/review_recipe">Leave a review</button>
                       <%})%>
+                      </div>
                     </nav>
                 </div>
             </section>
