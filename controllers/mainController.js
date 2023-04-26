@@ -34,7 +34,7 @@ exports.allRecipes = (req, res, next)=> {
 
 exports.recipeDetails = async (req, res, next) => {
     console.log(req.params);
-    let id = req.params.recipe_id;
+    let id = req.params.id;
     try {
       const recipe = await getRecipeById(id, req);
       if (recipe) {
