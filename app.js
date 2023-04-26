@@ -31,6 +31,13 @@ var config = mysql.createConnection({
     database: 'booksforcooks'
 });
 
+// Alows the mainController to use the config 
+module.exports = { config };
+app.use((req, res, next) => {
+    req.config = config;
+    next();
+  });
+  
 app.get('/allRecipes', function(req, res) {
     config.query('SELECT * FROM recipes', function(err, result) {
         if (err) {
@@ -52,7 +59,6 @@ app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
 
-<<<<<<< Updated upstream
 app.post('/addRecipe', (req, res) => {
     const {
       recipe_name,
@@ -102,14 +108,6 @@ app.post('/addRecipe', (req, res) => {
       }
     );
   });
-//aws cognito functions
-const poolData = {
-    UserPoolId: "us-east-1_ODmxRRkbw",
-    ClientId: "6stcckuprodns354nqp1r1ig43",
-    Storage: new AmazonCognitoIdentity.CookieStorage({domain: 'localhost'})
-};
-=======
->>>>>>> Stashed changes
 app.post('/create', (req, res) => {
     let user = req.body.username;
     let email = req.body.email;
