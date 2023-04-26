@@ -84,6 +84,66 @@ const poolData = {
     ClientId: "6stcckuprodns354nqp1r1ig43",
     Storage: new AmazonCognitoIdentity.CookieStorage({domain: 'localhost'})
 };
+
+
+
+
+
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+app.post('/addRecipe', (req, res) => {
+    const {
+      recipe_name,
+      recipe_type,
+      recipe_description,
+      recipe_picture,
+      ingredientName,
+      ingredientMeasurementQty,
+      ingredientMeasurementUnit,
+    } = req.body;
+  
+    const recipeSql =
+      'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
+    const ingredientSql =
+      'INSERT INTO recipe_ingredients (recipe_id, ingredient_name, measurement_qty, measurement_unit) VALUES (?, ?, ?, ?)';
+  
+    config.query(
+      recipeSql,
+      [recipe_name, recipe_type, recipe_description, recipe_picture],
+      (error, results, fields) => {
+        if (error) {
+          console.error(error);
+          res.sendStatus(500);
+          return;
+        }
+  
+        console.log(results);
+        const recipeId = results.insertId;
+  
+        for (let i = 0; i < ingredientName.length; i++) {
+          config.query(ingredientSql,[recipeId,ingredientName[i],
+                                      ingredientMeasurementQty[i],
+                                      ingredientMeasurementUnit[i]
+                                     ],
+            (error, results, fields) => {
+              if (error) {
+                console.error(error);
+                res.sendStatus(500);
+                return;
+              }
+              console.log(results);
+            }
+          );
+        }
+  
+        res.sendStatus(200);
+      }
+    );
+  });
 app.post('/create', (req, res) => {
     let user = req.body.username;
     let email = req.body.email;
