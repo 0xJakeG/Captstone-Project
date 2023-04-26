@@ -40,14 +40,12 @@ var config = mysql.createConnection({
 });
 
 app.get('/allRecipes', function(req, res) {
-    config.connect(function(err) {
-        var data = {};
-        if(err) console.log(err);
-        config.query('SELECT * FROM recipes', function(err, result) {
-            if(err) console.log(err);
-            data = {print: result};
-            res.render('allRecipes', {data: result});
-        });
+    config.query('SELECT * FROM recipes', function(err, result) {
+        if (err) {
+            console.log(err);
+            return res.status(500).send('Error querying the database');
+        }
+        res.render('allRecipes', {data: result});
     });
 });
 
