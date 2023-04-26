@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('recipes', {
-      recipe_id: {
+      recipe_id:{
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -19,6 +19,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       recipe_description: {
+        type: Sequelize.STRING
+      },
+      recipe_type: {
         type: Sequelize.STRING
       },
       time_to_complete: {
