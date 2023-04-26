@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
+//const { sequelize } = require('./sequelize/models');
 
 
 
@@ -25,8 +26,10 @@ app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 app.use('/sequelize', express.static('sequelize')); 
 app.use('/models', express.static('/models'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
+
+//const db = require('/sequelizes')
+
 
 var port = process.env.PORT || 8080; // set the port
 
@@ -38,7 +41,6 @@ var config = mysql.createConnection({
     'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
     database: 'booksforcooks'
 });
-
 
 config.connect(function(err) {
     if (err) {
@@ -76,55 +78,6 @@ app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
 
-app.post('/addRecipe', (req, res) => {
-    const {
-      recipe_name,
-      recipe_type,
-      recipe_description,
-      recipe_picture,
-      ingredientName,
-      ingredientMeasurementQty,
-      ingredientMeasurementUnit,
-    } = req.body;
-  
-    const recipeSql =
-      'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
-    const ingredientSql =
-      'INSERT INTO recipe_ingredients (recipe_id, ingredient_name, measurement_qty, measurement_unit) VALUES (?, ?, ?, ?)';
-  
-    config.query(
-      recipeSql,
-      [recipe_name, recipe_type, recipe_description, recipe_picture],
-      (error, results, fields) => {
-        if (error) {
-          console.error(error);
-          res.sendStatus(500);
-          return;
-        }
-  
-        console.log(results);
-        const recipeId = results.insertId;
-  
-        for (let i = 0; i < ingredientName.length; i++) {
-          config.query(ingredientSql,[recipeId,ingredientName[i],
-                                      ingredientMeasurementQty[i],
-                                      ingredientMeasurementUnit[i]
-                                     ],
-            (error, results, fields) => {
-              if (error) {
-                console.error(error);
-                res.sendStatus(500);
-                return;
-              }
-              console.log(results);
-            }
-          );
-        }
-  
-        res.sendStatus(200);
-      }
-    );
-  });
 //aws cognito functions
 const poolData = {
     UserPoolId: "us-east-1_ODmxRRkbw",

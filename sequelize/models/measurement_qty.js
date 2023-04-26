@@ -3,25 +3,23 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class recipe_ingredient extends Model {
+  class measurement_qty extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      recipe_ingredient.belongsTo(models.recipe);
-      models.recipe.hasMany(recipe_ingredient);    
+      measurement_qty.belongsTo(models.recipe_ingredient);
+      models.recipe_ingredient.hasMany(measurement_qty);    
     }
   }
-  recipe_ingredient.init({
-    ingredient_id: DataTypes.INTEGER,
-    recipe_id: DataTypes.INTEGER,
+  measurement_qty.init({
     measurement_qty_id: DataTypes.INTEGER,
-    measurement_id: DataTypes.INTEGER
+    qty_amount: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'recipe_ingredient',
+    modelName: 'measurement_qty',
   });
-  return recipe_ingredient;
+  return measurement_qty;
 };
