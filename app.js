@@ -69,12 +69,11 @@ app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
 
-
-app.post('/addRecipe', (req, res) => {
+/*app.post('/addRecipe', (req, res) => {
     const { recipe_name, recipe_type, 
             recipe_description, recipe_picture, 
             ingredientName, ingredientMeasurementQty, 
-            ingredientMeasurement } = req.body;  
+            ingredientMeasurementUnit } = req.body;
     const sql = 'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
   
     config.query(sql, [recipe_name, recipe_type, recipe_description, recipe_picture], (error, results, fields) => {
@@ -88,9 +87,10 @@ app.post('/addRecipe', (req, res) => {
       res.sendStatus(200);
     });
 
+    const recipeId = results.insertId;
     for (let i = 0; i < ingredientName.length; i++) {
-        const ingredientSql = 'INSERT INTO ingredients (ingredient_name) VALUES (?)';
-        config.query(ingredientSql, [ingredientName[i]], (error, results, fields) => {
+        const ingredientSql = 'INSERT INTO recipe_ingredients (ingredient_name, measurement_qty, measurement_unit) VALUES (?, ?, ?)';
+        config.query(ingredientSql, recipeId, [ingredientName[i], ingredientMeasurementQty[i], ingredientMeasurementUnit[i]], (error, results, fields) => {
           if (error) {
             console.error(error);
             res.sendStatus(500);
@@ -99,9 +99,57 @@ app.post('/addRecipe', (req, res) => {
           console.log(results);
         });
       }
-
   });
-
+*/
+app.post('/addRecipe', (req, res) => {
+    const {
+      recipe_name,
+      recipe_type,
+      recipe_description,
+      recipe_picture,
+      ingredientName,
+      ingredientMeasurementQty,
+      ingredientMeasurementUnit,
+    } = req.body;
+  
+    const recipeSql =
+      'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
+    const ingredientSql =
+      'INSERT INTO recipe_ingredients (recipe_id, ingredient_name, measurement_qty, measurement_unit) VALUES (?, ?, ?, ?)';
+  
+    config.query(
+      recipeSql,
+      [recipe_name, recipe_type, recipe_description, recipe_picture],
+      (error, results, fields) => {
+        if (error) {
+          console.error(error);
+          res.sendStatus(500);
+          return;
+        }
+  
+        console.log(results);
+        const recipeId = results.insertId;
+  
+        for (let i = 0; i < ingredientName.length; i++) {
+          config.query(ingredientSql,[recipeId,ingredientName[i],
+                                      ingredientMeasurementQty[i],
+                                      ingredientMeasurementUnit[i]
+                                     ],
+            (error, results, fields) => {
+              if (error) {
+                console.error(error);
+                res.sendStatus(500);
+                return;
+              }
+              console.log(results);
+            }
+          );
+        }
+  
+        res.sendStatus(200);
+      }
+    );
+  });
 //aws cognito functions
 const poolData = {
     UserPoolId: "us-east-1_ODmxRRkbw",

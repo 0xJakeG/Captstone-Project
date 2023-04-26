@@ -22,6 +22,7 @@
 			<option value="Lunch">Lunch</option>
 			<option value="Dinner">Dinner</option>
 			<option value="Dessert">Dessert</option>
+            <option value="Any">Any</option>
 		</select><br>
     
         <label for="recipe_description">Recipe Description:</label>
@@ -39,11 +40,11 @@
             <label for="ingredient_name">Ingredient Name:</label>
             <input type="text" name="ingredientName[]" id="ingredient_name" required>
     
-            <label for="ingredient_measurement_qty_1">Measurement Quantity:</label>
-            <input type="number" name="ingredientMeasurementQty[]" id="ingredient_measurement_qty" required>
+            <label for="ingredient_measurement_qty">Measurement Quantity:</label>
+            <input type="decimal" name="ingredientMeasurementQty[]" id="ingredient_measurement_qty" step="0.1" required>
     
-            <label for="ingredient_measurement_1">Measurement:</label>
-            <input type="text" name="ingredientMeasurement[]" id="ingredient_measurement" required>
+            <label for="ingredient_measurement_unit">Measurement:</label>
+            <input type="text" name="ingredientMeasurementUnit[]" id="ingredient_measurement_unit" required>
     
             <button class="remove-ingredient" type="button">Remove</button>
         </div>
@@ -82,8 +83,8 @@
     
         const measurementInput = document.createElement("input");
         measurementInput.type = "text";
-        measurementInput.name = "ingredientMeasurement[]";
-        measurementInput.id = `ingredient-measurement-${ingredientCount}`;
+        measurementInput.name = "ingredientMeasurementUnit[]";
+        measurementInput.id = `ingredient-measurement-unit-${ingredientCount}`;
         measurementInput.required = true;
     
         const removeBtn = document.createElement("button");
