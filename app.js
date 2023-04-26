@@ -4,7 +4,6 @@ const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
-//const { sequelize } = require('./sequelize/models');
 
 
 
@@ -39,12 +38,6 @@ var config = mysql.createConnection({
     'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
     database: 'booksforcooks'
 });
-const pool = mysql.createPool({
-    host: 'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
-    user: 'JakeAdmin',
-    password: '69LgU84Bta8RZJr',
-    database: 'booksforcooks'
-  });
 
 app.get('/allRecipes', function(req, res) {
     config.connect(function(err) {
@@ -69,38 +62,6 @@ app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
 
-/*app.post('/addRecipe', (req, res) => {
-    const { recipe_name, recipe_type, 
-            recipe_description, recipe_picture, 
-            ingredientName, ingredientMeasurementQty, 
-            ingredientMeasurementUnit } = req.body;
-    const sql = 'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
-  
-    config.query(sql, [recipe_name, recipe_type, recipe_description, recipe_picture], (error, results, fields) => {
-      if (error) {
-        console.error(error);
-        res.sendStatus(500);
-        return;
-      }
-  
-      console.log(results);
-      res.sendStatus(200);
-    });
-
-    const recipeId = results.insertId;
-    for (let i = 0; i < ingredientName.length; i++) {
-        const ingredientSql = 'INSERT INTO recipe_ingredients (ingredient_name, measurement_qty, measurement_unit) VALUES (?, ?, ?)';
-        config.query(ingredientSql, recipeId, [ingredientName[i], ingredientMeasurementQty[i], ingredientMeasurementUnit[i]], (error, results, fields) => {
-          if (error) {
-            console.error(error);
-            res.sendStatus(500);
-            return;
-          }
-          console.log(results);
-        });
-      }
-  });
-*/
 app.post('/addRecipe', (req, res) => {
     const {
       recipe_name,
