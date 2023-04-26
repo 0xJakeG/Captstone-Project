@@ -26,10 +26,8 @@ app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 app.use('/sequelize', express.static('sequelize')); 
 app.use('/models', express.static('/models'));
-
-
-//const db = require('/sequelizes')
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 var port = process.env.PORT || 8080; // set the port
 
@@ -41,6 +39,13 @@ var config = mysql.createConnection({
     'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
     database: 'booksforcooks'
 });
+const pool = mysql.createPool({
+    host: 'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
+    user: 'JakeAdmin',
+    password: '69LgU84Bta8RZJr',
+    database: 'booksforcooks'
+  });
+
 app.get('/allRecipes', function(req, res) {
     config.connect(function(err) {
         var data = {};
@@ -63,6 +68,39 @@ app.post('/create')
 app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
+
+
+app.post('/addRecipe', (req, res) => {
+    const { recipe_name, recipe_type, 
+            recipe_description, recipe_picture, 
+            ingredientName, ingredientMeasurementQty, 
+            ingredientMeasurement } = req.body;  
+    const sql = 'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
+  
+    config.query(sql, [recipe_name, recipe_type, recipe_description, recipe_picture], (error, results, fields) => {
+      if (error) {
+        console.error(error);
+        res.sendStatus(500);
+        return;
+      }
+  
+      console.log(results);
+      res.sendStatus(200);
+    });
+
+    for (let i = 0; i < ingredientName.length; i++) {
+        const ingredientSql = 'INSERT INTO ingredients (ingredient_name) VALUES (?)';
+        config.query(ingredientSql, [ingredientName[i]], (error, results, fields) => {
+          if (error) {
+            console.error(error);
+            res.sendStatus(500);
+            return;
+          }
+          console.log(results);
+        });
+      }
+
+  });
 
 //aws cognito functions
 const poolData = {
