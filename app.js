@@ -1,19 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
-const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
+const mysql = require("mysql2/promise");
 const bodyParser = require('body-parser');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 //const { sequelize } = require('./sequelize/models');
-
-
-
-//amazon_cognito dependencies. 
-const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-const cognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
-global.fetch = require('node-fetch');
-
-
 app = express();
 
 app.set('view engine', 'ejs');
@@ -27,6 +20,8 @@ app.use(methodOverride('_method'));
 app.use('/sequelize', express.static('sequelize')); 
 app.use('/models', express.static('/models'));
 
+app.use(express.json());
+
 
 //const db = require('/sequelizes')
 
@@ -34,24 +29,16 @@ app.use('/models', express.static('/models'));
 var port = process.env.PORT || 8080; // set the port
 
 //Connect to database
-var config = mysql.createConnection({
+let sql_connection = mysql.createConnection({
     user: 'JakeAdmin',
     password: '69LgU84Bta8RZJr',
     host: 
     'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
-    database: 'booksforcooks'
-});
-
-config.connect(function(err) {
-    if (err) {
-        console.error('Error connecting to the database:', err.stack);
-        return;
-    }
-    console.log('Connected to the database.');
+    database: 'booksforcooks',
 });
 
 app.get('/allRecipes', function(req, res) {
-    config.query('SELECT * FROM recipes', function(err, result) {
+    sql_connection.query('SELECT * FROM recipes', function(err, result) {
         if (err) {
             console.log(err);
             return res.status(500).send('Error querying the database');
@@ -71,26 +58,27 @@ app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
 
-//aws cognito functions
-const poolData = {
-    UserPoolId: "us-east-1_ODmxRRkbw",
-    ClientId: "6stcckuprodns354nqp1r1ig43",
-    Storage: new AmazonCognitoIdentity.CookieStorage({domain: 'localhost'})
-};
-app.post('/create', (req, res) => {
-    let user = req.body.username;
-    let email = req.body.email;
-    let password = req.body.password;
-    console.log('Creating user with email ', email);
-    registerUser({user, email, password}) 
-})
-
-exports.handler = async function(event, context, callback) {
-    const json = JSON.parse(event.body)
-    const result = await registerUser(json)
-
-    callback(null, {
-        statusCode: result.statusCode,
-        body: JSON.stringify(result)
+app.post("/register", (req,res) => {
+    const { username, email, password } = req.body;
+    bcrypt.hash(password, hash).then((hash) => {
+        sql_connection.execute(
+            'INSERT INTO users (`username`, `email`, `password`) VALUES(?,?,?)',
+            [username, email, hash],
+            function(err,results,fields){
+                console.log(results);
+                console.log(fields);
+                console.log(err);
+            }
+        )
+        
     })
-}
+    res.json("register");
+});
+
+app.post("/signin", (req,res) => {
+    res.json("login");
+});
+
+app.get("/profile", (req,res) => {
+    res.json("profile");
+});
