@@ -2,27 +2,30 @@
 <html lang="en">
 <head>
     <%- include('./partials/head'); %>
-      <title>This is the future recipeMeta Page</title>
-  </head>
+    <title>This is the future recipeMeta Page</title>
+    <link rel="stylesheet" href="/public/styles/styles.css">
+    <script id="recipe-data" type="application/json">
+      <%- JSON.stringify(data) %>
+    </script>
+    <script src="/display_all_recipe.js" defer></script>
+</head>
 
-  <body>
+<body>
     <header>
         <%- include('./partials/header'); %>
-      </header>
+    </header>
 
-      <main>
-        <div class="hero-container flex-row">
+    <main>
+        <div class="all-recipes flex-row">
             <section class="hero flex-column">
                 <h1>All Recipes</h1>
                 <br>
                 <div class="seriousEats">
-                    <nav>
-                    <% data.forEach(entry => { %>
-                        <a class="recipe_list_item" href="/allRecipes/<%= entry.recipe_id%>"><%= entry.recipe_name%></a>
-                      <%})%>
-                    </nav>
+                    <nav class="recipe-grid"></nav>
+                    <div class="pagination-container"></div>
                 </div>
             </section>
         </div>
-      </main>
-  </body>
+    </main>
+</body>
+</html>
