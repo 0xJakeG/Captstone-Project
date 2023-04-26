@@ -13,7 +13,7 @@ function displayRecipes(recipes, start, limit) {
 
     const recipeLink = document.createElement('a');
     recipeLink.classList.add('recipe_list_item');
-    recipeLink.href = `/recipes/${recipes[i].recipe_id}`;
+    recipeLink.href = `/allRecipes/${recipes[i].recipe_id}`;
     recipeLink.textContent = recipes[i].recipe_name;
     
     const recipeDescription = document.createElement('p');
@@ -73,6 +73,3 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-
-  // For creating a new page when box is clicked
-  
