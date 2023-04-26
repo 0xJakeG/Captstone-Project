@@ -5,14 +5,6 @@ const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
 
-
-
-//amazon_cognito dependencies. 
-const AmazonCognitoIdentity = require('amazon-cognito-identity-js');
-const cognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
-global.fetch = require('node-fetch');
-
-
 app = express();
 
 app.set('view engine', 'ejs');
@@ -60,6 +52,7 @@ app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
 
+<<<<<<< Updated upstream
 app.post('/addRecipe', (req, res) => {
     const {
       recipe_name,
@@ -115,6 +108,8 @@ const poolData = {
     ClientId: "6stcckuprodns354nqp1r1ig43",
     Storage: new AmazonCognitoIdentity.CookieStorage({domain: 'localhost'})
 };
+=======
+>>>>>>> Stashed changes
 app.post('/create', (req, res) => {
     let user = req.body.username;
     let email = req.body.email;
