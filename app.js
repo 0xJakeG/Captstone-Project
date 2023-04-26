@@ -50,6 +50,13 @@ config.connect(function(err) {
     console.log('Connected to the database.');
 });
 
+// Alows the mainController to use the config 
+module.exports = { config };
+app.use((req, res, next) => {
+    req.config = config;
+    next();
+  });
+
 app.get('/allRecipes', function(req, res) {
     config.query('SELECT * FROM recipes', function(err, result) {
         if (err) {
