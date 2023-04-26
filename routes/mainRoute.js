@@ -3,7 +3,6 @@ const controller = require('../controllers/mainController');
 
 const router = express.Router();
 
-
 router.get('/', controller.index);
 
 router.get('/signin', controller.signin);
@@ -16,7 +15,9 @@ router.get('/recipeMeta', controller.recipeMeta);
 
 router.get('/allRecipes', controller.allRecipes);
 
-router.get('/allRecipes:id', controller.showRecipe);
+router.get('/allRecipes/:id', controller.recipeDetails);
+
+router.get('/recipes/:recipe_id', controller.recipeDetails);
 
 router.get('/map', controller.map);
 
