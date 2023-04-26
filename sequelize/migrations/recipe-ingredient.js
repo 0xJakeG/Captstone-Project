@@ -3,22 +3,26 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('recipe_ingredients', {
-      recipe_id: {
+      ingredient_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ingredient_id: {
+      recipe_id: {
         allowNull: false,
-        //primaryKey: true,
+        primaryKey: true,
         type: Sequelize.INTEGER
       },
-      measurement_qty_id: {
-        type: Sequelize.INTEGER
+      ingredient_name:{
+        allowNull: false,
+        type: Sequelize.STRING
       },
-      measurement_id: {
-        type: Sequelize.INTEGER
+      measurement_qty: {
+        type: Sequelize.FLOAT
+      },
+      measurement_unit: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
