@@ -91,13 +91,3 @@ app.post('/create', (req, res) => {
     console.log('Creating user with email ', email);
     registerUser({user, email, password}) 
 })
-
-exports.handler = async function(event, context, callback) {
-    const json = JSON.parse(event.body)
-    const result = await registerUser(json)
-
-    callback(null, {
-        statusCode: result.statusCode,
-        body: JSON.stringify(result)
-    })
-}
