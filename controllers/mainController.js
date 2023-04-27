@@ -1,37 +1,51 @@
 const { config } = require('../app');
-
+//not logged in
 exports.index = (req, res, next)=> {
-    res.render('../views/index');
+    res.render('../views/logged_out/index');
 }
 
 exports.register = (req, res, next)=> {
-    res.render('../views/register');
+    res.render('../views/logged_out/register');
 }
 
 exports.signin = (req, res, next)=> {
-    res.render('../views/signin');
+    res.render('../views/logged_out/signin');
 }
 
 exports.about = (req, res, next)=> {
-    res.render('../views/about');
+    res.render('../views/logged_out/about');
+}
+exports.allRecipes = (req, res, next)=> {
+  res.render('../views/logged_out/allRecipes');
 }
 
+//logged in
 exports.add_recipe = (req, res, next)=> {
-    res.render('../views/add_recipe');
+    res.render('../views/logged_in/add_recipe');
 }
 
 exports.recipeMeta = (req, res, next)=> {
-    res.render('../views/recipeMeta');
+    res.render('../views/logged_in/recipeMeta');
 }
 
 exports.map = (req, res, next)=> {
-    res.render('../views/map');
+    res.render('../views/logged_in/map');
 }
 
-exports.allRecipes = (req, res, next)=> {
-    res.render('../views/allRecipes');
+exports.home = (req, res, next)=> {
+  res.render('../views/logged_in/index');
 }
 
+exports.aboutS = (req, res, next)=> {
+  res.render('../views/logged_in/about');
+}
+
+exports.allRecipesS = (req, res, next)=> {
+  res.render('../views/logged_in/allRecipes');
+}
+exports.profile = (req, res, next) => {
+  res.render('../views/logged_in/profile');
+}
 exports.recipeDetails = async (req, res, next) => {
   console.log(req.params);
   let id = req.params.id;
@@ -91,13 +105,26 @@ exports.showRecipe = (req, res, next)=> {
 }
 
 exports.head = (req, res, next)=> {
-    res.render('../views/partials/head');
+    res.render('../views/logged_out/partials/head');
 }
 
 exports.header = (req, res, next)=> {
-    res.render('../views/partials/header');
+    res.render('../views/logged_out/partials/header');
 }
 
 exports.footer = (req, res, next)=> {
-    res.render('../views/partials/footer');
+    res.render('../views/logged_out/partials/footer');
 }
+
+exports.headS = (req, res, next)=> {
+  res.render('../views/logged_in/partials/head');
+}
+
+exports.headerS = (req, res, next)=> {
+  res.render('../views/logged_in/partials/header');
+}
+
+exports.footerS = (req, res, next)=> {
+  res.render('../views/logged_in/partials/footer');
+}
+

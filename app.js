@@ -59,7 +59,7 @@ var config = mysql.createConnection({
 });
 
 // Alows the mainController to use the config 
-//module.exports = { config };
+module.exports = { config };
 app.use((req, res, next) => {
     req.config = config;
     next();
@@ -72,14 +72,15 @@ app.get('/allRecipes', function(req, res) {
             console.log(err);
             return res.status(500).send('Error querying the database');
         }
-        res.render('allRecipes', {data: result});
+        //console.log(result);
+        res.render('logged_out/allRecipes', {data: result});
     });
 });
 app.get("/recipeMeta", function(req, res) {
     res.render("recipeMeta");
 });
 app.get('/', (req, res)=> {
-    res.render('index');
+    res.render('/logged_out/index');
 });
 
 app.use('/', Route);

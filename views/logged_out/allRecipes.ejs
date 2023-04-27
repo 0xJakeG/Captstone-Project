@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head'); %>
+    <title>This is the future recipeMeta Page</title>
+    <link rel="stylesheet" href="../public/styles/styles.css">
+    <script id="recipe-data" type="application/json">
+      <%- JSON.stringify(data) %>
+    </script>
+    <script src="/display_all_recipe.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <%- include('./partials/header'); %>
+    </header>
+
+    <main>
+        <div class="all-recipes flex-row">
+            <section class="hero flex-column">
+                <h1>All Recipes</h1>
+                <br>
+                <select id="recipe-type-selector">
+                    <option value="all">All</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Any">Any</option>
+                  </select>
+                  
+                <div class="seriousEats">
+                    <nav class="recipe-grid"></nav>
+                    <div class="pagination-container"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get('/', controller.index);
 
+router.get('/home', controller.index);
+
 router.get('/signin', controller.signin);
 
 router.get('/register', controller.register);
@@ -13,7 +15,7 @@ router.get('/add_recipe', controller.add_recipe);
 
 router.get('/recipeMeta', controller.recipeMeta);
 
-router.get('/allRecipes', controller.allRecipes);
+//router.get('/allRecipes', controller.allRecipes);
 
 router.get('/allRecipes/:id', controller.recipeDetails);
 
