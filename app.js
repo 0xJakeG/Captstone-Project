@@ -77,7 +77,7 @@ app.get('/allRecipes', function(req, res) {
     });
 });
 app.get("/recipeMeta", function(req, res) {
-    res.render("recipeMeta");
+    res.render("logged_in/recipeMeta");
 });
 app.get('/', (req, res)=> {
     res.render('./logged_out/index');
@@ -238,8 +238,9 @@ app.post("/sign_in", (req,res) => {
                 {
                     req.session.authenticated = true;
                     req.session.user_id = results[0].user_id;
-                    console.log(req.sessionID)
-                    res.redirect("/");
+                    //console.log(req.sessionID)
+                    console.log(res.location);
+                    res.redirect("homeS");
                 }
             });
         }); 
@@ -259,7 +260,7 @@ app.post("/sign_in", (req,res) => {
                     req.session.authenticated = true;
                     req.session.user_id = results[0].user_id;
                     console.log(req.sessionID)
-                    res.redirect("/");
+                    res.redirect("homeS");
                 }
             }); 
         }); 

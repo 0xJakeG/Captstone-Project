@@ -32,8 +32,8 @@ exports.map = (req, res, next)=> {
     res.render('../views/logged_in/map');
 }
 
-exports.home = (req, res, next)=> {
-  res.render('../views/logged_in/index');
+exports.homeS = (req, res, next)=> {
+  res.render('../views/logged_in/home');
 }
 
 exports.aboutS = (req, res, next)=> {
