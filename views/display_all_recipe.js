@@ -90,3 +90,40 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+// Function to fetch and display recipes based on type
+let filteredRecipes = [...recipes]; // Copy of the original recipes array
+
+// Function to fetch all recipes
+function fetchAllRecipes() {
+  fetch('/allRecipes') // Replace with your API endpoint to get all recipes
+    .then(response => response.json())
+    .then(data => {
+      recipes = data;
+      filteredRecipes = [...data];
+      displayRecipes(filteredRecipes, 0, PAGE_LIMIT);
+      setupPagination(filteredRecipes, PAGE_LIMIT);
+    });
+}
+
+// Function to filter recipes based on type
+function filterRecipesByType(type) {
+  if (type === "all") {
+    fetchAllRecipes();
+    window.location.reload();
+  } else {
+    filteredRecipes = recipes.filter(recipe => recipe.recipe_type === type);
+    currentPage = 1; // Reset to first page
+    displayRecipes(filteredRecipes, 0, PAGE_LIMIT);
+    setupPagination(filteredRecipes, PAGE_LIMIT);
+  }
+}
+
+// Attach an event listener to the dropdown
+const recipeTypeSelector = document.getElementById("recipe-type-selector");
+recipeTypeSelector.addEventListener("change", (event) => {
+  filterRecipesByType(event.target.value);
+});
+
+// Initialize
+fetchAllRecipes(); // Fetch and display all recipes initially
