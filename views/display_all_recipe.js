@@ -82,14 +82,13 @@ displayRecipes(recipes, 0, PAGE_LIMIT);
 setupPagination(recipes, PAGE_LIMIT);
 
 document.addEventListener('DOMContentLoaded', () => {
-    const recipeBoxes = document.querySelectorAll('.recipe-box');
-    recipeBoxes.forEach(recipeBox => {
-      recipeBox.addEventListener('click', () => {
-        const recipeLink = recipeBox.querySelector('a');
-        window.location.href = recipeLink.href;
-      });
+  const recipeBoxes = document.querySelectorAll('.recipe-box');
+  recipeBoxes.forEach(recipeBox => {
+    recipeBox.addEventListener('click', () => {
+      window.location.href = recipeBox.querySelector('a').href;
     });
   });
+});
 
 // Function to fetch and display recipes based on type
 let filteredRecipes = [...recipes]; // Copy of the original recipes array
