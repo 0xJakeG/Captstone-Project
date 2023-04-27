@@ -10,19 +10,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       username: {
-        type: Sequelize.STRING
-      },
-      access_token: {
-        type: Sequelize.STRING
-      },
-      refresh_token: {
-        type: Sequelize.STRING
-      },
-      id_token: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       password: {
         type: Sequelize.STRING

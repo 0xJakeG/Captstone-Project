@@ -33,36 +33,49 @@ exports.allRecipes = (req, res, next)=> {
 }
 
 exports.recipeDetails = async (req, res, next) => {
-    console.log(req.params);
-    let id = req.params.id;
-    try {
-      const recipe = await getRecipeById(id, req);
-      if (recipe) {
-        res.render('recipeDetails', { recipe });
-      } else {
-        let err = new Error('Cannot find a recipe with id ' + id);
-        err.status = 404;
-        next(err);
-      }
-    } catch (error) {
-      console.error('Error retrieving recipe details:', error);
-      res.status(500).send('Error retrieving recipe details');
+  console.log(req.params);
+  let id = req.params.id;
+  try {
+    const result = await getRecipeById(id, req);
+    if (result.recipe) {
+      res.render('recipeDetails', { recipe: result.recipe, ingredients: result.ingredients, instructions: result.instructions });
+    } else {
+      let err = new Error('Cannot find a recipe with id ' + id);
+      err.status = 404;
+      next(err);
     }
-  };
+  } catch (error) {
+    console.error('Error retrieving recipe details:', error);
+    res.status(500).send('Error retrieving recipe details');
+  }
+};
+
 
   // Modify the getRecipeById function
-function getRecipeById(id, req) {
+  function getRecipeById(id, req) {
     return new Promise((resolve, reject) => {
-      req.config.query('SELECT * FROM recipes WHERE recipe_id = ?', [id], (err, result) => {
+      req.config.query('SELECT * FROM recipes WHERE recipe_id = ?', [id], (err, recipeResult) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result[0]);
+          req.config.query('SELECT * FROM recipe_ingredients WHERE recipe_id = ?', [id], (err, ingredientsResult) => {
+            if (err) {
+              reject(err);
+            } else {
+              req.config.query('SELECT * FROM instructions WHERE recipe_id = ? ORDER BY order_number', [id], (err, instructionsResult) => {
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve({ recipe: recipeResult[0], ingredients: ingredientsResult, instructions: instructionsResult });
+                }
+              });
+            }
+          });
         }
       });
     });
   }
-  
+
 
 exports.showRecipe = (req, res, next)=> {
     let id = req.params.id;

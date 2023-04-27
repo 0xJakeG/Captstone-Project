@@ -98,12 +98,17 @@ app.post('/addRecipe', (req, res) => {
       ingredientName,
       ingredientMeasurementQty,
       ingredientMeasurementUnit,
+      instructionDescription
     } = req.body;
   
+    
     const recipeSql =
       'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
     const ingredientSql =
       'INSERT INTO recipe_ingredients (recipe_id, ingredient_name, measurement_qty, measurement_unit) VALUES (?, ?, ?, ?)';
+    
+    const instructionSql =
+        'INSERT INTO instructions (recipe_id, instruction_description, order_number) VALUES (?, ?, ?)';
   
     config.query(
       recipeSql,
@@ -133,11 +138,25 @@ app.post('/addRecipe', (req, res) => {
             }
           );
         }
+
+        for (let j = 0; j < instructionDescription.length; j++) {
+            config.query(instructionSql,[recipeId, instructionDescription[j], j + 1],
+              (error, results, fields) => {
+                if (error) {
+                  console.error('Error inserting instruction:', error);
+                  res.sendStatus(500);
+                  return;
+                }
+                console.log(results);
+              }
+            );
+          }
   
         res.sendStatus(200);
       }
     );
   });
+
 
 //Function to register a new user 
 app.post("/register", async (req,res) => {
@@ -259,3 +278,4 @@ exports.handler = async function(event, context, callback) {
         body: JSON.stringify(result)
     })
 }
+

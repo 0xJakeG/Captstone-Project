@@ -1,92 +1,219 @@
 <!DOCTYPE html>
 <html>
-    <head>
-	    <%- include('./partials/head'); %>
-	    <title>Add Recipe</title>
-    </head>
+<head>
+    <%- include('./partials/head'); %>
+    <title>Add Recipe</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #171717;
+}
+
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #171717;
+}
+
+h1 {
+    color: white;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    margin-bottom: 10px;
+    color: #438d39;
+}
+
+.form-row {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"], 
+input[type="decimal"], 
+textarea, 
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.form-row input, 
+.form-row select, 
+.form-row textarea {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: #000; /* Add this line to change the text color to black */
+}
+    </style>
+</head>
 <body>
-	<header>
-		<%- include('./partials/header'); %>
-	</header>
-	<h1>Add a new recipe</h1>
-    <form action="/addRecipe" method="POST">
+<header>
+    <%- include('./partials/header'); %>
+</header>
+<main>
+    <h1>Add a new recipe</h1>
+    <form action="/addRecipe" method="POST" class="recipe-form">
 
-        <h3>Recipe:</h3>
+        <div class="form-section">
+            <h3 class="section-title">Recipe:</h3>
 
-        <label for="recipe_name">Recipe Name:</label>
-        <input type="text" name="recipe_name" id="recipe_name" required>
+            <div class="form-row">
+                <label for="recipe_name">Recipe Name:</label>
+                <input type="text" name="recipe_name" id="recipe_name" required>
+            </div>
 
-        <label for="recipe_type">Recipe Type:</label>
-		<select id="recipe_type" name="recipe_type" required>
-			<option value="Breakfast">Breakfast</option>
-			<option value="Lunch">Lunch</option>
-			<option value="Dinner">Dinner</option>
-			<option value="Dessert">Dessert</option>
-            <option value="Any">Any</option>
-		</select><br>
-    
-        <label for="recipe_description">Recipe Description:</label>
-        <textarea name="recipe_description" id="recipe_description" required></textarea>
-    
-        <label for="recipe_picture">Recipe Picture URL:</label>
-        <input type="text" name="recipe_picture" id="recipe_picture" required>
-    
-        <hr>
-    
-        <h3>Ingredients:</h3>
-    
-        <div id="ingredient-list">
-        <div class="ingredient">
-            <label for="ingredient_name">Ingredient Name:</label>
-            <input type="text" name="ingredientName[]" id="ingredient_name" required>
-    
-            <label for="ingredient_measurement_qty">Measurement Quantity:</label>
-            <input type="decimal" name="ingredientMeasurementQty[]" id="ingredient_measurement_qty" step="0.1" required>
-    
-            <label for="ingredient_measurement_unit">Measurement:</label>
-            <input type="text" name="ingredientMeasurementUnit[]" id="ingredient_measurement_unit" required>
-    
-            <button class="remove-ingredient" type="button">Remove</button>
+            <div class="form-row">
+                <label for="recipe_type">Recipe Type:</label>
+                <select id="recipe_type" name="recipe_type" required>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Lunch">Lunch</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Any">Any</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="recipe_description">Recipe Description:</label>
+                <textarea name="recipe_description" id="recipe_description" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <label for="recipe_picture">Recipe Picture URL:</label>
+                <input type="text" name="recipe_picture" id="recipe_picture" required>
+            </div>
         </div>
-        </div>
-    
-        <button id="add-ingredient" type="button">Add Ingredient</button>
-    
+
         <hr>
-        
-        <button type="submit">Create Recipe</button>
+
+        <div class="form-section">
+            <h3 class="section-title">Ingredients:</h3>
+
+            <div id="ingredient-list">
+                <div class="ingredient">
+                    <div class="form-row">
+                        <label for="ingredient_name">Ingredient Name:</label>
+                        <input type="text" name="ingredientName[]" id="ingredient_name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="ingredient_measurement_qty">Measurement Quantity:</label>
+                        <input type="decimal" name="ingredientMeasurementQty[]" id="ingredient_measurement_qty" step="0.1" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="ingredient_measurement_unit">Measurement:</label>
+                        <input type="text" name="ingredientMeasurementUnit[]" id="ingredient_measurement_unit" required>
+                    </div>
+
+                    <div class="form-row">
+                        <button class="remove-ingredient" type="button">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <button id="add-ingredient" type="button">Add Ingredient</button>
+            </div>
+
+
+        </div>
+------------------------------------------------------------------------------------------------------------
+        <div class="form-section">
+            <h3 class="section-title">Instructions:</h3>
+
+            <div id="instruction-list">
+                <div class="instruction">
+                    <div class="form-row">
+                        <label for="instruction_description">Instruction:</label>
+                        <input type="text" name="instructionDescription[]" id="instruction_description" required>
+                    </div>
+
+                    <div class="form-row">
+                        <button class="remove-instruction" type="button">Remove Instruction</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <button id="add-instruction" type="button">Add Instruction</button>
+            </div>
+
+
+        </div>
+------------------------------------------------------------------------------------------------------------
+ <div id="create-recipe" class="form-row">
+            <button type="submit">Create Recipe</button>
+        </div>
+       
     </form>
-
+</main>
     <script>
         const ingredientList = document.getElementById("ingredient-list");
         const addIngredientBtn = document.getElementById("add-ingredient");
-    
+
         let ingredientCount = 1;
-    
+
         addIngredientBtn.addEventListener("click", () => {
         ingredientCount++;
-    
+
         const ingredient = document.createElement("div");
         ingredient.classList.add("ingredient");
-    
+
         const nameInput = document.createElement("input");
         nameInput.type = "text";
         nameInput.name = "ingredientName[]";
         nameInput.id = `ingredient-name-${ingredientCount}`;
         nameInput.required = true;
-    
+
         const measurementQtyInput = document.createElement("input");
         measurementQtyInput.type = "number";
         measurementQtyInput.name = "ingredientMeasurementQty[]";
         measurementQtyInput.id = `ingredient-measurement-qty-${ingredientCount}`;
         measurementQtyInput.required = true;
-    
+
         const measurementInput = document.createElement("input");
         measurementInput.type = "text";
         measurementInput.name = "ingredientMeasurementUnit[]";
         measurementInput.id = `ingredient-measurement-unit-${ingredientCount}`;
         measurementInput.required = true;
-    
+
         const removeBtn = document.createElement("button");
         removeBtn.type = "button";
         removeBtn.classList.add("remove-ingredient");
@@ -94,23 +221,65 @@
         removeBtn.addEventListener("click", () => {
             ingredient.remove();
         });
-    
+
         ingredient.appendChild(nameInput);
         ingredient.appendChild(measurementQtyInput);
         ingredient.appendChild(measurementInput);
         ingredient.appendChild(removeBtn);
-    
+
         ingredientList.appendChild(ingredient);
         });
-    
+
         ingredientList.addEventListener("click", (event) => {
         if (event.target.classList.contains("remove-ingredient")) {
             event.target.parentNode.remove();
         }
         });
+
+
+
     </script>
 
+    <script>
+        const instructionList = document.getElementById("instruction-list");
+        const addInstructionBtn = document.getElementById("add-instruction");
+
+        let instructionCount = 1;
+
+        addInstructionBtn.addEventListener("click", () => {
+        instructionCount++;
+
+        const instruction = document.createElement("div");
+        instruction.classList.add("instruction");
+
+        const DescInput = document.createElement("input");
+        DescInput.type = "text";
+        DescInput.name = "instructionDescription[]";
+        DescInput.id = `instruction_description${instructionCount}`;
+        DescInput.required = true;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.classList.add("remove-instruction");
+        removeBtn.textContent = "Remove";
+        removeBtn.addEventListener("click", () => {
+            instruction.remove();
+        });
+
+        instruction.appendChild(DescInput);
+        instruction.appendChild(removeBtn);
+
+        instructionList.appendChild(instruction);
+        });
+
+        instructionList.addEventListener("click", (event) => {
+        if (event.target.classList.contains("remove-instruction")) {
+            event.target.parentNode.remove();
+        }
+        });
+    </script>
 </body>
 <footer>
-	<%- include('./partials/footer'); %>
+    <%- include('./partials/footer'); %>
 </footer>
+</html>
