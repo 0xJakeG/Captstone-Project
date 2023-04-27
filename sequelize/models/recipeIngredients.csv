@@ -1,0 +1,38 @@
+instruction_id,recipe_id,ingredient_name,measurement_qty,measurement_unit,createdAt,updatedAt
+12,28,"small tomatoes",2,whole,1/1/23,1/1/23
+13,28,"small onion",1,whole,1/1/23,1/1/23
+14,28,"jalapeno",1,whole,1/1/23,1/1/23
+15,28,"cloves of garlic",2,"1 chopped 1 smashed",1/1/23,1/1/23
+16,28,"hot sauce","1/2",teaspoons,1/1/23,1/1/23
+17,28,"ground cumin",1,teaspoons,1/1/23,1/1/23
+18,28,"Kosher salt and pepper",null,null,1/1/23,1/1/23
+19,28,"extra virgin olive oil",2,"tablespoons and teaspoons",1/1/23,1/1/23
+20,28,"Black beans",1,"15.5-ounce can drained and rinsed",1/1/23,1/1/23
+21,28,"Eggs",4,whole,1/1/23,1/1/23
+22,28,"6-inch corn tortillas",4,whole,1/1/23,1/1/23
+23,28,"crumbled feta cheese","1/2",cup,1/1/23,1/1/23
+24,28,"chopped cilantro","1/4",cup,1/1/23,1/1/23
+25,29,"low-fat buttermilk",1,"cup",1/1/23,1/1/23
+26,29,"nonfat milk","3/4","cup",1/1/23,1/1/23
+27,29,"eggs",2,"whole",1/1/23,1/1/23
+28,29,"honey",1,"tablespoons",1/1/23,1/1/23
+29,29,"pure maple syrup",6,"tablespoons",1/1/23,1/1/23
+30,29,"diced apple",1,"whole",1/1/23,1/1/23
+31,29,"all-purpose flour","3/4","cup",1/1/23,1/1/23
+32,29,"whole-wheat","3/4","cup",1/1/23,1/1/23
+33,29,"baking powder",2,"teaspoons",1/1/23,1/1/23
+34,29,"baking soda","1/2","teaspoons",1/1/23,1/1/23
+35,29,"salt","1/2","teaspoons",1/1/23,1/1/23
+36,30,"bittersweet chocolate, coarsly chopped","8","ounces",1/1/23,1/1/23
+37,30,"unsalted butter","2","tablespoons",1/1/23,1/1/23
+38,30,"whole grain pastry flour","1","cup",1/1/23,1/1/23
+39,30,"unsweetened natural cocoa powder","1/4","cup",1/1/23,1/1/23
+40,30,"salt","1/4","teaspoons",1/1/23,1/1/23
+41,30,"baking soda","1/4","teaspoons",1/1/23,1/1/23
+42,30,"eggs","4","whole",1/1/23,1/1/23
+43,30,"packed light brown sugar","1","cup",1/1/23,1/1/23
+44,30,"plain low-fat yougurt","1/2","cup",1/1/23,1/1/23
+45,30,"canola oil","1/4","cup",1/1/23,1/1/23
+46,30,"vanilla extract","2","teaspoons",1/1/23,1/1/23
+47,30,"(optional) chopped walnuts","3/4","cup",1/1/23,1/1/23
+48,31,"","","",1/1/23,1/1/23
