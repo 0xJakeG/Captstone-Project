@@ -76,64 +76,130 @@
 
 
         </div>
- <div id="create-recpie" class="form-row">
+------------------------------------------------------------------------------------------------------------
+        <div class="form-section">
+            <h3 class="section-title">Instructions:</h3>
+
+            <div id="instruction-list">
+                <div class="instruction">
+                    <div class="form-row">
+                        <label for="instruction_description">Instruction:</label>
+                        <input type="text" name="instructionDescription[]" id="instruction_description" required>
+                    </div>
+
+                    <div class="form-row">
+                        <button class="remove-instruction" type="button">Remove Instruction</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <button id="add-instruction" type="button">Add Instruction</button>
+            </div>
+
+
+        </div>
+------------------------------------------------------------------------------------------------------------
+ <div id="create-recipe" class="form-row">
             <button type="submit">Create Recipe</button>
         </div>
        
     </form>
 </main>
-<script>
-    const ingredientList = document.getElementById("ingredient-list");
-    const addIngredientBtn = document.getElementById("add-ingredient");
+    <script>
+        const ingredientList = document.getElementById("ingredient-list");
+        const addIngredientBtn = document.getElementById("add-ingredient");
 
-    let ingredientCount = 1;
+        let ingredientCount = 1;
 
-    addIngredientBtn.addEventListener("click", () => {
-    ingredientCount++;
+        addIngredientBtn.addEventListener("click", () => {
+        ingredientCount++;
 
-    const ingredient = document.createElement("div");
-    ingredient.classList.add("ingredient");
+        const ingredient = document.createElement("div");
+        ingredient.classList.add("ingredient");
 
-    const nameInput = document.createElement("input");
-    nameInput.type = "text";
-    nameInput.name = "ingredientName[]";
-    nameInput.id = `ingredient-name-${ingredientCount}`;
-    nameInput.required = true;
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.name = "ingredientName[]";
+        nameInput.id = `ingredient-name-${ingredientCount}`;
+        nameInput.required = true;
 
-    const measurementQtyInput = document.createElement("input");
-    measurementQtyInput.type = "number";
-    measurementQtyInput.name = "ingredientMeasurementQty[]";
-    measurementQtyInput.id = `ingredient-measurement-qty-${ingredientCount}`;
-    measurementQtyInput.required = true;
+        const measurementQtyInput = document.createElement("input");
+        measurementQtyInput.type = "number";
+        measurementQtyInput.name = "ingredientMeasurementQty[]";
+        measurementQtyInput.id = `ingredient-measurement-qty-${ingredientCount}`;
+        measurementQtyInput.required = true;
 
-    const measurementInput = document.createElement("input");
-    measurementInput.type = "text";
-    measurementInput.name = "ingredientMeasurementUnit[]";
-    measurementInput.id = `ingredient-measurement-unit-${ingredientCount}`;
-    measurementInput.required = true;
+        const measurementInput = document.createElement("input");
+        measurementInput.type = "text";
+        measurementInput.name = "ingredientMeasurementUnit[]";
+        measurementInput.id = `ingredient-measurement-unit-${ingredientCount}`;
+        measurementInput.required = true;
 
-    const removeBtn = document.createElement("button");
-    removeBtn.type = "button";
-    removeBtn.classList.add("remove-ingredient");
-    removeBtn.textContent = "Remove";
-    removeBtn.addEventListener("click", () => {
-        ingredient.remove();
-    });
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.classList.add("remove-ingredient");
+        removeBtn.textContent = "Remove";
+        removeBtn.addEventListener("click", () => {
+            ingredient.remove();
+        });
 
-    ingredient.appendChild(nameInput);
-    ingredient.appendChild(measurementQtyInput);
-    ingredient.appendChild(measurementInput);
-    ingredient.appendChild(removeBtn);
+        ingredient.appendChild(nameInput);
+        ingredient.appendChild(measurementQtyInput);
+        ingredient.appendChild(measurementInput);
+        ingredient.appendChild(removeBtn);
 
-    ingredientList.appendChild(ingredient);
-    });
+        ingredientList.appendChild(ingredient);
+        });
 
-    ingredientList.addEventListener("click", (event) => {
-    if (event.target.classList.contains("remove-ingredient")) {
-        event.target.parentNode.remove();
-    }
-    });
-</script>
+        ingredientList.addEventListener("click", (event) => {
+        if (event.target.classList.contains("remove-ingredient")) {
+            event.target.parentNode.remove();
+        }
+        });
+
+
+
+    </script>
+
+    <script>
+        const instructionList = document.getElementById("instruction-list");
+        const addInstructionBtn = document.getElementById("add-instruction");
+
+        let instructionCount = 1;
+
+        addInstructionBtn.addEventListener("click", () => {
+        instructionCount++;
+
+        const instruction = document.createElement("div");
+        instruction.classList.add("instruction");
+
+        const DescInput = document.createElement("input");
+        DescInput.type = "text";
+        DescInput.name = "instructionDescription[]";
+        DescInput.id = `instruction_description${instructionCount}`;
+        DescInput.required = true;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.classList.add("remove-instruction");
+        removeBtn.textContent = "Remove";
+        removeBtn.addEventListener("click", () => {
+            instruction.remove();
+        });
+
+        instruction.appendChild(DescInput);
+        instruction.appendChild(removeBtn);
+
+        instructionList.appendChild(instruction);
+        });
+
+        instructionList.addEventListener("click", (event) => {
+        if (event.target.classList.contains("remove-instruction")) {
+            event.target.parentNode.remove();
+        }
+        });
+    </script>
 </body>
 <footer>
     <%- include('./partials/footer'); %>
