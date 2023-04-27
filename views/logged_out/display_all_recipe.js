@@ -1,7 +1,6 @@
 const PAGE_LIMIT = 4 * 5; // 4 rows of 4 recipes per page
 let currentPage = 1;
 const recipes = JSON.parse(document.getElementById('recipe-data').innerHTML);
-
 function truncateText(text, maxLength) {
   if (text.length > maxLength) {
     return text.substring(0, maxLength) + "...";
@@ -39,7 +38,6 @@ function displayRecipes(recipes, start, limit) {
     recipeBox.appendChild(recipeImage); // Append image to recipe box
     recipeBox.appendChild(recipeDescription);
     recipeGrid.appendChild(recipeBox);
-
     // Add event listener for recipe box click event
     recipeBox.addEventListener('click', () => {
       window.location.href = recipeLink.href;
@@ -100,7 +98,7 @@ let filteredRecipes = [...recipes]; // Copy of the original recipes array
 
 // Function to fetch all recipes
 function fetchAllRecipes() {
-  fetch('/allRecipes') // Replace with your API endpoint to get all recipes
+  fetch('.allRecipes') // Replace with your API endpoint to get all recipes
     .then(response => response.json())
     .then(data => {
       recipes = data;

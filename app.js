@@ -80,7 +80,7 @@ app.get("/recipeMeta", function(req, res) {
     res.render("recipeMeta");
 });
 app.get('/', (req, res)=> {
-    res.render('/logged_out/index');
+    res.render('./logged_out/index');
 });
 
 app.use('/', Route);

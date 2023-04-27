@@ -1,5 +1,5 @@
 const { config } = require('../app');
-//not logged in
+//logged out
 exports.index = (req, res, next)=> {
     res.render('../views/logged_out/index');
 }
@@ -46,13 +46,14 @@ exports.allRecipesS = (req, res, next)=> {
 exports.profile = (req, res, next) => {
   res.render('../views/logged_in/profile');
 }
+
 exports.recipeDetails = async (req, res, next) => {
   console.log(req.params);
   let id = req.params.id;
   try {
     const result = await getRecipeById(id, req);
     if (result.recipe) {
-      res.render('recipeDetails', { recipe: result.recipe, ingredients: result.ingredients, instructions: result.instructions });
+      res.render('logged_out/recipeDetails', { recipe: result.recipe, ingredients: result.ingredients, instructions: result.instructions });
     } else {
       let err = new Error('Cannot find a recipe with id ' + id);
       err.status = 404;
@@ -95,7 +96,7 @@ exports.showRecipe = (req, res, next)=> {
     let id = req.params.id;
     recipes => {
         if(recipes) {
-        return res.render('../views/allRecipes', {recipes});
+        return res.render('../views/logged_out/allRecipes', {recipes});
         } else {
             let err = new Error('Cannot find a recipe with id ' + id);
             err.status = 404;
