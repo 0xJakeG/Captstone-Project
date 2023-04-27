@@ -483,6 +483,11 @@ h4
   font-weight: bold;
 }
 
+.all-recipes {
+  display: flex;
+  justify-content: center;
+}
+
 .recipe_list_item + .recipe-description {
   margin-top: 10px;
 }
@@ -625,3 +630,5 @@ h4
   width: 50%;
   height: auto;
 }
+
+
