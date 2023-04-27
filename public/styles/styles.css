@@ -336,6 +336,11 @@ h4
 
 }
 
+.register-section input,
+.signin-section input {
+color: black;
+}
+
 
 /* Recipe Page */
 
