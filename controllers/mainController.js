@@ -51,18 +51,24 @@ exports.recipeDetails = async (req, res, next) => {
   };
 
   // Modify the getRecipeById function
-function getRecipeById(id, req) {
+  function getRecipeById(id, req) {
     return new Promise((resolve, reject) => {
-      req.config.query('SELECT * FROM recipes WHERE recipe_id = ?', [id], (err, result) => {
+      req.config.query('SELECT * FROM recipes WHERE recipe_id = ?', [id], (err, recipeResult) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result[0]);
+          req.config.query('SELECT * FROM recipe_ingredients WHERE recipe_id = ?', [id], (err, ingredientsResult) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve({recipe: recipeResult[0], ingredients: ingredientsResult});
+            }
+          });
         }
       });
     });
   }
-  
+
 
 exports.showRecipe = (req, res, next)=> {
     let id = req.params.id;
