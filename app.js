@@ -5,6 +5,18 @@ const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
+const session = require("express-session");
+const mysql_store = require("express-mysql-session")(session);
+const options = {
+    connectionLimit: 10,
+    password: '69LgU84Bta8RZJr',
+    user: 'JakeAdmin',
+    database: 'booksforcooks',
+    host: 'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
+    port: '3306',
+    createDatabaseTable: true
+}
+const sessionStore = new mysql_store(options);
 let hashSalt = 10;
 let emailRegex = new RegExp("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$");
 app = express();
@@ -23,6 +35,15 @@ app.use('/sequelize', express.static('sequelize'));
 app.use('/models', express.static('/models'));
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(session({
+    name: 'booksforcooks_session',
+    secret: 'insecure_secret' ,
+    resave:false ,
+    saveUnititialized: false,
+    cookie: {maxAge: 300000, sameSite: true, httpOnly: true},
+    store: sessionStore,
+
+}));
 
 var port = process.env.PORT || 8080; // set the port
 
@@ -34,6 +55,8 @@ var config = mysql.createConnection({
     'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
     database: 'booksforcooks'
 });
+
+const store = new session.MemoryStore();
 
 // Alows the mainController to use the config 
 //module.exports = { config };
@@ -136,10 +159,10 @@ app.post("/register", async (req,res) => {
         bcrypt.hash(password, hashSalt).then((hash) => {
             (
                 config.query(newUser,
-                [username, lEmail, hash],
+                [username, lEmail, password],
                 function(err,results){
                     console.log(results);
-                    if(err != NULL)
+                    if(err)
                     {
                         console.log(err);
                     }
@@ -159,25 +182,64 @@ app.post("/return_value", (req,res) => {
     
    
 });
+//function for user to sign in
 app.post("/sign_in", (req,res) => {
-    const {email_or_username, userPassword} = req.body;
-    const userAuthName = "SELECT password FROM users WHERE username = ?;";
+    let retreived_pass = "";
     const userAuthEmail = "SELECT password FROM users WHERE email = ?;";
+    const userAuthName = "SELECT password FROM users WHERE username = ?;";
+    const { email_or_username, password } = req.body;
+    console.log(req.body);
     let lower_e_or_u = email_or_username.toLowerCase();
     let comp = lower_e_or_u.match(emailRegex);
-    let retreived_pass = "";
+    //if they used an email, Authenticate through here. 
     if(comp)
     {
-        retreived_pass = config.query(userAuthEmail, [lower_e_or_u], function(err, results){
+        config.query(userAuthEmail, [lower_e_or_u], function(err, results){
             if(err)
             {
                 console.log(err);
             }
-            console.log(results);
-        });
+            retreived_pass = results[0].password;
+            bcrypt.compare(password, retreived_pass).then((matches) => {
+                if(!matches)
+                {
+                    res.status(403).send("failed to authenticate");
+                }
+                else
+                {
+                    console.log(req.sessionID);
+                    req.session.authenticated = true;
+                    req.session.user = {
+                        email_or_username
+                    }
+                    res.json(req.session);
+                }
+            });
+        }); 
     }
-
-    res.json("login");
+    else
+    {
+        config.query(userAuthName, [lower_e_or_u], function (err, results) {
+            if (err) {
+                console.log(err);
+            }
+            retreived_pass = results[0].password;
+            bcrypt.compare(password, retreived_pass).then((matches) => {
+                if (!matches) {
+                    res.status(403).send("failed to authenticate");
+                }
+                else {
+                    req.session.authenticated = true;
+                    req.session.user = {
+                        email_or_username
+                    }
+                    res.json(req.session);
+                }
+            }); 
+        }); 
+    }
+ 
+       // res.status(403).json({msg: 'Bad credentials'});
 });
 
 app.get("/profile", (req,res) => {
