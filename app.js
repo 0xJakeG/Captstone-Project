@@ -6,6 +6,7 @@ const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
 const session = require("express-session");
+const cookieParser = require('cookie-parser');
 const mysql_store = require("express-mysql-session")(session);
 const options = {
     connectionLimit: 10,
@@ -35,12 +36,13 @@ app.use('/sequelize', express.static('sequelize'));
 app.use('/models', express.static('/models'));
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cookieParser());
 app.use(session({
     name: 'booksforcooks_session',
     secret: 'insecure_secret' ,
     resave:false ,
     saveUnititialized: false,
-    cookie: {maxAge: 300000, sameSite: true, httpOnly: true},
+    cookie: {maxAge: 60 * 60 * 1000, sameSite: true, httpOnly: true},
     store: sessionStore,
 
 }));
@@ -56,8 +58,6 @@ var config = mysql.createConnection({
     database: 'booksforcooks'
 });
 
-const store = new session.MemoryStore();
-
 // Alows the mainController to use the config 
 //module.exports = { config };
 app.use((req, res, next) => {
@@ -66,6 +66,7 @@ app.use((req, res, next) => {
   });
   
 app.get('/allRecipes', function(req, res) {
+    console.log("hello");
     config.query('SELECT * FROM recipes', function(err, result) {
         if (err) {
             console.log(err);
@@ -74,7 +75,9 @@ app.get('/allRecipes', function(req, res) {
         res.render('allRecipes', {data: result});
     });
 });
-
+app.get("/recipeMeta", function(req, res) {
+    res.render("recipeMeta");
+});
 app.get('/', (req, res)=> {
     res.render('index');
 });
@@ -135,13 +138,6 @@ app.post('/addRecipe', (req, res) => {
       }
     );
   });
-app.post('/create', (req, res) => {
-    let user = req.body.username;
-    let email = req.body.email;
-    let password = req.body.password;
-    console.log('Creating user with email ', email);
-    registerUser({user, email, password}) 
-})
 
 //Function to register a new user 
 app.post("/register", async (req,res) => {
@@ -170,27 +166,40 @@ app.post("/register", async (req,res) => {
                 }
             ))
         });
-        res.send("Thank you for signing up " + username);
+        res.redirect("signin");
     }
 });
 
 //testing fucntion
 app.post("/return_value", (req,res) => {
-    const { name, email, password } = req.body;
-    let username = name.toLowerCase();
-        res.send("register");
+   req.session.foo = "foo";
+   req.session.authenticated = true;
+   req.session.user = req.body.name;
+   /*if(req.session)
+   {
+    config.query("SELECT * FROM sessions WHERE session_id = ?", [req.sessionID], function(err,results,fields){
+        if(err)
+        {
+            console.log(err);
+        }
+        console.log(req.session.authenticated);
+        console.log(results);
+    });
+   }*/
+    res.json("hello");
     
    
 });
 //function for user to sign in
 app.post("/sign_in", (req,res) => {
     let retreived_pass = "";
-    const userAuthEmail = "SELECT password FROM users WHERE email = ?;";
-    const userAuthName = "SELECT password FROM users WHERE username = ?;";
+    const userAuthEmail = "SELECT password, user_id FROM users WHERE email = ?;";
+    const userAuthName = "SELECT password, user_id FROM users WHERE username = ?;";
     const { email_or_username, password } = req.body;
     console.log(req.body);
     let lower_e_or_u = email_or_username.toLowerCase();
     let comp = lower_e_or_u.match(emailRegex);
+    
     //if they used an email, Authenticate through here. 
     if(comp)
     {
@@ -207,12 +216,10 @@ app.post("/sign_in", (req,res) => {
                 }
                 else
                 {
-                    console.log(req.sessionID);
                     req.session.authenticated = true;
-                    req.session.user = {
-                        email_or_username
-                    }
-                    res.json(req.session);
+                    req.session.user_id = results[0].user_id;
+                    console.log(req.sessionID)
+                    res.redirect("/");
                 }
             });
         }); 
@@ -230,16 +237,13 @@ app.post("/sign_in", (req,res) => {
                 }
                 else {
                     req.session.authenticated = true;
-                    req.session.user = {
-                        email_or_username
-                    }
-                    res.json(req.session);
+                    req.session.user_id = results[0].user_id;
+                    console.log(req.sessionID)
+                    res.redirect("/");
                 }
             }); 
         }); 
-    }
- 
-       // res.status(403).json({msg: 'Bad credentials'});
+    }    
 });
 
 app.get("/profile", (req,res) => {
