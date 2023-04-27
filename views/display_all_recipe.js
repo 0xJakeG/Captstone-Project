@@ -39,6 +39,11 @@ function displayRecipes(recipes, start, limit) {
     recipeBox.appendChild(recipeImage); // Append image to recipe box
     recipeBox.appendChild(recipeDescription);
     recipeGrid.appendChild(recipeBox);
+
+    // Add event listener for recipe box click event
+    recipeBox.addEventListener('click', () => {
+      window.location.href = recipeLink.href;
+    });
   }
 }
 
