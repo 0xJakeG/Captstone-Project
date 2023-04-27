@@ -4,7 +4,22 @@ const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
-
+const bcrypt = require("bcrypt");
+const session = require("express-session");
+const cookieParser = require('cookie-parser');
+const mysql_store = require("express-mysql-session")(session);
+const options = {
+    connectionLimit: 10,
+    password: '69LgU84Bta8RZJr',
+    user: 'JakeAdmin',
+    database: 'booksforcooks',
+    host: 'awseb-e-epz4ed3tmg-stack-awsebrdsdatabase-uz3xxyihfosx.cs6g7v4x3uz2.us-east-1.rds.amazonaws.com',
+    port: '3306',
+    createDatabaseTable: true
+}
+const sessionStore = new mysql_store(options);
+let hashSalt = 10;
+let emailRegex = new RegExp("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$");
 app = express();
 
 app.set('view engine', 'ejs');
@@ -12,13 +27,25 @@ app.set('view engine', 'ejs');
 app.use('/public', express.static('public'));
 app.use('/images', express.static('/images'));
 app.use(express.static(__dirname + '/views'));
-app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 app.use('/sequelize', express.static('sequelize')); 
 app.use('/models', express.static('/models'));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(cookieParser());
+app.use(session({
+    name: 'booksforcooks_session',
+    secret: 'insecure_secret' ,
+    resave:false ,
+    saveUnititialized: false,
+    cookie: {maxAge: 60 * 60 * 1000, sameSite: true, httpOnly: true},
+    store: sessionStore,
+
+}));
 
 var port = process.env.PORT || 8080; // set the port
 
@@ -32,13 +59,14 @@ var config = mysql.createConnection({
 });
 
 // Alows the mainController to use the config 
-module.exports = { config };
+//module.exports = { config };
 app.use((req, res, next) => {
     req.config = config;
     next();
   });
   
 app.get('/allRecipes', function(req, res) {
+    console.log("hello");
     config.query('SELECT * FROM recipes', function(err, result) {
         if (err) {
             console.log(err);
@@ -47,7 +75,9 @@ app.get('/allRecipes', function(req, res) {
         res.render('allRecipes', {data: result});
     });
 });
-
+app.get("/recipeMeta", function(req, res) {
+    res.render("recipeMeta");
+});
 app.get('/', (req, res)=> {
     res.render('index');
 });
@@ -128,11 +158,124 @@ app.post('/addRecipe', (req, res) => {
   });
 
 
+//Function to register a new user 
+app.post("/register", async (req,res) => {
+    const { name, email, password } = req.body;
+    let username = name.toLowerCase();
+    let lEmail = email.toLowerCase();
+    let emailTest = lEmail.match(emailRegex);
+    if (!emailTest)
+    {
+        res.send("Invalid Email");
+    }
+    else
+    {
+        const newUser = 'INSERT INTO users (`username`, `email`, `password`) VALUES(?,?,?)'
+        bcrypt.hash(password, hashSalt).then((hash) => {
+            (
+                config.query(newUser,
+                [username, lEmail, password],
+                function(err,results){
+                    console.log(results);
+                    if(err)
+                    {
+                        console.log(err);
+                    }
+                    
+                }
+            ))
+        });
+        res.redirect("signin");
+    }
+});
 
-app.post('/create', (req, res) => {
-    let user = req.body.username;
-    let email = req.body.email;
-    let password = req.body.password;
-    console.log('Creating user with email ', email);
-    registerUser({user, email, password}) 
-})
+//testing fucntion
+app.post("/return_value", (req,res) => {
+   req.session.foo = "foo";
+   req.session.authenticated = true;
+   req.session.user = req.body.name;
+   /*if(req.session)
+   {
+    config.query("SELECT * FROM sessions WHERE session_id = ?", [req.sessionID], function(err,results,fields){
+        if(err)
+        {
+            console.log(err);
+        }
+        console.log(req.session.authenticated);
+        console.log(results);
+    });
+   }*/
+    res.json("hello");
+    
+   
+});
+//function for user to sign in
+app.post("/sign_in", (req,res) => {
+    let retreived_pass = "";
+    const userAuthEmail = "SELECT password, user_id FROM users WHERE email = ?;";
+    const userAuthName = "SELECT password, user_id FROM users WHERE username = ?;";
+    const { email_or_username, password } = req.body;
+    console.log(req.body);
+    let lower_e_or_u = email_or_username.toLowerCase();
+    let comp = lower_e_or_u.match(emailRegex);
+    
+    //if they used an email, Authenticate through here. 
+    if(comp)
+    {
+        config.query(userAuthEmail, [lower_e_or_u], function(err, results){
+            if(err)
+            {
+                console.log(err);
+            }
+            retreived_pass = results[0].password;
+            bcrypt.compare(password, retreived_pass).then((matches) => {
+                if(!matches)
+                {
+                    res.status(403).send("failed to authenticate");
+                }
+                else
+                {
+                    req.session.authenticated = true;
+                    req.session.user_id = results[0].user_id;
+                    console.log(req.sessionID)
+                    res.redirect("/");
+                }
+            });
+        }); 
+    }
+    else
+    {
+        config.query(userAuthName, [lower_e_or_u], function (err, results) {
+            if (err) {
+                console.log(err);
+            }
+            retreived_pass = results[0].password;
+            bcrypt.compare(password, retreived_pass).then((matches) => {
+                if (!matches) {
+                    res.status(403).send("failed to authenticate");
+                }
+                else {
+                    req.session.authenticated = true;
+                    req.session.user_id = results[0].user_id;
+                    console.log(req.sessionID)
+                    res.redirect("/");
+                }
+            }); 
+        }); 
+    }    
+});
+
+app.get("/profile", (req,res) => {
+    res.json("profile");
+});
+
+exports.handler = async function(event, context, callback) {
+    const json = JSON.parse(event.body)
+    const result = await registerUser(json)
+
+    callback(null, {
+        statusCode: result.statusCode,
+        body: JSON.stringify(result)
+    })
+}
+
