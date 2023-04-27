@@ -3,6 +3,42 @@
 <head>
   <%- include('./partials/head'); %>
   <title><%= recipe.recipe_name %></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    main {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      max-height: 500px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #438d39;
+      margin-top: 30px;
+    }
+    p, ul {
+      line-height: 1.6;
+      color: white;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
   <header>
