@@ -1,11 +1,12 @@
 const express = require('express');
 const morgan = require('morgan');
-const mysql = require('mysql2/promise');
+const mysql = require('mysql');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
-
+let hashSalt = 10;
+let emailRegex = new RegExp("^(?:(?!.*?[.]{2})[a-zA-Z0-9](?:[a-zA-Z0-9.+!%-]{1,64}|)|\"[a-zA-Z0-9.+!% -]{1,64}\")@[a-zA-Z0-9][a-zA-Z0-9.-]+(.[a-z]{2,}|.[0-9]{1,})$");
 app = express();
 
 app.set('view engine', 'ejs');
@@ -35,7 +36,7 @@ var config = mysql.createConnection({
 });
 
 // Alows the mainController to use the config 
-module.exports = { config };
+//module.exports = { config };
 app.use((req, res, next) => {
     req.config = config;
     next();
@@ -119,29 +120,63 @@ app.post('/create', (req, res) => {
     registerUser({user, email, password}) 
 })
 
-app.post("/register", (req,res) => {
+//Function to register a new user 
+app.post("/register", async (req,res) => {
     const { name, email, password } = req.body;
-    console.log(req.body);
-    console.log(password);
-    bcrypt.hash(password, hash).then((hash) => {
-        (
-            config.execute(
-            'INSERT INTO users (`username`, `email`, `password`) VALUES(?,?,?)',
-            [name, email, password],
-            function(err,results,fields){
-                console.log(results);
-                console.log(fields);
+    let username = name.toLowerCase();
+    let lEmail = email.toLowerCase();
+    let emailTest = lEmail.match(emailRegex);
+    if (!emailTest)
+    {
+        res.send("Invalid Email");
+    }
+    else
+    {
+        const newUser = 'INSERT INTO users (`username`, `email`, `password`) VALUES(?,?,?)'
+        bcrypt.hash(password, hashSalt).then((hash) => {
+            (
+                config.query(newUser,
+                [username, lEmail, hash],
+                function(err,results){
+                    console.log(results);
+                    if(err != NULL)
+                    {
+                        console.log(err);
+                    }
+                    
+                }
+            ))
+        });
+        res.send("Thank you for signing up " + username);
+    }
+});
+
+//testing fucntion
+app.post("/return_value", (req,res) => {
+    const { name, email, password } = req.body;
+    let username = name.toLowerCase();
+        res.send("register");
+    
+   
+});
+app.post("/sign_in", (req,res) => {
+    const {email_or_username, userPassword} = req.body;
+    const userAuthName = "SELECT password FROM users WHERE username = ?;";
+    const userAuthEmail = "SELECT password FROM users WHERE email = ?;";
+    let lower_e_or_u = email_or_username.toLowerCase();
+    let comp = lower_e_or_u.match(emailRegex);
+    let retreived_pass = "";
+    if(comp)
+    {
+        retreived_pass = config.query(userAuthEmail, [lower_e_or_u], function(err, results){
+            if(err)
+            {
                 console.log(err);
             }
-        ))
-        console.log(hash);
-    });
-    res.json("register");
-});
-app.post("/return_value", (req,res) => {
-    console.log(req.body);
-});
-app.post("/signin", (req,res) => {
+            console.log(results);
+        });
+    }
+
     res.json("login");
 });
 
