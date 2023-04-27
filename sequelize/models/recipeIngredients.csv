@@ -35,4 +35,47 @@ instruction_id,recipe_id,ingredient_name,measurement_qty,measurement_unit,create
 45,30,"canola oil","1/4","cup",1/1/23,1/1/23
 46,30,"vanilla extract","2","teaspoons",1/1/23,1/1/23
 47,30,"(optional) chopped walnuts","3/4","cup",1/1/23,1/1/23
-48,31,"","","",1/1/23,1/1/23
+48,31,"elbow macaroni","1","8 ounce box",1/1/23,1/1/23
+49,31,"butter","1/4","cup",1/1/23,1/1/23
+50,31,"all-purpose flour","1/4","cup",1/1/23,1/1/23
+51,31,"salt","1/2","teaspoons",1/1/23,1/1/23
+52,31,"black pepper","1/4","teaspoons",1/1/23,1/1/23
+53,31,"milk","2","cups",1/1/23,1/1/23
+54,31,"shredded cheddar cheese","2","cups",1/1/23,1/1/23
+55,32,"russet potatoes","Chips: 3","whole",1/1/23,1/1/23
+56,32,"extra virgin olive oil","Chips: 1/4","cup",1/1/23,1/1/23
+57,32,"cayenne pepper","Chips: 1","pinch",1/1/23,1/1/23
+58,32,"Kosher salt","Chips: 1","pinch",1/1/23,1/1/23
+59,32,"Olive oil","Fish:","",1/1/23,1/1/23
+60,32,"crispy rice cereal","Fish: 2 3/4","cups",1/1/23,1/1/23
+61,32,"Kosher salt and freshly ground black pepper","Fish: 1","pinch",1/1/23,1/1/23
+62,32,"egg white","Fish: 3","whole",1/1/23,1/1/23
+64,32,"skinless, boneless Pollock (or other firm white fish), cut into 2-by-4-inch pieces","Fish: 1 1/2","lbs",1/1/23,1/1/23
+63,32,"Tartar sauce and/or malt vinegar","Fish:","",1/1/23,1/1/23
+64,33,"all-purpose flour","1 1/2","cups",1/1/23,1/1/23
+65,33,"yellow cornmeal","2 1/2","cups",1/1/23,1/1/23
+66,33,"sugar","1 1/2","cups",1/1/23,1/1/23
+67,33,"baking powder","1","tablespoons",1/1/23,1/1/23
+68,33,"salt","3/4","teaspoons",1/1/23,1/1/23
+69,33,"low-fat buttermilk","2","cups",1/1/23,1/1/23
+70,33,"apricot nectar","1/2","cup",1/1/23,1/1/23
+71,33,"grapeseed oil","3","tablespoons",1/1/23,1/1/23
+72,33,"vanilla extract","2","teaspoons",1/1/23,1/1/23
+73,33,"orange zest","1","teaspoons",1/1/23,1/1/23
+74,33,"egg whites","4","whole",1/1/23,1/1/23
+75,33,"frozen raspberries ","2","cups",1/1/23,1/1/23
+76,34,"2-percent Greek yogurt","12","ounces",1/1/23,1/1/23
+77,34,"lowfat (1-percent) milk","1","cup",1/1/23,1/1/23
+78,34,"reduced-fat sour cream","1/2","cup",1/1/23,1/1/23
+79,34,"unbleached all-purpose flour","3","tablespoons",1/1/23,1/1/23
+80,34,"frozen shredded hash browns, thawed","2","lbs",1/1/23,1/1/23
+81,34,"shredded extra-sharp Cheddar","1","cup",1/1/23,1/1/23
+82,34,"Kosher salt and freshly ground black pepper","","",1/1/23,1/1/23
+83,34,"unsalted butter","2","tablespoons",1/1/23,1/1/23
+84,34,"yellow onions, chopped","2","whole",1/1/23,1/1/23
+85,34,"sliced cremini (baby bella) mushrooms","1","lbs",1/1/23,1/1/23
+86,34,"cloves garlic, minced","3","whole",1/1/23,1/1/23
+87,34,"panko breadcrumbs","2","tablespoons",1/1/23,1/1/23
+88,34,"ground nutmeg","1/4","teaspoons",1/1/23,1/1/23
+89,34,"chopped fresh parsley or chives, for garnish","1 to 2","tablespoons",1/1/23,1/1/23
+91,35,"","","",1/1/23,1/1/23
