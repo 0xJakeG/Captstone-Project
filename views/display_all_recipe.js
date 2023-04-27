@@ -1,4 +1,4 @@
-const PAGE_LIMIT = 4 * 4; // 4 rows of 4 recipes per page
+const PAGE_LIMIT = 4 * 5; // 4 rows of 4 recipes per page
 let currentPage = 1;
 const recipes = JSON.parse(document.getElementById('recipe-data').innerHTML);
 
@@ -20,11 +20,19 @@ function displayRecipes(recipes, start, limit) {
     recipeDescription.classList.add('recipe-description');
     recipeDescription.textContent = recipes[i].recipe_description;
 
+    // Create image element
+    const recipeImage = document.createElement('img');
+    recipeImage.src = recipes[i].recipe_picture;
+    recipeImage.alt = `Image for ${recipes[i].recipe_name}`;
+    recipeImage.classList.add('recipe-image'); // Add class for styling
+
     recipeBox.appendChild(recipeLink);
+    recipeBox.appendChild(recipeImage); // Append image to recipe box
     recipeBox.appendChild(recipeDescription);
     recipeGrid.appendChild(recipeBox);
   }
 }
+
 
 function createPageButton(pageNumber) {
   const button = document.createElement("button");
