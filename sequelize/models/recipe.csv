@@ -1,11 +1,21 @@
-recipe_id,user_id,recipe_picture,recipe_name,recipe_description,time_to_complete,createdAt,updatedAt
-admin1,123456789,null,"Simple Waffles",Breakfast,"30 minutes",1/1/23,1/1/23
-admin2,123456789,null,"Classic Hash Browns",Breakfast,"30 minutes",1/1/23,1/1/23
-admin3,123456789,null,"Microwave Scrambled Eggs",Breakfast,"10 minutes",1/1/23,1/1/23
-admin4,123456789,null,"Homemade Breakfast Sausage",Breakfast,"20 minutes",1/1/23,1/1/23
-admin5,123456789,null,"Hot Apple Cereal",Breakfast,"30 minutes",1/1/23,1/1/23
-admin6,123456789,null,"Whole-Wheat Apple Pancakes",Breakfast,"15 minutes",1/1/23,1/1/23
-admin7,123456789,null,"Oatmeal Smoothie",Breakfast,"10 minutes",1/1/23,1/1/23
-admin8,123456789,null,"Banana Waffles",Breakfast,"30 minutes",1/1/23,1/1/23
-admin9,123456789,null,"Green Apple Sour-Dough Pancakes",Breakfast,"40 minutes",1/1/23,1/1/23
-admin10,123456789,null,"Huevos Rancheros",Breakfast,"40 minutes",1/1/23,1/1/23
+recipe_id,user_id,recipe_picture,recipe_name,recipe_description,recipe_type,time_to_complete,createdAt,updatedAt
+admin1,123456789,null,"Huevos Rancheros","A simple and healthy Mexican egg dish",Breakfast,"40 minutes",1/1/23,1/1/23
+admin2,123456789,null,"Whole-Wheat Apple Pancakes","A vegetarian pancake recipe witha healthy twist",Breakfast,"15 minutes",1/1/23,1/1/23
+admin3,123456789,null,"Dark Chocolate Brownies","A healthy sweet recipe for a gathering","Desert","45 minutes",1/1/23,1/1/23
+admin4,123456789,null,"Simple Macaroni and Cheese","A homemade alternative to boxed mac and cheese that's just as quick and easy","Dinner","25 minutes",1/1/23,1/1/23
+admin5,123456789,null,"Baked Fish and Chips","A healthy and gluten free fish dish","Dinner","45 minutes",1/1/23,1/1/23
+admin6,123456789,null,"Low-Fat Rasberry-Corn Muffins","An delicious and healthy breakfast recipe","Breakfast","60 minutes",1/1/23,1/1/23
+admin7,123456789,null,"Hash Brown Casserole","A low fat vegetable side dish","Breakfast","80 minutes",1/1/23,1/1/23
+admin8,123456789,null,"Light Cheescake Brownies","A healthy cake recipe for a small gathering","Desert","60 minutes",1/1/23,1/1/23
+admin9,123456789,null,"Chicken Parmesan","Easy chicken main dish","Dinner","60 minutes",1/1/23,1/1/23
+admin10,123456789,null,"Turkey and Beef meatloaf with Cranberry Glaze","A healthy turkey meatloaf main dish","Dinner","70 minutes",1/1/23,1/1/23
+admin11,123456789,null,"Chia seed pudding","Healthy Gluten free and high Fiber breakfast","Breakfast","40 minutes",1/1/23,1/1/23
+admin12,123456789,null,"Chicken fried steak with gravy","A delicious beef main dish","Dinner","60 minutes",1/1/23,1/1/23
+admin13,123456789,null,"Buffalo chicken salad","An easy and healthy chicken recipe","Lunch","50 minutes",1/1/23,1/1/23
+admin14,123456789,null,"Spicy Kale and Corn Stuffed Chicken Breasts","A healthy and low calorie chicken dish","Dinner","35 minutes",1/1/23,1/1/23
+admin15,123456789,null,"Souffle Pancake With Apple-Pear Compote","A healthy and delicious sweet breakfast meal","Breakfast","90 minutes",1/1/23,1/1/23
+admin16,123456789,null,"Cinnamon Breadsticks","A healthy low calorie breakfast snack","Breakfast","70 mins plus 180 mins innactive",1/1/23,1/1/23
+admin17,123456789,null,"Lemon Cake","A healthy Desert for the whole family","Desert","70 minutes",1/1/23,1/1/23
+admin18,123456789,null,"Cheddar ham and egg Casserole","A healthy Casserole meal","Any","80 mins plus 360 mins innactive",1/1/23,1/1/23
+admin19,123456789,null,"Cracked Pepper Potato Chips with Onion Dip","A healthy and gluten free appetizer","Any","85 mins plus 80 mins innactive",1/1/23,1/1/23
+admin20,123456789,null,"Sweet Potato Lasagna","A gluten free and high fiber meal","Dinner","195 minutes",1/1/23,1/1/23
