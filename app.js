@@ -1,9 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
-const mysql = require('mysql');
+const mysql = require('mysql2/promise');
 const methodOverride = require('method-override');
 const Route = require('./routes/mainRoute');
 const bodyParser = require('body-parser');
+const bcrypt = require("bcrypt");
 
 app = express();
 
@@ -12,13 +13,15 @@ app.set('view engine', 'ejs');
 app.use('/public', express.static('public'));
 app.use('/images', express.static('/images'));
 app.use(express.static(__dirname + '/views'));
-app.use(express.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 app.use(morgan('tiny'))
 app.use(methodOverride('_method'));
 app.use('/sequelize', express.static('sequelize')); 
 app.use('/models', express.static('/models'));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json());
 
 var port = process.env.PORT || 8080; // set the port
 
@@ -115,6 +118,36 @@ app.post('/create', (req, res) => {
     console.log('Creating user with email ', email);
     registerUser({user, email, password}) 
 })
+
+app.post("/register", (req,res) => {
+    const { name, email, password } = req.body;
+    console.log(req.body);
+    console.log(password);
+    bcrypt.hash(password, hash).then((hash) => {
+        (
+            config.execute(
+            'INSERT INTO users (`username`, `email`, `password`) VALUES(?,?,?)',
+            [name, email, password],
+            function(err,results,fields){
+                console.log(results);
+                console.log(fields);
+                console.log(err);
+            }
+        ))
+        console.log(hash);
+    });
+    res.json("register");
+});
+app.post("/return_value", (req,res) => {
+    console.log(req.body);
+});
+app.post("/signin", (req,res) => {
+    res.json("login");
+});
+
+app.get("/profile", (req,res) => {
+    res.json("profile");
+});
 
 exports.handler = async function(event, context, callback) {
     const json = JSON.parse(event.body)
