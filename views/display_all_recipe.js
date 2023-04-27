@@ -2,6 +2,13 @@ const PAGE_LIMIT = 4 * 5; // 4 rows of 4 recipes per page
 let currentPage = 1;
 const recipes = JSON.parse(document.getElementById('recipe-data').innerHTML);
 
+function truncateText(text, maxLength) {
+  if (text.length > maxLength) {
+    return text.substring(0, maxLength) + "...";
+  } else {
+    return text;
+  }
+}
 
 function displayRecipes(recipes, start, limit) {
   const recipeGrid = document.querySelector('.recipe-grid');
@@ -18,7 +25,9 @@ function displayRecipes(recipes, start, limit) {
     
     const recipeDescription = document.createElement('p');
     recipeDescription.classList.add('recipe-description');
-    recipeDescription.textContent = recipes[i].recipe_description;
+    const maxLength = 90; // Set your desired maximum length for descriptions here
+    recipeDescription.textContent = truncateText(recipes[i].recipe_description, maxLength);
+
 
     // Create image element
     const recipeImage = document.createElement('img');
