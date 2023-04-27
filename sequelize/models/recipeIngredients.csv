@@ -42,16 +42,16 @@ instruction_id,recipe_id,ingredient_name,measurement_qty,measurement_unit,create
 52,31,"black pepper","1/4","teaspoons",1/1/23,1/1/23
 53,31,"milk","2","cups",1/1/23,1/1/23
 54,31,"shredded cheddar cheese","2","cups",1/1/23,1/1/23
-55,32,"russet potatoes","Chips: 3","whole",1/1/23,1/1/23
-56,32,"extra virgin olive oil","Chips: 1/4","cup",1/1/23,1/1/23
-57,32,"cayenne pepper","Chips: 1","pinch",1/1/23,1/1/23
-58,32,"Kosher salt","Chips: 1","pinch",1/1/23,1/1/23
-59,32,"Olive oil","Fish:","",1/1/23,1/1/23
-60,32,"crispy rice cereal","Fish: 2 3/4","cups",1/1/23,1/1/23
-61,32,"Kosher salt and freshly ground black pepper","Fish: 1","pinch",1/1/23,1/1/23
-62,32,"egg white","Fish: 3","whole",1/1/23,1/1/23
-64,32,"skinless, boneless Pollock (or other firm white fish), cut into 2-by-4-inch pieces","Fish: 1 1/2","lbs",1/1/23,1/1/23
-63,32,"Tartar sauce and/or malt vinegar","Fish:","",1/1/23,1/1/23
+55,32,"russet potatoes","3","whole",1/1/23,1/1/23
+56,32,"extra virgin olive oil","1/4","cup",1/1/23,1/1/23
+57,32,"cayenne pepper","1","pinch",1/1/23,1/1/23
+58,32,"Kosher salt","1","pinch",1/1/23,1/1/23
+59,32,"Olive oil","","",1/1/23,1/1/23
+60,32,"crispy rice cereal","2 3/4","cups",1/1/23,1/1/23
+61,32,"Kosher salt and freshly ground black pepper","1","pinch",1/1/23,1/1/23
+62,32,"egg white","3","whole",1/1/23,1/1/23
+64,32,"skinless, boneless Pollock (or other firm white fish), cut into 2-by-4-inch pieces","1 1/2","lbs",1/1/23,1/1/23
+63,32,"Tartar sauce and/or malt vinegar","1","",1/1/23,1/1/23
 64,33,"all-purpose flour","1 1/2","cups",1/1/23,1/1/23
 65,33,"yellow cornmeal","2 1/2","cups",1/1/23,1/1/23
 66,33,"sugar","1 1/2","cups",1/1/23,1/1/23
