@@ -46,17 +46,7 @@ app.use(session({
     store: sessionStore,
 
 }));
-app.use((req, res, next) => {
-    if(req.session.path != "/logout")
-    {
-        req.session.lastPage = req.path;
-        console.log(req.session.lastPage);
-    }
     
-    //console.log(req.session.lastPage);
-    next();
-});
-
 var port = process.env.PORT || 8080; // set the port
 
 //Connect to database
@@ -92,9 +82,12 @@ app.get('/', (req, res)=> {
     let user_info = {};
 
     if(req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
-        user_info = req.session.user_info;  // get the user id from session
+        user_info = req.session.user_info; 
+       
+        //req.session.user_info.user_id = "jerry"; // get the user id from session
+        console.log(req.session.user_info);
     }
-
+    console.log(user_info);
     res.render('index', { user_info }); // pass the user id to the template
 });
 
@@ -215,7 +208,14 @@ app.post("/register", async (req,res) => {
         res.redirect("signin");
     }
 });
-
+app.get("/logout", (req, res) => 
+{
+    req.session.user_info.email = "email";
+    req.session.user_info.user_id = "812";
+    req.session.user_info.test = false;
+    res.redirect("/");
+    
+});
 //function for user to sign in
 app.post("/sign_in", (req,res) => {
     let retreived_pass = "";
@@ -242,17 +242,15 @@ app.post("/sign_in", (req,res) => {
                 }
                 else
                 {
-                    let authenticated = true;
                     let user_id = results[0].user_id;
                     let username = results[0].username;
                     let email = results[0].email;
-                    user_info = {
-                        authenticated,
-                        user_id,
-                        username,
-                        email
-                    }
-                    req.session.user_info = user_info;
+                    req.session.user_info = {
+                        user_id: user_id,
+                        authenticated: false,
+                        username: username,
+                        email: email
+                    };
                     console.log(req.session.user_info);
                     //console.log(req.session.user_info.authenticated);
                     res.redirect("/");
@@ -272,17 +270,16 @@ app.post("/sign_in", (req,res) => {
                     res.status(403).send("failed to authenticate");
                 }
                 else {
-                    let authenticated = true;
                     let user_id = results[0].user_id;
                     let username = results[0].username;
                     let email = results[0].email;
-                    user_info = {
-                        authenticated,
-                        user_id,
-                        username,
-                        email
-                    }
-                    req.session.user_info = user_info;
+                    req.session.user_info = {
+                        user_id: user_id,
+                        authenticated: true,
+                        test: false,
+                        username: username,
+                        email: email
+                    };
                     console.log(req.session.user_info);
                     //console.log(req.session.user_info.authenticated);
                     res.redirect("/");
@@ -309,13 +306,5 @@ exports.handler = async function(event, context, callback) {
         body: JSON.stringify(result)
     })
 }
-app.get("/logout", (req, res) => 
-{
-    console.log(req.body);
-   
-    req.session.destroy();
-    res.clearCookie('connect.sid');
-    res.redirect("/");
-    
-});
+
 app.use('/', Route);
