@@ -552,3 +552,41 @@ select option {
   color: white;
   font-family: 'Varela Round';
 }
+
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.search-container label {
+  font-size: var(--fs-h5);
+  color: var(--white-color);
+  font-weight: 600;
+  padding: .5em;
+}
+
+.search-container input {
+  width: 300px;
+  height: 40px;
+  padding: .5em;
+  border-radius: 6px;
+  font-size: var(--fs-h5);
+  margin-right: .5rem;
+}
+
+.search-container button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: 6px;
+  font-size: var(--fs-h5);
+  padding: .5em 1.5em;
+  cursor: pointer;
+}
+
+#search-bar {
+  color: black;
+}

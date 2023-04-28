@@ -131,3 +131,16 @@ recipeTypeSelector.addEventListener("change", (event) => {
 
 // Initialize
 fetchAllRecipes(); // Fetch and display all recipes initially
+
+const searchButton = document.getElementById("search-button");
+searchButton.addEventListener("click", () => {
+  const searchTerm = document.getElementById("search-bar").value.toLowerCase();
+
+  filteredRecipes = recipes.filter(recipe =>
+    recipe.recipe_name.toLowerCase().includes(searchTerm)
+  );
+
+  currentPage = 1; // Reset to first page
+  displayRecipes(filteredRecipes, 0, PAGE_LIMIT);
+  setupPagination(filteredRecipes, PAGE_LIMIT);
+});

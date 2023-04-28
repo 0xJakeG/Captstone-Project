@@ -20,6 +20,12 @@
             <section class="hero flex-column">
                 <h1>All Recipes</h1>
                 <br>
+                <div class="search-container">
+                    <label for="search-bar">Search for a recipe:</label>
+                    <input type="text" id="search-bar" name="search-bar">
+                    <button id="search-button">Search</button>
+                </div>
+
                 <select id="recipe-type-selector">
                     <option value="all">All</option>
                     <option value="Breakfast">Breakfast</option>
@@ -27,9 +33,9 @@
                     <option value="Dinner">Dinner</option>
                     <option value="Dessert">Dessert</option>
                     <option value="Any">Any</option>
-                  </select>
+                </select>
                   
-                <div class="seriousEats">
+                <div id="seriousEats">
                     <nav class="recipe-grid"></nav>
                     <div class="pagination-container"></div>
                 </div>
@@ -38,3 +44,4 @@
     </main>
 </body>
 </html>
+
