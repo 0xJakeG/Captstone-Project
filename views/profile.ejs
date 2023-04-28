@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head'); %>
+    <title>Profile</title>
+</head>
+
+<body>
+  <header>
+    <%- include('./partials/header'); %>
+  </header>
+  <main>
+    <div class="hero-container flex-row">
+      <section class="hero flex-column">
+        <h1>Account information</h1>
+        <p>username: <%= user_info.username %></p>
+        <p>email: <%= user_info.email %></p>
+        <p></p>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <%- include('./partials/footer'); %>
+  </footer>
+  
+</body>
+
+</html>

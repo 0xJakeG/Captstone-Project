@@ -289,13 +289,6 @@ app.post("/sign_in", (req,res) => {
     }    
 });
 
-app.get('/profile', (req,res) => {
-    let userId = null;
-    if (req.session && req.session.user_id) {
-        userId = req.session.user_id;
-    }
-    res.render('profile', { userId: userId });
-});
 
 exports.handler = async function(event, context, callback) {
     const json = JSON.parse(event.body)
