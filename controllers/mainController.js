@@ -63,27 +63,44 @@ exports.allRecipes = (req, res, next)=> {
     res.render('../views/allRecipes', { user_info });
 }
 
+// Exporting the recipeDetails function as a module
 exports.recipeDetails = async (req, res, next) => {
+  // Initializing a variable to hold user information
   let user_info = {};
+  
+  // Checking if the session exists and the user is authenticated
+  // If true, assign the user_info from the session to the variable
   if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
-      user_info = req.session.user_info;
+    user_info = req.session.user_info;
   }
-  console.log(req.params);
+  
   let id = req.params.id;
+  
+
   try {
+    // Making an asynchronous call to get the recipe details by its ID
     const result = await getRecipeById(id, req);
+    
+   
     if (result.recipe) {
+   
       res.render('recipeDetails', { user_info, recipe: result.recipe, ingredients: result.ingredients, instructions: result.instructions });
     } else {
+      // If the recipe does not exist, create a new error indicating that and set the status code to 404
       let err = new Error('Cannot find a recipe with id ' + id);
       err.status = 404;
+      
+      // Pass the error to the next middleware function in the stack
       next(err);
     }
   } catch (error) {
+    // If an error occurs, log it to the console
     console.error('Error retrieving recipe details:', error);
+    
     res.status(500).send('Error retrieving recipe details');
   }
 };
+
 
 
   // Modify the getRecipeById function
