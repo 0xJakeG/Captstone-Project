@@ -43,7 +43,7 @@ exports.recipeMeta = (req, res, next)=> {
   let user_info = {};
   if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
       user_info = req.session.user_info;
-  }  // Or however you get the user ID
+  }  
   res.render('../views/recipeMeta', { user_info});
 }
 

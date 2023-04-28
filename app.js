@@ -78,6 +78,22 @@ app.get('/allRecipes', function(req, res) {
         res.render('allRecipes', {data: result, user_info});
     });
 });
+
+app.get('/recipeMeta', function(req, res) {
+    let user_info = {};
+    if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+        user_info = req.session.user_info;
+    } 
+    config.query('SELECT * FROM recipes', function(err, result) {
+        if (err) {
+            console.log(err);
+            return res.status(500).send('Error querying the database');
+        }
+        res.render('recipeMeta', {data: result, user_info});
+    });
+});
+
+
 app.get('/', (req, res)=> {
     let user_info = {};
 
