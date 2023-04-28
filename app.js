@@ -84,7 +84,7 @@ app.get('/recipeMeta', function(req, res) {
     if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
         user_info = req.session.user_info;
     } 
-    config.query('SELECT * FROM recipes', function(err, result) {
+    config.query('SELECT * FROM recipes WHERE user_id = ?',[user_info.user_id], function(err, result) {
         if (err) {
             console.log(err);
             return res.status(500).send('Error querying the database');
@@ -309,7 +309,7 @@ app.get("/session", (req, res) =>
 {
     console.log(req.session.user_info.user_id);
     mySession = {
-        user_id : req.session.user_info.user_id, 
+        user_id : req.session.user_info.user_id
     };
     mySessionJSON = JSON.stringify(mySession);
     console.log(mySessionJSON);
