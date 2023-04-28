@@ -30,4 +30,8 @@ router.get('/header', controller.header);
 router.get('/footer', controller.footer);
 
 router.get('/profile', controller.profile);
+
+router.get('/map', controller.map);
+
+router.get('/')
 module.exports = router;

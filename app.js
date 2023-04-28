@@ -275,7 +275,6 @@ app.post("/sign_in", (req,res) => {
     const userAuthEmail = "SELECT * FROM users WHERE email = ?;";
     const userAuthName = "SELECT * FROM users WHERE username = ?;";
     const { email_or_username, password } = req.body;
-    console.log(req.body);
     let lower_e_or_u = email_or_username.toLowerCase();
     let comp = lower_e_or_u.match(emailRegex);
     
@@ -351,7 +350,6 @@ app.get("/session", (req, res) =>
         user_id : req.session.user_info.user_id
     };
     mySessionJSON = JSON.stringify(mySession);
-    console.log(mySessionJSON);
     res.send(mySessionJSON);
 });
 
