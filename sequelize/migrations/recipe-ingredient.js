@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       measurement_qty: {
-        type: Sequelize.FLOAT
+        type: Sequelize.STRING
       },
       measurement_unit: {
         type: Sequelize.STRING
