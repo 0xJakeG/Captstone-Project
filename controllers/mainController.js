@@ -159,3 +159,11 @@ exports.profile = (req, res, next)=> {
   }
     res.render('../views/profile', { user_info });
 }
+
+exports.map = (req, res, next) => {
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+      res.render('../views/map', {user_info});
+  }
+}
