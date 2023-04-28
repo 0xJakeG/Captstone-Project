@@ -3,7 +3,17 @@ let currentPage = 1;
 const recipes = JSON.parse(document.getElementById('recipe-data').innerHTML);
 
 // Fetch userId from user_info object (assuming it's globally available)
-const userId = user_info.userID;
+let userId;
+
+fetch('/session')
+  .then(response => response.json())
+  .then(data => {
+    userId = data.user_info.userID;
+    // Initialize
+    displayRecipes(recipes, 0, PAGE_LIMIT, userId);
+    setupPagination(recipes, PAGE_LIMIT, userId);
+  })
+  .catch(error => console.error(error));
 
 function truncateText(text, maxLength) {
   if (text.length > maxLength) {
