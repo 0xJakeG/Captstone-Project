@@ -1,9 +1,7 @@
-//const axios = require('axios');
-
 let map;
 
 function initMap(){
-    var stored = '35.2999487,-80.7330315';//CHANGE
+    var stored = {lat:35.2999487,lng:-80.7330315};//CHANGE
 
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
@@ -21,31 +19,10 @@ function initMap(){
         calculateAndDisplayRoute(directionsService, directionsRenderer);
     });
 
-
-
-//place pins functionality
-    const script = document.createElement("script");
-
-    script.src =
-        "https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js";
-    document.getElementsByTagName("head")[0].appendChild(script);
-
 }
 
-const eqfeed_callback = function (results) {
-    for (let i = 0; i < results.features.length; i++) {
-        const coords = results.features[i].geometry.coordinates;
-        const latLng = new google.maps.LatLng(coords[1], coords[0]);
-
-        new google.maps.Marker({
-            position: latLng,
-            map: map,
-        });
-    }
-};
-
 window.initMap = initMap;
-window.eqfeed_callback = eqfeed_callback;
+
 
 //display route between two points
 
@@ -62,9 +39,9 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer){
         if (cheapest == 0){
             destination = "8120 University City Blvd, Charlotte, NC 28213"; //CHANGE
         } else if (cheapest == 1){
-            destination = "1100 Chancellor Park Dr, Charlotte, NC 28213"; //CHANGE
+            destination = "8600 University City Blvd, Charlotte, NC 28213"; //CHANGE
         } else{
-            destination = "8101 University City Blvd Ste 1A, Charlotte, NC 28213"; //CHANGE
+            destination = "7735 N Tryon St Charlotte, NC 28262"; //CHANGE
         }
     }
 

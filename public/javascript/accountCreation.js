@@ -11,9 +11,6 @@ var walmartTime;
 var harrisTime;
 var location = "8908 University City Blvd, Charlotte, NC 28223";//CHANGE THIS
 
-//geocode();
-
-
 //GEOCODES USER ADDRESS
 
 function geocode(){
