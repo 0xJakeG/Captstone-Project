@@ -1,21 +1,25 @@
-<%- include('userId') %>
-<header id="'header" class="flex-row">
+
+<header id="header" class="flex-row">
   <img class="logo" src="../public/images/logo.jpg" alt="logo" width="60" height="60">
-  <nav>
+  <nav id=>
     <ul class="flex-row">
       <li><a class="active" href="/">Home</a></li>
-      <% if (userLoggedIn) { %>
+      <% if (user_info.authenticated) { %>
+        <li><a class="active" href="/about">About</a></li>
+        <li><a class="active" href="/allRecipes">All Recipes</a></li>
         <li><a class="active" href="/recipeMeta">My Recipes</a></li>
         <li><a class="active" href="/add_recipe">Add Recipe</a></li>
-        <% if (typeof userId !== 'undefined' && userId) { %>
-          <li><a class="active" href="/profile">Profile: <%= userId %></a></li>
-        <% } %>
-      <% } else { %>
-        <li><a class="active" href="/register">Sign Up/Sign In</a></li>
+        <li><a class="active" href="/profile">Profile: <%= user_info.username %></a></li>
+        <li><a class="active" href="#" onclick="handleClick()">Log out</a></li>
+      <% } 
+      else 
+      { %>
+        <li><a class="active" href="/about">About</a></li>
+        <li><a class="active" href="/allRecipes">All Recipes</a></li>
+        <li><a class="active" href="/register">Sign Up</a></li>
+        <li><a class="active" href="/signin">Sign In</a></li>
       <% } %>
-      <li><a class="active" href="/allRecipes">All Recipes</a></li>
-      <li><a class="active" href="/about">About</a></li>
-    </ul>
+      </ul>
   </nav>
 </header>
 

@@ -46,9 +46,9 @@ app.use(session({
     store: sessionStore,
 
 }));
-
 app.use((req, res, next) => {
-    res.locals.userLoggedIn = req.session && req.session.authenticated ? true : false;
+    req.session.lastPage = req.path;
+    console.log(req.session.lastPage);
     next();
 });
 
@@ -71,39 +71,41 @@ app.use((req, res, next) => {
   });
   
 app.get('/allRecipes', function(req, res) {
-    console.log("hello");
+    let user_info = {};
+    if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+        user_info = req.session.user_info;
+    } 
     config.query('SELECT * FROM recipes', function(err, result) {
         if (err) {
             console.log(err);
             return res.status(500).send('Error querying the database');
         }
-        res.render('allRecipes', {data: result});
+        res.render('allRecipes', {data: result, user_info});
     });
 });
-app.get("/recipeMeta", function(req, res) {
-    res.render("recipeMeta");
-});
 app.get('/', (req, res)=> {
-    let userLoggedIn = false;
-    let userId = null;
+    let user_info = {};
 
-    if(req.session && req.session.authenticated) {
-        userLoggedIn = true;
-        userId = req.session.user_id;  // get the user id from session
+    if(req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+        user_info = req.session.user_info;  // get the user id from session
     }
 
-    res.render('index', { userLoggedIn: userLoggedIn, userId: userId }); // pass the user id to the template
+    res.render('index', { user_info }); // pass the user id to the template
 });
 
 app.get('/add_recipe', (req,res) => {
-    if (req.session && req.session.user_id) {
-        res.render('add_recipe', { userId: req.session.user_id });
-    } else {
-        res.redirect('/login');
+    let user_info = {};
+    if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+        user_info = req.session.user_info;
+        res.render('add_recipe', {user_info});
+    } 
+    else {
+        res.redirect("signin", {user_info})
     }
+    
 });
 
-app.use('/', Route);
+
 
 app.post('/create')
 app.listen(port, ()=> {
@@ -209,32 +211,11 @@ app.post("/register", async (req,res) => {
     }
 });
 
-
-//testing fucntion
-app.post("/return_value", (req,res) => {
-   req.session.foo = "foo";
-   req.session.authenticated = true;
-   req.session.user = req.body.name;
-   /*if(req.session)
-   {
-    config.query("SELECT * FROM sessions WHERE session_id = ?", [req.sessionID], function(err,results,fields){
-        if(err)
-        {
-            console.log(err);
-        }
-        console.log(req.session.authenticated);
-        console.log(results);
-    });
-   }*/
-    res.json("hello");
-    
-   
-});
 //function for user to sign in
 app.post("/sign_in", (req,res) => {
     let retreived_pass = "";
-    const userAuthEmail = "SELECT password, user_id FROM users WHERE email = ?;";
-    const userAuthName = "SELECT password, user_id FROM users WHERE username = ?;";
+    const userAuthEmail = "SELECT * FROM users WHERE email = ?;";
+    const userAuthName = "SELECT * FROM users WHERE username = ?;";
     const { email_or_username, password } = req.body;
     console.log(req.body);
     let lower_e_or_u = email_or_username.toLowerCase();
@@ -256,9 +237,19 @@ app.post("/sign_in", (req,res) => {
                 }
                 else
                 {
-                    req.session.authenticated = true;
-                    req.session.user_id = results[0].user_id;
-                    console.log(req.sessionID)
+                    let authenticated = true;
+                    let user_id = results[0].user_id;
+                    let username = results[0].username;
+                    let email = results[0].email;
+                    user_info = {
+                        authenticated,
+                        user_id,
+                        username,
+                        email
+                    }
+                    req.session.user_info = user_info;
+                    console.log(req.session.user_info);
+                    //console.log(req.session.user_info.authenticated);
                     res.redirect("/");
                 }
             });
@@ -276,9 +267,19 @@ app.post("/sign_in", (req,res) => {
                     res.status(403).send("failed to authenticate");
                 }
                 else {
-                    req.session.authenticated = true;
-                    req.session.user_id = results[0].user_id;
-                    console.log(req.sessionID)
+                    let authenticated = true;
+                    let user_id = results[0].user_id;
+                    let username = results[0].username;
+                    let email = results[0].email;
+                    user_info = {
+                        authenticated,
+                        user_id,
+                        username,
+                        email
+                    }
+                    req.session.user_info = user_info;
+                    console.log(req.session.user_info);
+                    //console.log(req.session.user_info.authenticated);
                     res.redirect("/");
                 }
             }); 
@@ -303,4 +304,11 @@ exports.handler = async function(event, context, callback) {
         body: JSON.stringify(result)
     })
 }
-
+app.post("/logout", (req, res) => 
+{
+    res.set('Cache-Control', 'no-cache');
+    req.session.destroy();
+    res.clearCookie('connect.sid');
+    res.send('<script>location.reload();</script>');
+});
+app.use('/', Route);
