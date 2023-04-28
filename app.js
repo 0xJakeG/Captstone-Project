@@ -41,11 +41,16 @@ app.use(session({
     name: 'booksforcooks_session',
     secret: 'insecure_secret' ,
     resave:false ,
-    saveUnititialized: false,
+    saveUninitialized: false,
     cookie: {maxAge: 60 * 60 * 1000, sameSite: true, httpOnly: true},
     store: sessionStore,
 
 }));
+
+app.use((req, res, next) => {
+    res.locals.userLoggedIn = req.session && req.session.authenticated ? true : false;
+    next();
+});
 
 var port = process.env.PORT || 8080; // set the port
 
@@ -79,7 +84,23 @@ app.get("/recipeMeta", function(req, res) {
     res.render("recipeMeta");
 });
 app.get('/', (req, res)=> {
-    res.render('index');
+    let userLoggedIn = false;
+    let userId = null;
+
+    if(req.session && req.session.authenticated) {
+        userLoggedIn = true;
+        userId = req.session.user_id;  // get the user id from session
+    }
+
+    res.render('index', { userLoggedIn: userLoggedIn, userId: userId }); // pass the user id to the template
+});
+
+app.get('/add_recipe', (req,res) => {
+    if (req.session && req.session.user_id) {
+        res.render('add_recipe', { userId: req.session.user_id });
+    } else {
+        res.redirect('/login');
+    }
 });
 
 app.use('/', Route);
@@ -88,6 +109,8 @@ app.post('/create')
 app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
+
+
 
 app.post('/addRecipe', (req, res) => {
     const {
@@ -172,22 +195,20 @@ app.post("/register", async (req,res) => {
     {
         const newUser = 'INSERT INTO users (`username`, `email`, `password`) VALUES(?,?,?)'
         bcrypt.hash(password, hashSalt).then((hash) => {
-            (
-                config.query(newUser,
-                [username, lEmail, password],
+            config.query(newUser, [username, lEmail, hash], // Use 'hash' here
                 function(err,results){
                     console.log(results);
                     if(err)
                     {
                         console.log(err);
                     }
-                    
                 }
-            ))
+            );
         });
         res.redirect("signin");
     }
 });
+
 
 //testing fucntion
 app.post("/return_value", (req,res) => {
@@ -265,8 +286,12 @@ app.post("/sign_in", (req,res) => {
     }    
 });
 
-app.get("/profile", (req,res) => {
-    res.json("profile");
+app.get('/profile', (req,res) => {
+    let userId = null;
+    if (req.session && req.session.user_id) {
+        userId = req.session.user_id;
+    }
+    res.render('profile', { userId: userId });
 });
 
 exports.handler = async function(event, context, callback) {

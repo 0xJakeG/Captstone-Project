@@ -1,9 +1,14 @@
 const { config } = require('../app');
 
 exports.index = (req, res, next)=> {
-    res.render('../views/index');
+  let userLoggedIn = false;
+  let userId = null;
+  if (req.session && req.session.authenticated) {
+      userLoggedIn = true;
+      userId = req.session.user_id;
+  }
+  res.render('../views/index', { userLoggedIn, userId });
 }
-
 exports.register = (req, res, next)=> {
     res.render('../views/register');
 }
@@ -21,7 +26,8 @@ exports.add_recipe = (req, res, next)=> {
 }
 
 exports.recipeMeta = (req, res, next)=> {
-    res.render('../views/recipeMeta');
+  let userId = req.session.userId;  // Or however you get the user ID
+  res.render('../views/recipeMeta', { userId: userId });
 }
 
 exports.map = (req, res, next)=> {
