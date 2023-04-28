@@ -142,7 +142,7 @@ app.post('/addRecipe', (req, res) => {
   
     
     const recipeSql =
-      'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
+      'INSERT INTO recipes (user_id, recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?, ?)';
     const ingredientSql =
       'INSERT INTO recipe_ingredients (recipe_id, ingredient_name, measurement_qty, measurement_unit) VALUES (?, ?, ?, ?)';
     
@@ -151,7 +151,7 @@ app.post('/addRecipe', (req, res) => {
   
     config.query(
       recipeSql,
-      [recipe_name, recipe_type, recipe_description, recipe_picture],
+      [req.session.user_info.user_id, recipe_name, recipe_type, recipe_description, recipe_picture],
       (error, results, fields) => {
         if (error) {
           console.error(error);
@@ -191,7 +191,7 @@ app.post('/addRecipe', (req, res) => {
             );
           }
   
-        res.sendStatus(200);
+        res.redirect("recipeMeta");
       }
     );
   });
@@ -229,6 +229,7 @@ app.get("/logout", (req, res) =>
     req.session.user_info.email = "email";
     req.session.user_info.user_id = "812";
     req.session.user_info.test = false;
+    req.session.user_info.authenticated = false;
     res.redirect("/");
     
 });
@@ -304,7 +305,10 @@ app.post("/sign_in", (req,res) => {
         }); 
     }    
 });
+app.get("/session", (req, res) =>
+{
 
+});
 
 exports.handler = async function(event, context, callback) {
     const json = JSON.parse(event.body)
