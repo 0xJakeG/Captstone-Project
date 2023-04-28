@@ -1,4 +1,6 @@
+//these are the default get requests. app.js takes precendent, but this is backup
 const { config } = require('../app');
+
 
 exports.index = (req, res, next)=> {
   let user_info = {};
@@ -7,6 +9,7 @@ exports.index = (req, res, next)=> {
   }
   res.render('../views/index', { user_info });
 }
+
 exports.register = (req, res, next)=> {
   let user_info = {};
   if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
@@ -169,6 +172,7 @@ exports.footer = (req, res, next)=> {
   }
     res.render('../views/partials/footer', { user_info });
 }
+
 exports.profile = (req, res, next)=> {
   let user_info = {};
   if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
