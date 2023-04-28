@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include('./partials/head'); %>
+  <title>Books For Cooks</title>
+</head>
+<body>
+  <header>
+    <% include('./partials/header'); %>
+  </header>
+  <main>
+    <div class="hero-container flex-row">
+      <section class="hero flex-column">
+        <h1>Make restaurant quality food</h1>
+        <h1>from home.</h1>
+        <p>A place to keep track of your favorite recipes.<br>Create your own or select one of ours.</p>
+        <a href="/recipes">
+          <div class="cfa flex-column">Get Started</div>
+        </a>
+        <div class="search-container">
+          <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Search recipes">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </section>
+    </div>
+    <div class="featured-recipes-container">
+      <h2>Featured Recipes</h2>
+      <div class="recipes-grid">
+        <% for (let i = 0; i < recipes.length; i++) { %>
+          <div class="recipe-card">
+            <a href="/recipes/<%= recipes[i]._id %>">
+              <img src="<%= recipes[i].image %>" alt="<%= recipes[i].title %>">
+              <h3><%= recipes[i].title %></h3>
+            </a>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <% include('./partials/footer'); %>
+  </footer>
+</body>
+</html>

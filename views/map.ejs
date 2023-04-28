@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" id="mapMain">
+<head>
+    <%- include('./partials/head'); %>
+    <script src="../public/javascript/map.js"></script>
+    <title>Map Test</title>
+</head>
+
+<body id="mapMain">
+    <header>
+      <%- include('./partials/header'); %>
+    </header>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/geocode/json?address=8908 University City Blvd, Charlotte, NC 28223&key=AIzaSyCzKNqUGAC9dtaqgyKmPvabVhJVkjXnuRo"></script>
+        <div id="floating-panel">
+            <div>
+                <div>
+                    <input type="text" id="from", placeholder="Origin", style="color:black;", value="8908 University City Blvd, Charlotte, NC 28223">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <input type="text" id="to", placeholder="Destination", style="color:black;", value="8120 University City Blvd, Charlotte, NC 28213">
+                </div>
+            </div>
+            <div>
+                <select id="optimize">
+                    <option value="TIME">Time</option>
+                    <option value="COST">Cost</option>
+                </select>
+            </div>
+        </div>
+        <select id="mode">
+            <option value="DRIVING">Driving</option>
+            <option value="WALKING">Walking</option>
+            <option value="BICYCLING">Bicycling</option>
+            <option value="TRANSIT">Transit</option>
+        </select>
+        
+        <div id="map"></div>
+        
+        <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzKNqUGAC9dtaqgyKmPvabVhJVkjXnuRo&callback=initMap&v=weekly"
+                defer
+        ></script>
+    <footer>
+      <%- include('./partials/footer'); %>
+    </footer>
+</body>
+  
+</html>
