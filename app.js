@@ -307,6 +307,13 @@ app.post("/sign_in", (req,res) => {
 });
 app.get("/session", (req, res) =>
 {
+    console.log(req.session.user_info.user_id);
+    mySession = {
+        user_id : req.session.user_info.user_id, 
+    };
+    mySessionJSON = JSON.stringify(mySession);
+    console.log(mySessionJSON);
+    res.send(mySessionJSON);
 
 });
 
