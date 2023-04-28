@@ -53,7 +53,7 @@ select {
 }
 
 button {
-    background-color: #333;
+    background-color: #31572C; /* change this to #0582CA for the other color */
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -62,23 +62,32 @@ button {
 }
 
 button:hover {
-    background-color: #444;
+    background-color: #24431E; /* adjust this for a suitable hover effect with your chosen color */
 }
-
 hr {
     margin: 20px 0;
     border: none;
     border-top: 1px solid #ddd;
 }
+button.remove-ingredient, button.remove-instruction {
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+input[type="text"], 
+input[type="decimal"], 
+textarea, 
+select {
+    color: black; 
+}
 
-.form-row input, 
-.form-row select, 
-.form-row textarea {
-    flex: 1;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    color: #000; /* Add this line to change the text color to black */
+button#add-instruction {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button#add-ingredient {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
     </style>
 </head>
@@ -143,8 +152,9 @@ hr {
                     </div>
 
                     <div class="form-row">
-                        <button class="remove-ingredient" type="button">Remove</button>
+                        <button class="remove-ingredient" type="button" style="display: none;">Remove</button>
                     </div>
+                    
                 </div>
             </div>
 
@@ -166,8 +176,9 @@ hr {
                     </div>
 
                     <div class="form-row">
-                        <button class="remove-instruction" type="button">Remove Instruction</button>
+                        <button class="remove-instruction" type="button" style="display: none;">Remove Instruction</button>
                     </div>
+                    
                 </div>
             </div>
 
@@ -184,17 +195,21 @@ hr {
        
     </form>
 </main>
-    <script>
-        const ingredientList = document.getElementById("ingredient-list");
-        const addIngredientBtn = document.getElementById("add-ingredient");
+<script>
+    const ingredientList = document.getElementById("ingredient-list");
+    const addIngredientBtn = document.getElementById("add-ingredient");
 
-        let ingredientCount = 1;
+    let ingredientCount = 1;
 
-        addIngredientBtn.addEventListener("click", () => {
+    addIngredientBtn.addEventListener("click", () => {
         ingredientCount++;
 
         const ingredient = document.createElement("div");
         ingredient.classList.add("ingredient");
+
+        const nameLabel = document.createElement("label");
+        nameLabel.textContent = "Ingredient Name:";
+        nameLabel.htmlFor = `ingredient-name-${ingredientCount}`;
 
         const nameInput = document.createElement("input");
         nameInput.type = "text";
@@ -202,11 +217,20 @@ hr {
         nameInput.id = `ingredient-name-${ingredientCount}`;
         nameInput.required = true;
 
+        const measurementQtyLabel = document.createElement("label");
+        measurementQtyLabel.textContent = "Measurement Quantity:";
+        measurementQtyLabel.htmlFor = `ingredient-measurement-qty-${ingredientCount}`;
+
         const measurementQtyInput = document.createElement("input");
-        measurementQtyInput.type = "number";
+        measurementQtyInput.type = "text";
         measurementQtyInput.name = "ingredientMeasurementQty[]";
         measurementQtyInput.id = `ingredient-measurement-qty-${ingredientCount}`;
         measurementQtyInput.required = true;
+
+
+        const measurementLabel = document.createElement("label");
+        measurementLabel.textContent = "Measurement:";
+        measurementLabel.htmlFor = `ingredient-measurement-unit-${ingredientCount}`;
 
         const measurementInput = document.createElement("input");
         measurementInput.type = "text";
@@ -222,23 +246,24 @@ hr {
             ingredient.remove();
         });
 
+        ingredient.appendChild(nameLabel);
         ingredient.appendChild(nameInput);
+        ingredient.appendChild(measurementQtyLabel);
         ingredient.appendChild(measurementQtyInput);
+        ingredient.appendChild(measurementLabel);
         ingredient.appendChild(measurementInput);
         ingredient.appendChild(removeBtn);
 
         ingredientList.appendChild(ingredient);
-        });
+    });
 
-        ingredientList.addEventListener("click", (event) => {
+    ingredientList.addEventListener("click", (event) => {
         if (event.target.classList.contains("remove-ingredient")) {
             event.target.parentNode.remove();
         }
-        });
+    });
+</script>
 
-
-
-    </script>
 
     <script>
         const instructionList = document.getElementById("instruction-list");
@@ -247,36 +272,36 @@ hr {
         let instructionCount = 1;
 
         addInstructionBtn.addEventListener("click", () => {
-        instructionCount++;
+    instructionCount++;
 
-        const instruction = document.createElement("div");
-        instruction.classList.add("instruction");
+    const instruction = document.createElement("div");
+    instruction.classList.add("instruction");
 
-        const DescInput = document.createElement("input");
-        DescInput.type = "text";
-        DescInput.name = "instructionDescription[]";
-        DescInput.id = `instruction_description${instructionCount}`;
-        DescInput.required = true;
+    const instructionLabel = document.createElement("label"); 
+    instructionLabel.textContent = "Instruction:"; 
+    instructionLabel.htmlFor = `instruction_description${instructionCount}`; 
 
-        const removeBtn = document.createElement("button");
-        removeBtn.type = "button";
-        removeBtn.classList.add("remove-instruction");
-        removeBtn.textContent = "Remove";
-        removeBtn.addEventListener("click", () => {
-            instruction.remove();
-        });
+    const DescInput = document.createElement("input");
+    DescInput.type = "text";
+    DescInput.name = "instructionDescription[]";
+    DescInput.id = `instruction_description${instructionCount}`;
+    DescInput.required = true;
 
-        instruction.appendChild(DescInput);
-        instruction.appendChild(removeBtn);
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.classList.add("remove-instruction");
+    removeBtn.textContent = "Remove";
+    removeBtn.addEventListener("click", () => {
+        instruction.remove();
+    });
 
-        instructionList.appendChild(instruction);
-        });
+    instruction.appendChild(instructionLabel); 
+    instruction.appendChild(DescInput);
+    instruction.appendChild(removeBtn);
 
-        instructionList.addEventListener("click", (event) => {
-        if (event.target.classList.contains("remove-instruction")) {
-            event.target.parentNode.remove();
-        }
-        });
+    instructionList.appendChild(instruction);
+});
+
     </script>
 </body>
 <footer>
