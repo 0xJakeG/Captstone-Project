@@ -2,6 +2,10 @@
 
 Download the zip file from github: https://github.com/0xJakeG/4155TTeam6/archive/refs/heads/master.zip
 
-Npm install express
+Load project in Visual Studio Code
 
-Npm fund
+Run the following commands in the terminal
+
+  -Npm install express
+
+  -Npm fund
