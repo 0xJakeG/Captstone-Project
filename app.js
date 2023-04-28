@@ -246,25 +246,22 @@ app.post("/sign_in", (req,res) => {
     //if they used an email, Authenticate through here. 
     if(comp)
     {
-        config.query(userAuthEmail, [lower_e_or_u], function(err, results){
-            if(err)
-            {
+        config.query(userAuthEmail, [lower_e_or_u], function (err, results) {
+            if (err) {
                 console.log(err);
             }
             retreived_pass = results[0].password;
             bcrypt.compare(password, retreived_pass).then((matches) => {
-                if(!matches)
-                {
+                if (!matches) {
                     res.status(403).send("failed to authenticate");
                 }
-                else
-                {
+                else {
                     let user_id = results[0].user_id;
                     let username = results[0].username;
                     let email = results[0].email;
                     req.session.user_info = {
                         user_id: user_id,
-                        authenticated: false,
+                        authenticated: true,
                         username: username,
                         email: email
                     };
@@ -272,7 +269,7 @@ app.post("/sign_in", (req,res) => {
                     //console.log(req.session.user_info.authenticated);
                     res.redirect("/");
                 }
-            });
+            }); 
         }); 
     }
     else
@@ -293,7 +290,6 @@ app.post("/sign_in", (req,res) => {
                     req.session.user_info = {
                         user_id: user_id,
                         authenticated: true,
-                        test: false,
                         username: username,
                         email: email
                     };
