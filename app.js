@@ -47,8 +47,13 @@ app.use(session({
 
 }));
 app.use((req, res, next) => {
-    req.session.lastPage = req.path;
-    console.log(req.session.lastPage);
+    if(req.session.path != "/logout")
+    {
+        req.session.lastPage = req.path;
+        console.log(req.session.lastPage);
+    }
+    
+    //console.log(req.session.lastPage);
     next();
 });
 
@@ -304,11 +309,13 @@ exports.handler = async function(event, context, callback) {
         body: JSON.stringify(result)
     })
 }
-app.post("/logout", (req, res) => 
+app.get("/logout", (req, res) => 
 {
-    res.set('Cache-Control', 'no-cache');
+    console.log(req.body);
+   
     req.session.destroy();
     res.clearCookie('connect.sid');
-    res.send('<script>location.reload();</script>');
+    res.redirect("/");
+    
 });
 app.use('/', Route);
