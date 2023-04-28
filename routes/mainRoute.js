@@ -29,4 +29,5 @@ router.get('/header', controller.header);
 
 router.get('/footer', controller.footer);
 
+router.get('/profile', controller.profile);
 module.exports = router;

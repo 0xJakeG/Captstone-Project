@@ -41,12 +41,12 @@ app.use(session({
     name: 'booksforcooks_session',
     secret: 'insecure_secret' ,
     resave:false ,
-    saveUnititialized: false,
+    saveUninitialized: false,
     cookie: {maxAge: 60 * 60 * 1000, sameSite: true, httpOnly: true},
     store: sessionStore,
 
 }));
-
+    
 var port = process.env.PORT || 8080; // set the port
 
 //Connect to database
@@ -66,28 +66,67 @@ app.use((req, res, next) => {
   });
   
 app.get('/allRecipes', function(req, res) {
-    console.log("hello");
+    let user_info = {};
+    if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+        user_info = req.session.user_info;
+    } 
     config.query('SELECT * FROM recipes', function(err, result) {
         if (err) {
             console.log(err);
             return res.status(500).send('Error querying the database');
         }
-        res.render('allRecipes', {data: result});
+        res.render('allRecipes', {data: result, user_info});
     });
 });
-app.get("/recipeMeta", function(req, res) {
-    res.render("recipeMeta");
-});
-app.get('/', (req, res)=> {
-    res.render('index');
+
+app.get('/recipeMeta', function(req, res) {
+    let user_info = {};
+    if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+        user_info = req.session.user_info;
+    } 
+    config.query('SELECT * FROM recipes WHERE user_id = ?',[user_info.user_id], function(err, result) {
+        if (err) {
+            console.log(err);
+            return res.status(500).send('Error querying the database');
+        }
+        res.render('recipeMeta', {data: result, user_info});
+    });
 });
 
-app.use('/', Route);
+
+app.get('/', (req, res)=> {
+    let user_info = {};
+
+    if(req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+        user_info = req.session.user_info; 
+       
+        //req.session.user_info.user_id = "jerry"; // get the user id from session
+        console.log(req.session.user_info);
+    }
+    console.log(user_info);
+    res.render('index', { user_info }); // pass the user id to the template
+});
+
+app.get('/add_recipe', (req,res) => {
+    let user_info = {};
+    if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+        user_info = req.session.user_info;
+        res.render('add_recipe', {user_info});
+    } 
+    else {
+        res.redirect("signin", {user_info})
+    }
+    
+});
+
+
 
 app.post('/create')
 app.listen(port, ()=> {
     console.log('Server is running on port', port);
 });
+
+
 
 app.post('/addRecipe', (req, res) => {
     const {
@@ -103,7 +142,7 @@ app.post('/addRecipe', (req, res) => {
   
     
     const recipeSql =
-      'INSERT INTO recipes (recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?)';
+      'INSERT INTO recipes (user_id, recipe_name, recipe_type, recipe_description, recipe_picture) VALUES (?, ?, ?, ?, ?)';
     const ingredientSql =
       'INSERT INTO recipe_ingredients (recipe_id, ingredient_name, measurement_qty, measurement_unit) VALUES (?, ?, ?, ?)';
     
@@ -112,7 +151,7 @@ app.post('/addRecipe', (req, res) => {
   
     config.query(
       recipeSql,
-      [recipe_name, recipe_type, recipe_description, recipe_picture],
+      [req.session.user_info.user_id, recipe_name, recipe_type, recipe_description, recipe_picture],
       (error, results, fields) => {
         if (error) {
           console.error(error);
@@ -152,7 +191,7 @@ app.post('/addRecipe', (req, res) => {
             );
           }
   
-        res.sendStatus(200);
+        res.redirect("recipeMeta");
       }
     );
   });
@@ -172,48 +211,33 @@ app.post("/register", async (req,res) => {
     {
         const newUser = 'INSERT INTO users (`username`, `email`, `password`) VALUES(?,?,?)'
         bcrypt.hash(password, hashSalt).then((hash) => {
-            (
-                config.query(newUser,
-                [username, lEmail, password],
+            config.query(newUser, [username, lEmail, hash], // Use 'hash' here
                 function(err,results){
                     console.log(results);
                     if(err)
                     {
                         console.log(err);
                     }
-                    
                 }
-            ))
+            );
         });
         res.redirect("signin");
     }
 });
-
-//testing fucntion
-app.post("/return_value", (req,res) => {
-   req.session.foo = "foo";
-   req.session.authenticated = true;
-   req.session.user = req.body.name;
-   /*if(req.session)
-   {
-    config.query("SELECT * FROM sessions WHERE session_id = ?", [req.sessionID], function(err,results,fields){
-        if(err)
-        {
-            console.log(err);
-        }
-        console.log(req.session.authenticated);
-        console.log(results);
-    });
-   }*/
-    res.json("hello");
+app.get("/logout", (req, res) => 
+{
+    req.session.user_info.email = "email";
+    req.session.user_info.user_id = "812";
+    req.session.user_info.test = false;
+    req.session.user_info.authenticated = false;
+    res.redirect("/");
     
-   
 });
 //function for user to sign in
 app.post("/sign_in", (req,res) => {
     let retreived_pass = "";
-    const userAuthEmail = "SELECT password, user_id FROM users WHERE email = ?;";
-    const userAuthName = "SELECT password, user_id FROM users WHERE username = ?;";
+    const userAuthEmail = "SELECT * FROM users WHERE email = ?;";
+    const userAuthName = "SELECT * FROM users WHERE username = ?;";
     const { email_or_username, password } = req.body;
     console.log(req.body);
     let lower_e_or_u = email_or_username.toLowerCase();
@@ -235,9 +259,17 @@ app.post("/sign_in", (req,res) => {
                 }
                 else
                 {
-                    req.session.authenticated = true;
-                    req.session.user_id = results[0].user_id;
-                    console.log(req.sessionID)
+                    let user_id = results[0].user_id;
+                    let username = results[0].username;
+                    let email = results[0].email;
+                    req.session.user_info = {
+                        user_id: user_id,
+                        authenticated: false,
+                        username: username,
+                        email: email
+                    };
+                    console.log(req.session.user_info);
+                    //console.log(req.session.user_info.authenticated);
                     res.redirect("/");
                 }
             });
@@ -255,18 +287,34 @@ app.post("/sign_in", (req,res) => {
                     res.status(403).send("failed to authenticate");
                 }
                 else {
-                    req.session.authenticated = true;
-                    req.session.user_id = results[0].user_id;
-                    console.log(req.sessionID)
+                    let user_id = results[0].user_id;
+                    let username = results[0].username;
+                    let email = results[0].email;
+                    req.session.user_info = {
+                        user_id: user_id,
+                        authenticated: true,
+                        test: false,
+                        username: username,
+                        email: email
+                    };
+                    console.log(req.session.user_info);
+                    //console.log(req.session.user_info.authenticated);
                     res.redirect("/");
                 }
             }); 
         }); 
     }    
 });
+app.get("/session", (req, res) =>
+{
+    console.log(req.session.user_info.user_id);
+    mySession = {
+        user_id : req.session.user_info.user_id
+    };
+    mySessionJSON = JSON.stringify(mySession);
+    console.log(mySessionJSON);
+    res.send(mySessionJSON);
 
-app.get("/profile", (req,res) => {
-    res.json("profile");
 });
 
 exports.handler = async function(event, context, callback) {
@@ -279,3 +327,4 @@ exports.handler = async function(event, context, callback) {
     })
 }
 
+app.use('/', Route);

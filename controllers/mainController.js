@@ -1,44 +1,79 @@
 const { config } = require('../app');
 
 exports.index = (req, res, next)=> {
-    res.render('../views/index');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+  res.render('../views/index', { user_info });
 }
-
 exports.register = (req, res, next)=> {
-    res.render('../views/register');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/register', { user_info });
 }
 
 exports.signin = (req, res, next)=> {
-    res.render('../views/signin');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/signin', { user_info });
 }
 
 exports.about = (req, res, next)=> {
-    res.render('../views/about');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/about', { user_info });
 }
 
 exports.add_recipe = (req, res, next)=> {
-    res.render('../views/add_recipe');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/add_recipe', { user_info });
 }
 
 exports.recipeMeta = (req, res, next)=> {
-    res.render('../views/recipeMeta');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }  
+  res.render('../views/recipeMeta', { user_info});
 }
 
 exports.map = (req, res, next)=> {
-    res.render('../views/map');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/map', { user_info });
 }
 
 exports.allRecipes = (req, res, next)=> {
-    res.render('../views/allRecipes');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/allRecipes', { user_info });
 }
 
 exports.recipeDetails = async (req, res, next) => {
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
   console.log(req.params);
   let id = req.params.id;
   try {
     const result = await getRecipeById(id, req);
     if (result.recipe) {
-      res.render('recipeDetails', { recipe: result.recipe, ingredients: result.ingredients, instructions: result.instructions });
+      res.render('recipeDetails', { user_info, recipe: result.recipe, ingredients: result.ingredients, instructions: result.instructions });
     } else {
       let err = new Error('Cannot find a recipe with id ' + id);
       err.status = 404;
@@ -78,10 +113,14 @@ exports.recipeDetails = async (req, res, next) => {
 
 
 exports.showRecipe = (req, res, next)=> {
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
     let id = req.params.id;
     recipes => {
         if(recipes) {
-        return res.render('../views/allRecipes', {recipes});
+        return res.render('../views/allRecipes', {user_info, recipes});
         } else {
             let err = new Error('Cannot find a recipe with id ' + id);
             err.status = 404;
@@ -91,13 +130,32 @@ exports.showRecipe = (req, res, next)=> {
 }
 
 exports.head = (req, res, next)=> {
-    res.render('../views/partials/head');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/partials/head', { user_info });
 }
 
 exports.header = (req, res, next)=> {
-    res.render('../views/partials/header');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/partials/header', { user_info });
 }
 
 exports.footer = (req, res, next)=> {
-    res.render('../views/partials/footer');
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/partials/footer', { user_info });
+}
+exports.profile = (req, res, next)=> {
+  let user_info = {};
+  if (req.session && (req.session.user_info != null) && (req.session.user_info.authenticated)) {
+      user_info = req.session.user_info;
+  }
+    res.render('../views/profile', { user_info });
 }
