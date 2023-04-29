@@ -49,7 +49,7 @@ Data Retrieval: BookForCooks retrieves data through POST requests made by the No
 **<span style="text-decoration:underline;">Deployment Architecture </span>**
 
 
-![alt_text](/public/images/pic 2.png "image_tooltip")
+![alt_text](/public/images/pic2.png "image_tooltip")
 
 
 Our web app is built using Node.js, a JavaScript runtime environment. The application is hosted on AWS Elastic Beanstalk, an all-in-one service that simplifies the deployment, scaling, and maintenance of web applications. Elastic Beanstalk integrates with Amazon EC2 instances for computing resources and Amazon RDS for managing databases, ensuring flexibility.
