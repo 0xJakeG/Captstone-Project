@@ -71,7 +71,7 @@ _Books 4 Cooks _is a procedure-driven system that executes in a linear fashion. 
 
 Our system is implemented using the MVC architecture and implements node.js as the controller, ejs as the view, and mySQL as the model. The view portion implemented by ejs displays all the content of the website to the user. The model implemented by mySQL is the basis of the relational tables that hold all the data needed for the website to function. The controller implemented by node.js interfaces between the model and the view in order to get the data needed for displaying the functions to the user. It is a CRUD system so it can create, read, update, and delete data from the system. Additionally we use Google’s Maps API in order to implement the shopping trip functionality.
 
-**<span style="text-decoration:underline;">Static View </span>**
+<h2>Static View </h2>
 
 
 
