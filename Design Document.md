@@ -53,7 +53,7 @@ Data Retrieval: BookForCooks retrieves data through POST requests made by the No
 <p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image2.png "image_tooltip")
+![alt_text](/public/images/pic2.png "image_tooltip")
 
 
 Our web app is built using Node.js, a JavaScript runtime environment. The application is hosted on AWS Elastic Beanstalk, an all-in-one service that simplifies the deployment, scaling, and maintenance of web applications. Elastic Beanstalk integrates with Amazon EC2 instances for computing resources and Amazon RDS for managing databases, ensuring flexibility.
@@ -81,7 +81,7 @@ Our system is implemented using the MVC architecture and implements node.js as t
 <p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image3.png "image_tooltip")
+![alt_text](public/images/pic3.png "image_tooltip")
 
 
 A user can access the main homepage and login page after first logging into the Books 4 Cooks website. They can either register or sign in on the sign in page. The user can login to the website in order to gain access to the greater functionality of the website. Once logged in a user can look at their recipe list or can access the add recipe page in order to create a new recipe to add to their list. A user can also access their shopping list of ingredients they need to buy to cook their recipes. The Google Maps API is used in order to generate a route for them to follow in order to get their groceries.
@@ -95,7 +95,7 @@ A user can access the main homepage and login page after first logging into the 
 <p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
-![alt_text](images/image4.png "image_tooltip")
+![alt_text](/public/images/pic4.png "image_tooltip")
 
 
 The user communicates with the books4cooks website in multiple ways. Firstly, by navigating to the login page, the user can provide input in the form of signing into the entire system. This is important as it grants a user access to a larger amount of functionality. Firstly, the  website will acknowledge that a user has registered, and will store their newly assigned user id into the database. The books4cooks interface provides registered users with the means to add and delete recipes. The addition and deletion of recipes will directly change the information that the database holds. The website does not store user information such as their password into the database. To ensure security, our website establishes these credentials through amazon Cognito. Lastly, registered users can enable the directions feature by consenting to provide necessary location data. The directions API communicates the point of origin back to the website.
