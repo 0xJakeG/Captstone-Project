@@ -13,7 +13,7 @@
 
 **April 13, 2023**
 
-**<span style="text-decoration:underline;">Project Overview</span>**
+<h1">Project Overview</h1>
 
 For many home cooks it is difficult to find a website that is able to supply them with all the features they desire in a cookbook. _Books 4 Cooks _aims to offer a single website where a home cook can access recipes and plan their grocery shopping for the week. Currently, there are no websites that provide home cooks with an all-in-one package of recipe creation, recipe viewing, and grocery trip planning. Our website will allow users to upload and access their recipes on a per-account basis, allowing them to keep track of their recipes on multiple devices. Additionally, _Books 4 Cooks_ will provide a trip planner that creates a grocery plan to do the shopping for the ingredients you need seamlessly.
 
