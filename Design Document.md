@@ -1,15 +1,16 @@
 
 <h1>BOOKS 4 COOKS Project Design Document</h1>
 
-**ITCS 4155**
+<h2>ITCS 4155</h2>
 
-**Team 6**
+<h2>Team 6</h2>
 
-**Phoenix Chassin, Jake Garcia **
-
-**Tyrone Reed, Henry Hall **
-
-**Lee Caesar, Mason Jordan**
+    Caesar, Lee
+    Chassin, Phoenix
+    Garcia, Jake
+    Hall, Henry
+    Jordan, Mason
+    Reed, Tyrone
 
 **April 13, 2023**
 
