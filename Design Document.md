@@ -21,7 +21,7 @@ For many home cooks it is difficult to find a website that is able to supply the
 
 _Books 4 Cooks _is a website designed for desktop and laptop viewing. As the main functionality of the website is focused on creating and viewing recipes, we felt that a large-screen viewing experience would be best for usability. Some users would like to be able to use the website on mobile devices in order to view their recipes on a smaller screen in the kitchen. We felt that keeping our focus on large screen viewing for both desktop and laptop allows for our major functionality to be better structured and allows for users to make use of the website in the kitchen if they desire. In order to implement the website, we used an MVC software architectural pattern. We chose this system in order to maintain the expansive website that has a front end, a database-based back end, with additional programs that need to be executed on different pages of the website. Our model is implemented using MySQL and is interfaced with the code using equalization. Our view is implemented using ejs in order to display a consistent HTML-based webpage to the user. Our controller is implemented using Node.js in order to render the views and change the models as necessary. Our server is hosted on an AWS server using elastic beanstalk and allows for a consistent version of the website to be hosted for all users to access.
 
-<h2>Subsystem Architecture<h2>
+Subsystem Architecture
 
 There are three subsystem layers within our application: presentation, application, and data. The subsystems in our web application are designed to handle different aspects of the platform, including user interface, data storage, data retrieval, and integration with external services.
 
