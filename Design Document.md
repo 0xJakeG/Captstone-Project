@@ -46,7 +46,7 @@ Data Retrieval: BookForCooks retrieves data through POST requests made by the No
 ![alt_text](public/images/pic1.png "image_tooltip")
 
 
-**<span style="text-decoration:underline;">Deployment Architecture </span>**
+<h1>Deployment Architecture </h1>
 
 
 ![alt_text](/public/images/pic2.png "image_tooltip")
