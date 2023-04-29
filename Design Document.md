@@ -17,7 +17,7 @@
 
 For many home cooks it is difficult to find a website that is able to supply them with all the features they desire in a cookbook. _Books 4 Cooks _aims to offer a single website where a home cook can access recipes and plan their grocery shopping for the week. Currently, there are no websites that provide home cooks with an all-in-one package of recipe creation, recipe viewing, and grocery trip planning. Our website will allow users to upload and access their recipes on a per-account basis, allowing them to keep track of their recipes on multiple devices. Additionally, _Books 4 Cooks_ will provide a trip planner that creates a grocery plan to do the shopping for the ingredients you need seamlessly.
 
-<h1>Architectural Overview</h1>
+<h2>Architectural Overview</h2>
 
 _Books 4 Cooks _is a website designed for desktop and laptop viewing. As the main functionality of the website is focused on creating and viewing recipes, we felt that a large-screen viewing experience would be best for usability. Some users would like to be able to use the website on mobile devices in order to view their recipes on a smaller screen in the kitchen. We felt that keeping our focus on large screen viewing for both desktop and laptop allows for our major functionality to be better structured and allows for users to make use of the website in the kitchen if they desire. In order to implement the website, we used an MVC software architectural pattern. We chose this system in order to maintain the expansive website that has a front end, a database-based back end, with additional programs that need to be executed on different pages of the website. Our model is implemented using MySQL and is interfaced with the code using equalization. Our view is implemented using ejs in order to display a consistent HTML-based webpage to the user. Our controller is implemented using Node.js in order to render the views and change the models as necessary. Our server is hosted on an AWS server using elastic beanstalk and allows for a consistent version of the website to be hosted for all users to access.
 
@@ -29,13 +29,13 @@ Presentation:
 
 User Interface: The user interface of BookForCooks is developed using EJS pages. EJS provides a way to create dynamic web pages by embedding JavaScript code within HTML templates. This allows for easy customization and interactivity, resulting in a responsive interface for users.
 
-Application:
+<h2>Application:</h2>
 
 Google Directions API: BookForCooks integrates with the Google Directions API. This external service provides users with accurate and easy-to-follow directions to nearby grocery stores or other relevant locations. By incorporating this API, the platform adds value to users by simplifying their shopping and meal planning process.
 
 Business Logic: Our application’s business logic is handled via node.js interfacing with the presentation and data layers of the system.
 
-Data:
+<h2>Data:</h2>
 
 Data Storage: The platform utilizes Sequelize, an Object-Relational Mapping (ORM) library for Node.js, to manage and interact with the data stored in an Amazon RDS (Relational Database Service) instance.
 
