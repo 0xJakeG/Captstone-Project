@@ -5,12 +5,12 @@
 
 <h2>Team 6</h2>
 
-    Caesar, Lee
-    Chassin, Phoenix
-    Garcia, Jake
-    Hall, Henry
-    Jordan, Mason
-    Reed, Tyrone
+ Caesar, Lee
+ Chassin, Phoenix
+ Garcia, Jake
+ Hall, Henry
+ Jordan, Mason
+ Reed, Tyrone
 
 **April 13, 2023**
 
