@@ -49,11 +49,7 @@ Data Retrieval: BookForCooks retrieves data through POST requests made by the No
 **<span style="text-decoration:underline;">Deployment Architecture </span>**
 
 
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](/public/images/pic2.png "image_tooltip")
+![alt_text](/public/images/pic 2.png "image_tooltip")
 
 
 Our web app is built using Node.js, a JavaScript runtime environment. The application is hosted on AWS Elastic Beanstalk, an all-in-one service that simplifies the deployment, scaling, and maintenance of web applications. Elastic Beanstalk integrates with Amazon EC2 instances for computing resources and Amazon RDS for managing databases, ensuring flexibility.
@@ -78,8 +74,6 @@ Our system is implemented using the MVC architecture and implements node.js as t
 
 
 
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](public/images/pic3.png "image_tooltip")
 
@@ -90,9 +84,6 @@ A user can access the main homepage and login page after first logging into the 
 
 **<span style="text-decoration:underline;">Dynamic View    </span>**
 
-
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 
 ![alt_text](/public/images/pic4.png "image_tooltip")
