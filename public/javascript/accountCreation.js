@@ -9,7 +9,7 @@ var harrisAddress;
 var targetTime;
 var walmartTime;
 var harrisTime;
-var location = "8908 University City Blvd, Charlotte, NC 28223";//CHANGE THIS
+var location = "8908 University City Blvd, Charlotte, NC 28223";
 
 //GEOCODES USER ADDRESS
 
@@ -159,12 +159,6 @@ function setTime(){
 }
 //TIME DONE
 
-//POST TO TABLE
-function postTable(){
-
-}
-//POST TO TABLE DONE
-
 
 //EXECUTE FUNCTIONS
 let promise1 = new Promise((resolve, reject) => {
@@ -185,7 +179,7 @@ let promise3 = new Promise((resolve, reject) =>{
 
 let promise4 = new Promise((resolve, reject) =>{
     setTimeout(() => {
-        resolve(postTable());
+        resolve();
     }, 3000);
 });
 

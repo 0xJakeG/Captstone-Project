@@ -1,4 +1,5 @@
 let map;
+const cheapest = Math.floor(Math.random() * 3);
 
 function initMap(){
     var stored = {lat:35.2999487,lng:-80.7330315};//CHANGE
@@ -30,12 +31,10 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer){
     const selectedMode = document.getElementById("mode").value;
     const optimizeFor = document.getElementById("optimize").value;
     var destination = document.getElementById("to").value;
-    var cheapest;
 
     if (optimizeFor === "TIME"){
         destination = "8600 University City Blvd, Charlotte, NC 28213";
     } else if (optimizeFor === "COST"){
-        cheapest = Math.floor(Math.random() * 3);
         if (cheapest == 0){
             destination = "8120 University City Blvd, Charlotte, NC 28213"; //CHANGE
         } else if (cheapest == 1){
