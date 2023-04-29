@@ -82,7 +82,7 @@ A user can access the main homepage and login page after first logging into the 
 
 
 
-**<span style="text-decoration:underline;">Dynamic View    </span>**
+<h1>Dynamic View </h1>
 
 
 
