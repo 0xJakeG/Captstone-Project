@@ -1,5 +1,5 @@
 
-<h1>**BOOKS 4 COOKS Project Design Document**</h1>
+<h1>BOOKS 4 COOKS Project Design Document</h1>
 
 **ITCS 4155**
 
